@@ -1,0 +1,632 @@
+﻿<Window x:Class="SmartICAVI.ReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+        Title="ReportWindow" Height="1000" Width="1300"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        ResizeMode="CanResizeWithGrip"
+        Style="{StaticResource StyleOperateWindow}"
+        Loaded="Window_Loaded"
+        Unloaded="Window_Unloaded"
+        Closed="Window_Closed"
+        >
+    <Window.Resources>
+        <Style x:Key="styleLabel" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Background" Value="Beige"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style x:Key="styleLabelLineNo" TargetType="{x:Type Label}">
+            <Setter Property="Background" Value="AliceBlue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="styleLabelNormalNo" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="styleLabelFiveNo" TargetType="{x:Type Label}">
+            <Setter Property="Background" Value="Khaki"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="styleLabelBlueNo" TargetType="{x:Type Label}">
+            <Setter Property="Background" Value="SkyBlue"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" Value="Red"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+
+        <Border Name="bdrList" Grid.Row="0" Grid.Column="0" Width="350" Style="{StaticResource StyleBorder}">
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <Border Name="bdrCalender" Margin="5" Background="Transparent" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+                        <Calendar Name="calendar" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedDatesChanged="calendar_SelectedDatesChanged" Style="{StaticResource StyleCalendar}"/>
+                    </Border>
+                </DockPanel>
+                <DockPanel Height="80" DockPanel.Dock="Top">
+                    <Button Name="btnSelect" Tag="Select" DockPanel.Dock="Right" Click="btnSelect_Click" Margin="5" Padding="5" Width="110" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource TemplateButton_BorderStyle}">
+                        <StackPanel>
+                            <Image Source="Images/Apply32.png" Stretch="None"/>
+                            <TextBlock Text="선 택" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Label Name="lbTitleReportList" DockPanel.Dock="left" Content="결과 리스트" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" />
+                </DockPanel>
+
+                <ListBox Name="listbox" DockPanel.Dock="Bottom" Padding="10" Foreground="Black" FontSize="24" Background="Transparent" SelectionChanged="listbox_SelectionChanged">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Padding" Value="5"/>
+                            <EventSetter Event="MouseDoubleClick" Handler="listboxItem_MouseDoubleClick"/>
+                        </Style>
+                        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                            <Setter Property="MinWidth" Value="40" />
+                            <Setter Property="MinHeight" Value="40" />
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </DockPanel>
+        </Border>
+
+        <Border Name="bdrButton" Grid.Row="1" Grid.Column="0" Width="350" Style="{StaticResource StyleBorder}">
+            <DockPanel LastChildFill="False">
+                <Button Name="btnDelete" Tag="Delete" DockPanel.Dock="Left" Click="btnDelete_Click" Margin="5" Padding="2" Width="110" VerticalAlignment="Stretch" Template="{StaticResource TemplateButton_BorderStyle}">
+                    <StackPanel VerticalAlignment="Center">
+                        <Image Source="Images/Delete32.png" Stretch="None"/>
+                        <TextBlock Text="삭 제" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Name="btnDeleteAll" Tag="DeleteAll" Visibility="Hidden" DockPanel.Dock="Right" Click="btnDeleteAll_Click" Margin="5" Padding="2" Width="110" VerticalAlignment="Stretch" Template="{StaticResource TemplateButton_BorderStyle}">
+                    <StackPanel VerticalAlignment="Center">
+                        <Image Source="Images/Delete32.png" Stretch="None"/>
+                        <TextBlock Text="전체삭제" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </DockPanel>
+        </Border>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+
+                <Grid Margin="11,10,9,10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="300"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Name="lblRecipeTitle" Grid.Row="0" Grid.Column="0" Content="모델명" Style="{StaticResource styleLabel}"/>
+                    <!--<Label Name="lblRecipe" Grid.Row="0" Grid.Column="1" Content="LGI001" Style="{StaticResource styleLabel}"/>-->
+                    <Label Name="lblRecipe" Grid.Row="0" Grid.Column="1" Style="{StaticResource styleLabel}">
+                        <TextBlock Name="tblRecipe" FontSize="20" FontFamily="Arial" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Label>
+
+                    <!--<StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Label Name="lblLineTitle" Grid.Row="0" Grid.Column="2" Content="열수" Style="{StaticResource styleLabel}"/>
+                    </StackPanel>-->
+
+                    <UniformGrid Grid.Row="0" Grid.Column="2" Columns="2" Margin="2,0">
+                        <Label Name="lblLineTitle" Content="열수" Style="{StaticResource styleLabel}"/>
+                        <Label Name="lblLine" Content="2" Style="{StaticResource styleLabel}"/>
+                    </UniformGrid>
+
+
+
+                    <Label Name="lblPFHoleTitle" Grid.Row="0" Grid.Column="3" Content="PF 홀" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblPFHole" Grid.Row="0" Grid.Column="4" Content="6" Style="{StaticResource styleLabel}"/>
+
+                    <UniformGrid Grid.Row="3" Grid.Column="0" Columns="2">
+                        <Button Name="btnSectionBack" Visibility="Hidden" Click="btnSectionBack_Click" Margin="2" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="Images/Back32.png" Stretch="None"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Name="btnSectionForward" Visibility="Hidden" Click="btnSectionForward_Click" Margin="2" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Image Source="Images/Forward32.png" Stretch="None"/>
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+
+                    <Label Name="lblSection1" Grid.Row="3" Grid.Column="1" Content="Top" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblSection2" Grid.Row="3" Grid.Column="2" Content="Bottom" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblSection3" Grid.Row="3" Grid.Column="3" Content="Mono" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblTotal" Grid.Row="3" Grid.Column="4" Content="전 체 구 간" Style="{StaticResource styleLabel}"/>
+
+                    <Label Name="lblLotID" Grid.Row="4" Grid.Column="0" Content="LotID" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblCount" Grid.Row="5" Grid.Column="0" Content="검사 수" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblOKCount" Grid.Row="6" Grid.Column="0" Content="OK 수" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGCount" Grid.Row="7" Grid.Column="0" Content="NG 수" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblYield" Grid.Row="8" Grid.Column="0" Content="정상수율(%)" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGYield" Grid.Row="9" Grid.Column="0" Content="불량수율(%)" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGContinue" Grid.Row="10" Grid.Column="0" Content="연속불량 수" Style="{StaticResource styleLabel}"/>
+                    <!--<Label Name="lblSectionYield" Grid.Row="11" Grid.Column="0" Content="구간수율불량 수" Style="{StaticResource styleLabel}"/>-->
+                    <Label Name="lblJointCount" Grid.Row="11" Grid.Column="0" Content="조인트(Joint) 수" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblThroughHoleCount" Grid.Row="12" Grid.Column="0" Content="쓰루홀" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblLength" Grid.Row="13" Grid.Column="0" Content="길이 (m)" Style="{StaticResource styleLabel}"/>
+
+                    <Label Name="lblLotIDSection1" Grid.Row="4" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblCountSection1" Grid.Row="5" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblOKCountSection1" Grid.Row="6" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGCountSection1" Grid.Row="7" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblYieldSection1" Grid.Row="8" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGYieldSection1" Grid.Row="9" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGContinueSection1" Grid.Row="10" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <!--<Label Name="lblSectionYieldSection1" Grid.Row="11" Grid.Column="1" Style="{StaticResource styleLabel}"/>-->
+                    <Label Name="lblJointCount1" Grid.Row="11" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblThroughHoleCount1" Grid.Row="12" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblLengthValue" Grid.Row="13" Grid.Column="1" Style="{StaticResource styleLabel}"/>
+
+                    <Label Name="lblLotIDSection2" Grid.Row="4" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblCountSection2" Grid.Row="5" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblOKCountSection2" Grid.Row="6" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGCountSection2" Grid.Row="7" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblYieldSection2" Grid.Row="8" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGYieldSection2" Grid.Row="9" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGContinueSection2" Grid.Row="10" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <!--<Label Name="lblSectionYieldSection2" Grid.Row="11" Grid.Column="2" Style="{StaticResource styleLabel}"/>-->
+                    <Label Name="lblJointCount2" Grid.Row="11" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblThroughHoleCount2" Grid.Row="12" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblRunTimeSection2" Grid.Row="13" Grid.Column="2" Style="{StaticResource styleLabel}"/>
+
+                    <Label Name="lblLotIDSection3" Grid.Row="4" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblCountSection3" Grid.Row="5" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblOKCountSection3" Grid.Row="6" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGCountSection3" Grid.Row="7" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblYieldSection3" Grid.Row="8" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGYieldSection3" Grid.Row="9" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblNGContinueSection3" Grid.Row="10" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <!--<Label Name="lblSectionYieldSection3" Grid.Row="11" Grid.Column="3" Style="{StaticResource styleLabel}"/>-->
+                    <Label Name="lblJointCount3" Grid.Row="11" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblThroughHoleCount3" Grid.Row="12" Grid.Column="3" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblRunTime" Grid.Row="13" Grid.Column="3" Content="검사시간" Style="{StaticResource styleLabel}"/>
+
+                    <Label Name="lblLotIDTotal" Grid.Row="4" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblCountTotal" Grid.Row="5" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblOKCountTotal" Grid.Row="6" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblNGCountTotal" Grid.Row="7" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblYieldTotal" Grid.Row="8" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblNGYieldTotal" Grid.Row="9" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblNGContinueTotal" Grid.Row="10" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <!--<Label Name="lblSectionYieldTotal" Grid.Row="11" Grid.Column="4" Style="{StaticResource styleLabel}"/>-->
+                    <Label Name="lblJointCountTotal" Grid.Row="11" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblThroughHoleCountTotal" Grid.Row="12" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    <Label Name="lblRunTimeTotal" Grid.Row="13" Grid.Column="4" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+
+
+                    <Label Name="lblDefectCount" Grid.Row="0" Grid.Column="5" Content="불량 수량" Margin="5,0,0,0" Style="{StaticResource styleLabel}"/>
+
+                    <ListView Name="listViewDefectCount" Grid.Row="3" Grid.Column="5" Grid.RowSpan="10" Margin="5,0,0,0">
+                        <ListView.Resources>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Padding" Value="5"/>
+                                <Setter Property="FontSize" Value="18"/>
+                            </Style>
+                            <Style TargetType="{x:Type ListView}">
+                                <Setter Property="FontSize" Value="18"/>
+                            </Style>
+                        </ListView.Resources>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="번호" DisplayMemberBinding="{Binding Path=DefectNo}" />
+                                <GridViewColumn Header="불량명" DisplayMemberBinding="{Binding Path=DefectName}" Width="170"/>
+                                <GridViewColumn Header="개수" DisplayMemberBinding="{Binding Path=DefectCount}" Width="60"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <UniformGrid Grid.Row="13" Grid.Column="5" Columns="3" Margin="5,0,0,0">
+                        <Label Name="lblYieldSection" Content="전/후 수율(%)" Style="{StaticResource styleLabel}"/>
+                        <Label Name="lblYieldTotal1" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                        <Label Name="lblYieldTotal2" Style="{StaticResource styleLabel}" Background="YellowGreen"/>
+                    </UniformGrid>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="1.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <UniformGrid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Columns="3">
+                        <Button Name="btnSectionMapBack" Click="btnSectionMapBack_Click" Margin="2" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Back32.png" Stretch="None"/>
+                                <Label Content="처음" Margin="10" FontFamily="Arial" FontSize="20"/>
+                            </StackPanel>
+                        </Button>
+                        <Label Name="lblSectionMap" Visibility="Hidden" Content="1 구간" FontSize="20" FontFamily="Arial" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        <Button Name="btnSectionMapForward" Click="btnSectionMapForward_Click" Margin="2" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Label Content="끝" Margin="10" FontFamily="Arial" FontSize="20"/>
+                                <Image Source="Images/Forward32.png" Stretch="None"/>
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+
+
+
+
+                    <Button Name="btnMapUp" Grid.Row="0" Grid.Column="3" Margin="10,2,2,2" Click="btnMapUp_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
+                            <Label Name="lblMapUp" Content="Map 데이터" FontSize="20" FontFamily="Arial"/>
+                            <Image Source="Images/UpBlue32.png" Stretch="None"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Name="btnMapDown" Grid.Row="0" Grid.Column="4" Margin="2,2,10,2" Click="btnMapDown_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" >
+                            <Image Source="Images/DownGreen32.png" Stretch="None"/>
+                            <Label Name="lblMapDown" Content="Map 데이터" FontSize="20" FontFamily="Arial"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Grid Grid.Row="1" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="1.5*"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Name="lbLineNo" Grid.Row="0" Grid.Column="0" Content="라인번호" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                        <UniformGrid Grid.Row="0" Grid.Column="1" Columns="50">
+                            <Label Name="lbLineNo01" Content="01" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo02" Content="02" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo03" Content="03" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo04" Content="04" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo05" Content="05" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo06" Content="06" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo07" Content="07" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo08" Content="08" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo09" Content="09" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo10" Content="10" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo11" Content="11" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo12" Content="12" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo13" Content="13" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo14" Content="14" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo15" Content="15" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo16" Content="16" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo17" Content="17" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo18" Content="18" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo19" Content="19" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo20" Content="20" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo21" Content="21" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo22" Content="22" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo23" Content="23" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo24" Content="24" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo25" Content="25" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo26" Content="26" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo27" Content="27" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo28" Content="28" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo29" Content="29" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo30" Content="30" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo31" Content="31" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo32" Content="32" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo33" Content="33" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo34" Content="34" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo35" Content="35" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo36" Content="36" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo37" Content="37" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo38" Content="38" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo39" Content="39" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo40" Content="40" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo41" Content="41" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo42" Content="42" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo43" Content="43" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo44" Content="44" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo45" Content="45" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo46" Content="46" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo47" Content="47" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo48" Content="48" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo49" Content="49" FontSize="14" Background="AliceBlue" Style="{StaticResource styleLabel}"/>
+                            <Label Name="lbLineNo50" Content="50" FontSize="14" Background="Khaki" Style="{StaticResource styleLabel}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbLine01" Grid.Row="1" Grid.Column="0" Content="1" Background="Beige"  Style="{StaticResource styleLabel}"/>
+                        <UniformGrid Grid.Row="1" Grid.Column="1" Rows="3" Columns="50">
+                            <Label Name="lbLine01_101" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_102" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_103" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_104" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_105" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_106" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_107" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_108" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_109" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_110" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_111" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_112" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_113" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_114" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_115" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_116" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_117" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_118" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_119" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_120" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_121" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_122" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_123" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_124" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_125" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_126" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_127" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_128" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_129" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_130" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_131" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_132" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_133" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_134" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_135" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_136" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_137" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_138" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_139" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_140" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_141" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_142" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_143" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_144" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_145" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_146" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_147" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_148" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_149" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_150" Style="{StaticResource styleLabelFiveNo}"/>
+
+                            <Label Name="lbLine01_201" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_202" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_203" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_204" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_205" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_206" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_207" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_208" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_209" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_210" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_211" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_212" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_213" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_214" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_215" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_216" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_217" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_218" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_219" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_220" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_221" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_222" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_223" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_224" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_225" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_226" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_227" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_228" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_229" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_230" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_231" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_232" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_233" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_234" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_235" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_236" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_237" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_238" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_239" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_240" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_241" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_242" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_243" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_244" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_245" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_246" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_247" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_248" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_249" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_250" Style="{StaticResource styleLabelFiveNo}"/>
+
+
+                            <Label Name="lbLine01_301" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_302" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_303" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_304" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_305" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_306" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_307" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_308" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_309" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_310" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_311" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_312" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_313" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_314" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_315" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_316" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_317" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_318" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_319" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_320" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_321" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_322" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_323" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_324" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_325" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_326" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_327" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_328" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_329" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_330" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_331" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_332" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_333" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_334" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_335" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_336" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_337" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_338" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_339" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_340" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_341" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_342" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_343" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_344" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_345" Style="{StaticResource styleLabelFiveNo}"/>
+                            <Label Name="lbLine01_346" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_347" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_348" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_349" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lbLine01_350" Style="{StaticResource styleLabelFiveNo}"/>
+                        </UniformGrid>
+
+                    </Grid>
+
+
+
+                    <ut:RunMoveCheckBox x:Name="btnPitchMoveBack" Visibility="Hidden" Grid.Row="3" Grid.Column="1" Click="btnPitchMoveBack_Click" Margin="2" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Image Source="Images/Back32.png" Stretch="None"/>
+                            <Label Content="피치 이동" Margin="10" FontFamily="Arial" FontSize="20"/>
+                        </StackPanel>
+                    </ut:RunMoveCheckBox>
+
+                    <ComboBox Name="cbPtich" Visibility="Hidden" Grid.Row="3" Grid.Column="2" Margin="5" SelectionChanged="cbPtich_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" FontSize="32" FontWeight="Bold"/>
+
+
+                    <ut:RunMoveCheckBox x:Name="btnPitchMoveForward" Visibility="Hidden" Grid.Row="3" Grid.Column="3" Click="btnPitchMoveForward_Click" Margin="2" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Label Content="피치 이동" Margin="10" FontFamily="Arial" FontSize="20"/>
+                            <Image Source="Images/Forward32.png" Stretch="None"/>
+                        </StackPanel>
+                    </ut:RunMoveCheckBox>
+                </Grid>
+            </Grid>
+        </Grid>
+
+
+        <DockPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" LastChildFill="False">
+            <Button Name="btnEnd" Tag="End" DockPanel.Dock="Right" Click="btnEnd_Click" Margin="5" Width="200" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource TemplateCustomButton}">
+                <StackPanel>
+                    <Image Margin="5" Source="Images/EndGreen32.png" Stretch="None"/>
+                    <TextBlock Name="tbxEnd" Text="완 공" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <TextBlock Name="tbMESComment" DockPanel.Dock="Left" Text="특이사항" Margin="10" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="32" />
+            <TextBox x:Name="tbComment" Text="" Margin="10" Tag="MES Comment" MinWidth="500" MaxWidth="1000" VerticalAlignment="Stretch" FontSize="20" TextWrapping="Wrap"/>
+            <ComboBox Name="cbNextMachine" DockPanel.Dock="Right" Margin="10,20,50,20" MinWidth="200" SelectionChanged="cbNextMachine_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" FontSize="16" FontWeight="Bold"/>
+            <TextBlock Name="tbNextMachineID" DockPanel.Dock="Right" Text="다음공정" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="32" />
+
+            <Button Name="btnSectionEnd" Visibility="Hidden" Tag="SectionEnd" DockPanel.Dock="Right" Click="btnSectionEnd_Click" Margin="5" Width="200" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource TemplateCustomButton}">
+                <StackPanel>
+                    <Image Margin="5" Source="Images/CancelGreen32.png" Stretch="None"/>
+                    <TextBlock Name="tbxSectionEnd" Text="구간 완공" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+        </DockPanel>
+
+    </Grid>
+</Window>

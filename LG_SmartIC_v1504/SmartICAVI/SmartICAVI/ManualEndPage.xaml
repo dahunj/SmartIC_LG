@@ -1,0 +1,84 @@
+﻿<Page x:Class="SmartICAVI.ManualEndPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="600"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="ManualEndPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Name="title" Grid.Row="0" Content="수 동 완 공" Background="Olive" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Label Grid.Row="0" Grid.Column="0" Content="LotID : " HorizontalAlignment="Right"/>
+            <Label Grid.Row="0" Grid.Column="1" Name="lblLotID" HorizontalAlignment="Left"/>
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Total : " HorizontalAlignment="Right"/>
+            <Label Grid.Row="1" Grid.Column="1" Name="lblTotal" HorizontalAlignment="Left"/>
+
+            <Label Grid.Row="1" Grid.Column="2" Content="Yield : " HorizontalAlignment="Right"/>
+            <Label Grid.Row="1" Grid.Column="3" Name="lblYield" HorizontalAlignment="Left"/>
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Good : " HorizontalAlignment="Right"/>
+            <Label Grid.Row="2" Grid.Column="1" Name="lblGood" HorizontalAlignment="Left"/>
+
+            <Label Grid.Row="2" Grid.Column="2" Content="NG : " HorizontalAlignment="Right"/>
+            <Label Grid.Row="2" Grid.Column="3" Name="lblNG" HorizontalAlignment="Left"/>
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Joint : " HorizontalAlignment="Right"/>
+            <Label Grid.Row="3" Grid.Column="1" Name="lblJoint" HorizontalAlignment="Left"/>
+
+            <Label Grid.Row="4" Grid.Column="0" Content="Comment" Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+
+            <TextBox Grid.Row="5" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="4" Name="tbxComment" Margin="10,0,10,10" Padding="5" FontSize="20" TextWrapping="Wrap"/>
+
+            <CheckBox Grid.Row="9" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Name="cbxMes" Tag="MES 보고" MinHeight="50" MinWidth="150"  HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource StyleCheckBox}" IsChecked="True"/>
+
+            <Button x:Name="btnReport" Grid.Row="9" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Margin="10" Click="btnReport_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                    <!--<Image Source="Images/Apply48.png" Margin="10,0" Stretch="None"/>-->
+                    <TextBlock Text="완공 보고" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</Page>

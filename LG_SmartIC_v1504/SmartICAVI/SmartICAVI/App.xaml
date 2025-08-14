@@ -1,0 +1,25 @@
+﻿<Application x:Class="SmartICAVI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="BaseForeground" Color="White"/>
+            <SolidColorBrush x:Key="BaseBackground" Color="#FF00394D"/>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources\CustomCheckBox.xaml"/>
+                <ResourceDictionary Source="Resources\CustomButton.xaml"/>
+                <ResourceDictionary Source="Resources\CustomTextBox.xaml"/>
+                <ResourceDictionary Source="Resources\CustomWindow.xaml"/>
+                <ResourceDictionary Source="Resources\CustomControl.xaml"/>
+                <ResourceDictionary Source="Resources\CustomRadioButton.xaml"/>
+                <ResourceDictionary Source="Resources\CustomTabControl.xaml"/>
+                <ResourceDictionary Source="Resources\CustomLED.xaml"/>
+                <ResourceDictionary Source="Resources\CustomCalender.xaml"/>
+                <ResourceDictionary Source="Resources\CustomLabel.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

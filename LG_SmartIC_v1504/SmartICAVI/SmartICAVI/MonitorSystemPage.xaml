@@ -1,0 +1,55 @@
+﻿<Page x:Class="SmartICAVI.MonitorSystemPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="600"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="MonitorSystemPage">
+
+    <Border Background="Gainsboro" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Margin="10" Background="Transparent" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+                <Grid Margin="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Name="lblTitleSystem" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="시스템 정보" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Label Name="lblTitleVersion" Grid.Row="1" Grid.Column="0" Content="파일 버전 : " FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Name="lblVersion" Grid.Row="1" Grid.Column="1" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Name="lblTitleFileVersion" Grid.Row="2" Grid.Column="0" Content="빌드 버전 : " FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Name="lblFileVersion" Grid.Row="2" Grid.Column="1" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <Label Name="lblTitleCopyright" Grid.Row="3" Grid.Column="0" Content="저작권 : " FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Name="lblCopyright" Grid.Row="3" Grid.Column="1" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                    <Label Name="lblTitleMode" Grid.Row="1" Grid.Column="2" Content="현재 모드 : " FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Name="lblMode" Grid.Row="1" Grid.Column="3" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                    <Label Name="lblTitleStatus" Grid.Row="2" Grid.Column="2" Content="현재 상태 : " FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Name="lblStatus" Grid.Row="2" Grid.Column="3" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+    </Border>
+    
+</Page>

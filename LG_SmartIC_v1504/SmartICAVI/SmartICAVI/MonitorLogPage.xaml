@@ -1,0 +1,90 @@
+﻿<Page x:Class="SmartICAVI.MonitorLogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="600"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="MonitorLogPage">
+
+
+    <Border Background="Gainsboro" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.4*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Margin="5" Background="Transparent" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+
+                <DockPanel Margin="5">
+                    <Label Name="lblTitleSelectedLogType" DockPanel.Dock="Top" Margin="5" Content="일반 로그 (Trace)" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ListBox Name="lbxLog" Padding="10" Background="Transparent" FontSize="14">
+                        <ListBox.Resources>
+                            <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                                <Setter Property="MinWidth" Value="40" />
+                                <Setter Property="MinHeight" Value="40" />
+                            </Style>
+                        </ListBox.Resources>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+
+            <!--Splitter-->
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Center" VerticalAlignment="Stretch" Opacity="0"/>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Margin="5" Background="Transparent" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Name="lblTitleSelectedDay" Grid.Row="0" Grid.Column="0" Content="선택 날짜" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Name="btnToday" Tag="Today" Grid.Row="0" Grid.Column="1" Click="btnToday_Click" Margin="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="15,0" Source="Images/ToDay32.png" Stretch="None"/>
+                                <TextBlock Name="tbxToday" Text="오늘 날짜" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Label Name="lblSelectedDay" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="2014-09-26" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1" Margin="5" Background="Transparent" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+                    <Calendar Name="calendar" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedDatesChanged="calendar_SelectedDatesChanged" Style="{StaticResource StyleCalendar}"/>
+                </Border>
+
+                <Border Grid.Row="2" Margin="5" Background="Transparent" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+                    <DockPanel>
+                        <Label Name="lblTitleLogType" DockPanel.Dock="Top" Content="로그 선택" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <StackPanel Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <RadioButton GroupName="groupLog" Name="rdLogTrace" Tag="0" Margin="5" Content="일반 로그 (Trace)" Foreground="Black" VerticalAlignment="Center" Checked="rdLogType_Checked" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="groupLog" Name="rdLogError" Tag="1" Margin="5" Content="에러 로그 (Error)" Foreground="Black" VerticalAlignment="Center" Checked="rdLogType_Checked" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="groupLog" Name="rdLogHistory" Tag="2" Margin="5" Content="파라미터 로그 (History)" Foreground="Black" VerticalAlignment="Center" Checked="rdLogType_Checked" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="groupLog" Name="rdCIMFcmu" Visibility="Collapsed" Tag="3" Margin="5" Content="MES 로그" Foreground="Black" VerticalAlignment="Center" Checked="rdLogType_Checked" Style="{StaticResource StyleRadioButton}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Border>
+
+            </Grid>
+
+        </Grid>
+    </Border>
+
+</Page>

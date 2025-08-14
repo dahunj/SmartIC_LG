@@ -1,0 +1,538 @@
+﻿<Page x:Class="SmartICAVI.ManualPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1280"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="ManualPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Border Name="borderMachine" Grid.Row="0" Style="{StaticResource StyleBorder}">
+                <Canvas Name="canvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Image Name="image" Source="Images/Stop48.png" Stretch="Fill" Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}"/>
+
+                    <CheckBox Name="cbxDio" Tag="cbxDio" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="입출력" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+                    
+                    <CheckBox Name="cbxUncoiler" Tag="cbxUncoiler" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="공급 릴" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxRecoiler" Tag="cbxRecoiler" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="수급 릴" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxVisionFeed" Tag="cbxVisionFeed" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="비젼 Feed" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxVisionTop" Tag="cbxVisionTop" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="비젼 Top" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxVisionBottom" Tag="cbxVisionBottom" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="비젼 Bottom" Foreground="White" FontSize="20" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxPunchFeed" Tag="cbxPunchFeed" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="펀치 Feed" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxPunchX" Tag="cbxPunchX" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="펀치 X" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+                    <CheckBox Name="cbxPunchY" Tag="cbxPunchY" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="펀치 Y" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxFeeding" Tag="cbxFeeding" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="자동 피딩 구동" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxEnd" Tag="cbxEnd" Click="cbx_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="수동완공" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="cbxLight" Tag="cbxLight" Click="cbxLight_Click" Template="{StaticResource TemplateCheckBox_JogStyle}">
+                        <TextBlock Text="전면부 조명" Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </CheckBox>
+                </Canvas>
+                
+                
+            </Border>
+            
+            <Label Content="조 그 구 동" Grid.Row="0" Margin="20" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+            <UniformGrid Grid.Row="1" Columns="2">
+                <Border Name="borderInport" Style="{StaticResource StyleBorder}">
+                    <DockPanel>
+                        <Label Name="lblTitleInport" DockPanel.Dock="Top" Content="입 력" HorizontalAlignment="Center"/>
+
+                        <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer.Resources>
+                                <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                                    <Setter Property="MinWidth" Value="40" />
+                                    <Setter Property="MinHeight" Value="40" />
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </ScrollViewer.Resources>
+
+                            <UniformGrid Rows="64">
+                                <StackPanel Name="stpInport000" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport000" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport000" Content="Inport000"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport001" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport001" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport001" Content="Inport001"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport002" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport002" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport002" Content="Inport002"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport003" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport003" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport003" Content="Inport003"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport004" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport004" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport004" Content="Inport004"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport005" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport005" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport005" Content="Inport005"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport006" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport006" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport006" Content="Inport006"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport007" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport007" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport007" Content="Inport007"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport008" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport008" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport008" Content="Inport008"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport009" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport009" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport009" Content="Inport009"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport010" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport010" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport010" Content="Inport010"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport011" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport011" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport011" Content="Inport011"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport012" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport012" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport012" Content="Inport012"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport013" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport013" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport013" Content="Inport013"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport014" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport014" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport014" Content="Inport014"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport015" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport015" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport015" Content="Inport015"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport016" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport016" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport016" Content="Inport016"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport017" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport017" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport017" Content="Inport017"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport018" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport018" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport018" Content="Inport018"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport019" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport019" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport019" Content="Inport019"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport020" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport020" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport020" Content="Inport020"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport021" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport021" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport021" Content="Inport021"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport022" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport022" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport022" Content="Inport022"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport023" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport023" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport023" Content="Inport023"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport024" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport024" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport024" Content="Inport024"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport025" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport025" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport025" Content="Inport025"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport026" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport026" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport026" Content="Inport026"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport027" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport027" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport027" Content="Inport027"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport028" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport028" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport028" Content="Inport028"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport029" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport029" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport029" Content="Inport029"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport030" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport030" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport030" Content="Inport030"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport031" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport031" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport031" Content="Inport031"/>
+                                </StackPanel>
+
+
+
+                                <StackPanel Name="stpInport100" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport100" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport100" Content="Inport100"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport101" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport101" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport101" Content="Inport101"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport102" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport102" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport102" Content="Inport102"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport103" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport103" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport103" Content="Inport103"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport104" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport104" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport104" Content="Inport104"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport105" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport105" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport105" Content="Inport105"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport106" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport106" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport106" Content="Inport106"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport107" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport107" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport107" Content="Inport107"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport108" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport108" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport108" Content="Inport108"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport109" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport109" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport109" Content="Inport109"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport110" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport110" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport110" Content="Inport110"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport111" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport111" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport111" Content="Inport111"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport112" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport112" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport112" Content="Inport112"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport113" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport113" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport113" Content="Inport113"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport114" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport114" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport114" Content="Inport114"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport115" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport115" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport115" Content="Inport115"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport116" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport116" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport116" Content="Inport116"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport117" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport117" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport117" Content="Inport117"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport118" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport118" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport118" Content="Inport118"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport119" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport119" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport119" Content="Inport119"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport120" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport120" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport120" Content="Inport120"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport121" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport121" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport121" Content="Inport121"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport122" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport122" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport122" Content="Inport122"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport123" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport123" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport123" Content="Inport123"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport124" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport124" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport124" Content="Inport124"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport125" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport125" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport125" Content="Inport125"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport126" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport126" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport126" Content="Inport126"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport127" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport127" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport127" Content="Inport127"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport128" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport128" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport128" Content="Inport128"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport129" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport129" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport129" Content="Inport129"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport130" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport130" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport130" Content="Inport130"/>
+                                </StackPanel>
+                                <StackPanel Name="stpInport131" Orientation="Horizontal" MinWidth="220">
+                                    <Label Name="ledInport131" Template="{StaticResource TemplateBlueLED}"/>
+                                    <Label Name="lblInport131" Content="Inport131"/>
+                                </StackPanel>
+
+
+
+
+                            </UniformGrid>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+
+                <Border Name="borderMotion" Style="{StaticResource StyleBorder}">
+                    <DockPanel>
+                        <Label Name="lblTitleMotion" DockPanel.Dock="Top" Content="모 션" HorizontalAlignment="Center"/>
+
+                        <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
+                            <ScrollViewer.Resources>
+                                <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                                    <Setter Property="MinWidth" Value="40" />
+                                    <Setter Property="MinHeight" Value="40" />
+                                    <Setter Property="Margin" Value="10,0,0,0"/>
+                                </Style>
+                            </ScrollViewer.Resources>
+
+                            <UniformGrid Rows="9">
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis00" Content="Axis00"/>
+                                    <Label Name="lbCoordAxis00" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis00" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis00" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis00" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis00" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis01" Content="Axis01"/>
+                                    <Label Name="lbCoordAxis01" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis01" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis01" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis01" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis01" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis02" Content="Axis02"/>
+                                    <Label Name="lbCoordAxis02" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis02" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis02" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis02" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis02" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis03" Content="Axis03"/>
+                                    <Label Name="lbCoordAxis03" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis03" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis03" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis03" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis03" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis04" Content="Axis04"/>
+                                    <Label Name="lbCoordAxis04" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis04" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis04" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis04" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis04" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis05" Content="Axis05"/>
+                                    <Label Name="lbCoordAxis05" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis05" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis05" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis05" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis05" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis06" Content="Axis06"/>
+                                    <Label Name="lbCoordAxis06" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis06" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis06" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis06" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis06" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis07" Content="Axis07"/>
+                                    <Label Name="lbCoordAxis07" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis07" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis07" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis07" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis07" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+
+                                <UniformGrid Columns="4">
+                                    <Label Name="lbAxis08" Content="Axis08"/>
+                                    <Label Name="lbCoordAxis08" Content="0.000"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitNAxis08" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitNAxis08" Content="(-)Limit"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Name="ledLimitPAxis08" Template="{StaticResource TemplateGreenLED}"/>
+                                        <Label Name="lbLimitPAxis08" Content="(+)Limit"/>
+                                    </StackPanel>
+                                </UniformGrid>
+                            </UniformGrid>
+                        </ScrollViewer>
+                    </DockPanel>
+                </Border>
+            </UniformGrid>
+            
+                
+            
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Border Name="borderJog" Grid.Row="0" Style="{StaticResource StyleBorder}">
+                <Grid ClipToBounds="True" >
+                    <Frame Name="jogPage" JournalOwnership="UsesParentJournal" Source="ManualFeeding2Page.xaml"/>
+                </Grid>
+            </Border>
+
+            <Grid Grid.Row="1">
+                <ut:StopButton x:Name="btnStop" Click="btnStop_Click" Tag="Stop" Margin="10" Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_StopStyle}">
+                    <StackPanel VerticalAlignment="Center">
+                        <Image Margin="10"  Source="Images/Stop48.png" Stretch="None"/>
+                        <TextBlock Text="조그구동 정지" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ut:StopButton>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,102 @@
+﻿<Window x:Class="SmartICAVI.JobCngWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        ResizeMode="CanResizeWithGrip"
+        Style="{StaticResource StyleCustomWindow}"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterScreen"
+        Topmost="True"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        Title="JobCngWindow" MinHeight="600" MinWidth="900">
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                        <ColorAnimation  Storyboard.TargetName="redGround"
+                            Storyboard.TargetProperty = "(Grid.Background).(LinearGradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                         AccelerationRatio="0.1" DecelerationRatio="0.1" To="Yellow" Duration="0:0:0.7"/>
+                        <ColorAnimation  Storyboard.TargetName="redGround"
+                            Storyboard.TargetProperty = "(Grid.Background).(LinearGradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                         AccelerationRatio="0.1" DecelerationRatio="0.1" To="Gold" Duration="0:0:0.7"/>
+                        <ColorAnimation  Storyboard.TargetName="redGround"
+                            Storyboard.TargetProperty = "(Grid.Background).(LinearGradientBrush.GradientStops)[2].(GradientStop.Color)"
+                                         AccelerationRatio="0.1" DecelerationRatio="0.1" To="OrangeRed" Duration="0:0:0.7"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Name="redGround" >
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1" >
+                    <GradientStop Color="Red" Offset="0" />
+                    <GradientStop Color="Red" Offset="0.2" />
+                    <GradientStop Color="DarkRed" Offset="0.8" />
+                    <GradientStop Color="DarkRed" Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="390"/>
+                <ColumnDefinition Width="450"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Name="tblMessageNum" Grid.Row="0" Padding="5" FontSize="24" FontWeight="Bold" TextAlignment="Center"/>
+                <Canvas Name="canvas" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Image Name="image" Source="Images/Stop48.png" Stretch="Fill" Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}"/>
+                </Canvas>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="2.5*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Name="tblMessage" Grid.Row="0" Padding="5" FontSize="24" FontWeight="Bold" TextWrapping="Wrap"/>
+                <TextBlock Name="tblDescription" Grid.Row="1" Padding="5" FontSize="24" TextWrapping="Wrap"/>
+            </Grid>
+        </Grid>
+
+        <UniformGrid Grid.Row="1" Columns="3">
+            <Button Name="btnStop"  Click="btnStop_Click" Template="{StaticResource TemplateButton_MenuStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Margin="10,0" Source="Images/cancel32.png" Stretch="None"/>
+                    <TextBlock Text="검사 정지" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Name="btnBuzzer" Click="btnBuzzer_Click" Template="{StaticResource TemplateButton_MenuStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Margin="10,0" Source="Images/SoundOff32.png" Stretch="None"/>
+                    <TextBlock Text="부저정지" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Name="btnApply" Click="btnApply_Click" Template="{StaticResource TemplateButton_MenuStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Margin="10,0" Source="Images/Apply32.png" Stretch="None"/>
+                    <TextBlock Text="확 인(검사진행)" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </UniformGrid>
+
+    </Grid>
+</Window>

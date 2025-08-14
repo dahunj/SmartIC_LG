@@ -1,0 +1,346 @@
+﻿<Window x:Class="SmartICAVI.VirtualKeyboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:SmartICAVI"
+        ResizeMode="CanResizeWithGrip"
+        Style="{StaticResource StyleOperateWindow}"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
+        Title="VirtualKeyboard" Height="450" Width="950">
+
+    <Window.Resources>
+        <Style x:Key="StyleKeyButton" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="Black"/>
+
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type src:KeyButton}">
+                        <Grid ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Name="tblUp" Grid.Row="0" Margin="2,0,23,2" DockPanel.Dock="Top" Text="{Binding Path=Up}" FontSize="{Binding Path=UpSize}" Foreground="Black" FontWeight="{Binding Path=UpWeight}"/>
+                            <TextBlock Name="tblDown" Grid.Row="1" Margin="10,2,15,0" DockPanel.Dock="Bottom"  Text="{Binding Path=Down}" FontSize="{Binding Path=DownSize}" Foreground="Black" FontWeight="{Binding Path=DownWeight}"/>
+                        </Grid>
+                        <!--<DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=Shift}" Value="True">
+                                <Setter TargetName="tblUp" Property="FontWeight" Value="Bold"/>
+                                <Setter TargetName="tblUp" Property="FontSize" Value="20"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>-->
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="LayoutRoot" Margin="6,2,6,0">
+        <Grid.Resources>
+            <Style x:Key="specialKeyStyle" TargetType="Button">
+                <Setter Property="Control.Background" Value="#716F64" />
+                <Setter Property="Control.Foreground" Value="White" />
+                <Setter Property="Button.FontSize" Value="12"/>
+                <Setter Property="Button.Margin" Value="0,0,2,1"/>
+                <Style.Triggers>
+                    <Trigger Property="Control.IsMouseOver" Value="True">
+                        <Setter Property="Control.Foreground" Value="Blue"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Text-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="12*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Margin="10,5" Name="lbText" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="1" Name="tbxText" HorizontalAlignment="Stretch" FontSize="24" />
+            <PasswordBox Grid.Column="1" Name="pwdText" HorizontalAlignment="Stretch" FontSize="24" Visibility="Hidden"/>
+            <Button Grid.Column="2" Name="btnLeft" Click="btnLeft_Click">
+                <Canvas VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Path Fill="DimGray">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure StartPoint="-15,0" >
+                                    <LineSegment Point="-5,10"/>
+                                    <LineSegment Point="-5,5"/>
+                                    <LineSegment Point="15,5"/>
+                                    <LineSegment Point="15,-5"/>
+                                    <LineSegment Point="-5,-5"/>
+                                    <LineSegment Point="-5,-10"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Button>
+            <Button Grid.Column="3" Name="btnRight" Click="btnRight_Click">
+                <Canvas VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Path Fill="DimGray">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure StartPoint="15,0" >
+                                    <LineSegment Point="5,10"/>
+                                    <LineSegment Point="5,5"/>
+                                    <LineSegment Point="-15,5"/>
+                                    <LineSegment Point="-15,-5"/>
+                                    <LineSegment Point="5,-5"/>
+                                    <LineSegment Point="5,-10"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Button>
+            <Button Grid.Column="4" Name="btnDelAll" Content="Del. All" Click="btnDelAll_Click" />
+        </Grid>
+
+        <!--12345-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnVK_Oem3" Grid.Column="0"  Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_1" Grid.Column="1"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_2" Grid.Column="2"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_3" Grid.Column="3"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_4" Grid.Column="4"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_5" Grid.Column="5"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_6" Grid.Column="6"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_7" Grid.Column="7"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_8" Grid.Column="8"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_9" Grid.Column="9"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_0" Grid.Column="10"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_OemMinus" Grid.Column="11"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_OemPlus" Grid.Column="12" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnBackspace" Grid.Column="13" ToolTip="backspace" Padding="0" Style="{StaticResource specialKeyStyle}">
+                <!--Style="{StaticResource specialKeyStyle}"-->
+                <Button.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="lblBackspace" Text="BS" VerticalAlignment="Top" />
+                        <Canvas x:Name="arrow30" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Path x:Name="pathLeftArrow" Width="38" Height="9" Canvas.Left="-15" Canvas.Top="-1" Stretch="Fill" Fill="#FFF2F2F2" Data="F1 M 0.684,18.073 L12.790,5.968 L12.790,14.385 L54.794,14.385 L54.794,21.761 L12.790,21.761 L12.790,30.178 Z "/>
+                        </Canvas>
+                    </Grid>
+                </Button.Content>
+            </Button>
+
+        </Grid>
+        <!--/12345-->
+
+        <!--QWERTY-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnTab" CommandParameter="{Binding TabKey}" Grid.Column="0" Style="{StaticResource specialKeyStyle}">Tab</Button>
+            <Button Name="btnVK_Q" Grid.Column="1" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_W" Grid.Column="2" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_E" Grid.Column="3" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_R" Grid.Column="4" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_T" Grid.Column="5" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_Y" Grid.Column="6" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_U" Grid.Column="7" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_I" Grid.Column="8" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_O" Grid.Column="9" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_P" Grid.Column="10" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_OemOpenBrackets" Grid.Column="11"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_Oem6" Grid.Column="12"  Style="{StaticResource StyleKeyButton}"/>
+            <Button Name="btnVK_Oem5" Grid.Column="13"  Style="{StaticResource StyleKeyButton}"/>
+        </Grid>
+        <!--/QWERTY-->
+
+        <!--ASDFGH-->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnCapsLock" Grid.Column="0" Style="{StaticResource specialKeyStyle}">
+                <Button.Content>
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center" Text="Caps"/>
+                        <!--Text="{Binding IsCapsLock, Converter={StaticResource capsLockToTextConverter}}" -->
+
+                        <Line Stroke="Yellow" X1="0" Y1="6" X2="50" Y2="6"  />
+                        <!--Visibility="{Binding Path=IsCapsLock, Converter={StaticResource boolToVisibleConv}}"-->
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Name="btnVK_A" Grid.Column="1" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_S" Grid.Column="2" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_D" Grid.Column="3" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_F" Grid.Column="4" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_G" Grid.Column="5" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_H" Grid.Column="6" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_J" Grid.Column="7" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_K" Grid.Column="8" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_L" Grid.Column="9" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_Oem1" Grid.Column="10" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_Oem7" Grid.Column="11" Style="{StaticResource StyleKeyButton}" />
+            <!--<Button Name="btnEnter" Command="{Binding KeyPressedCommand}" CommandParameter="{Binding EnterKey}" Grid.Column="12" >Enter</Button>-->
+            <Button Name="btnEnter" CommandParameter="{Binding EnterKey}" Grid.Column="12" Style="{StaticResource specialKeyStyle}">Enter</Button>
+        </Grid>
+        <!--/ASDFGH-->
+
+        <!--ZXCVB-->
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6.5*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="6.5*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btnShift_Left" FontWeight="{Binding Path=ShiftKey.FontWeight}" 
+                Style="{StaticResource specialKeyStyle}" Click="btnShift_Left_Click">
+                <!---->
+                <Button.Content>
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center" Text="Shift" />
+                        <!--Text="{Binding IsShiftLock, Converter={StaticResource shiftLockToTextConverter}}"-->
+                <Line Stroke="Yellow" X1="0" Y1="6" X2="50" Y2="6"  />
+                <!--Visibility="{Binding Path=IsShiftLock, Converter={StaticResource boolToVisibleConv}}"-->
+                </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button Name="btnVK_Z" Grid.Column="1" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_X" Grid.Column="2" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_C" Grid.Column="3" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_V" Grid.Column="4" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_B" Grid.Column="5" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_N" Grid.Column="6" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_M" Grid.Column="7" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_OemComma" Grid.Column="8" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_OemPeriod" Grid.Column="9" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnVK_OemQuestion" Grid.Column="10" Style="{StaticResource StyleKeyButton}" />
+            <Button Name="btnShift_Right" 
+                Grid.Column="11" Style="{StaticResource specialKeyStyle}" Click="btnShift_Left_Click" >
+                <!---->
+                <Button.Content>
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center" Text="Shift" />
+                        <!--Text="{Binding IsShiftLock, Converter={StaticResource shiftLockToTextConverter}}"-->
+                <Line Stroke="Yellow" X1="0" Y1="6" X2="50" Y2="6"  />
+                <!--Visibility="{Binding Path=IsShiftLock, Converter={StaticResource boolToVisibleConv}}"-->
+                </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+        <!--/ZXCVB-->
+
+        <!--Space-->
+        <Grid Grid.Row="5" Margin="0,2,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="21*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--<Button Name="btnTest"  Grid.Column="0" Style="{StaticResource StyleKeyButton}"/>-->
+
+            <Button Name="btnCancel" CommandParameter="{Binding EscapeKey}" Grid.Column="0" Style="{StaticResource specialKeyStyle}">Cancel</Button>
+
+
+            <Button Name="btnVK_SPACE" Content="Space" Grid.Column="2" />
+            <Button Name="btnAlt_Right" FontSize="14"  
+                Foreground="{Binding ColorForAltGr}" Grid.Column="4"  
+                    Visibility="Hidden"
+                >
+                <!--Style="{StaticResource specialKeyStyle}" -->
+                <!--Visibility="{Binding Path=KB.IsAltGrKeyUsed, Converter={StaticResource boolToVisibleConv}}"-->
+                <Button.Content>
+                    <StackPanel>
+                        <TextBlock HorizontalAlignment="Center" Text="Alt" />
+                        <!--Text="{Binding Path=Alt_Right.Text}"-->
+                        <Line Stroke="Yellow" X1="0" Y1="6" X2="50" Y2="6"  />
+                        <!--Visibility="{Binding Path=IsInAltGrState, Converter={StaticResource boolToVisibleConv}}"-->
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <!--<CheckBox Name="ckbxFlowDirection" Content="Left-to-Right" Grid.Column="5" HorizontalAlignment="Right" IsChecked="{Binding Path=IsForcingLeftToRight}" 
+                      ToolTip="FlowDirection is RightToLeft. Put a checkmark here to force it to insert characters LeftToRight." VerticalAlignment="Center"
+                       />-->
+            <!--Visibility="{Binding Path=IsFlowDirectionLeftToRight, Converter={StaticResource boolToVisibleConv}}"-->
+
+            <Button Name="btnOK" CommandParameter="{Binding EnterKey}" Grid.Column="4" Grid.ColumnSpan="2" Style="{StaticResource specialKeyStyle}">OK</Button>
+
+        </Grid>
+        <!--/Space-->
+
+    </Grid>
+</Window>

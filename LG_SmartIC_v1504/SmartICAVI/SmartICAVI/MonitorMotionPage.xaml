@@ -1,0 +1,150 @@
+﻿<Page x:Class="SmartICAVI.MonitorMotionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="600"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="MonitorMotionPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Border Background="Gainsboro" CornerRadius="5" BorderBrush="DarkBlue" BorderThickness="1">
+
+        <ScrollViewer DockPanel.Dock="Bottom" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Resources>
+                <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                    <Setter Property="MinWidth" Value="40" />
+                    <Setter Property="MinHeight" Value="40" />
+                    <Setter Property="Margin" Value="10,0,0,0"/>
+                </Style>
+            </ScrollViewer.Resources>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Name="lblTitleAxisNumber" Grid.Row="1" Grid.Column="0" Content="축 번호" />
+                <Label Name="lblTitleAxisName" Grid.Row="1" Grid.Column="1" Content="축 이름" />
+                <Label Name="lblTitleCoord" Grid.Row="1" Grid.Column="2" Content="현재 좌표" />
+                <Label Name="lblTitleLimitM" Grid.Row="1" Grid.Column="3" Content="- 리미트" />
+                <Label Name="lblTitleHome" Grid.Row="1" Grid.Column="4" Content="원점" />
+                <Label Name="lblTitleLimitP" Grid.Row="1" Grid.Column="5" Content="+ 리미트" />
+                <Label Name="lblTitleAmpFault" Grid.Row="1" Grid.Column="6" Content="앰프오류" />
+
+                <Border Background="#1F202020" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="8"/>
+                <Border Background="#1F202020" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="8"/>
+               
+                <Label Name="lblNumberAxis00" Grid.Row="2" Grid.Column="0" Content="0" />
+                <Label Name="lblNameAxis00" Grid.Row="2" Grid.Column="1" Content="Axis00" />
+                <Label Name="lblCoordAxis00" Grid.Row="2" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis00" Grid.Row="2" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis00" Grid.Row="2" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis00" Grid.Row="2" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis00" Grid.Row="2" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis01" Grid.Row="3" Grid.Column="0" Content="1" />
+                <Label Name="lblNameAxis01" Grid.Row="3" Grid.Column="1" Content="Axis01" />
+                <Label Name="lblCoordAxis01" Grid.Row="3" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis01" Grid.Row="3" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis01" Grid.Row="3" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis01" Grid.Row="3" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis01" Grid.Row="3" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis02" Grid.Row="4" Grid.Column="0" Content="2" />
+                <Label Name="lblNameAxis02" Grid.Row="4" Grid.Column="1" Content="Axis02" />
+                <Label Name="lblCoordAxis02" Grid.Row="4" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis02" Grid.Row="4" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis02" Grid.Row="4" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis02" Grid.Row="4" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis02" Grid.Row="4" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis03" Grid.Row="5" Grid.Column="0" Content="3" />
+                <Label Name="lblNameAxis03" Grid.Row="5" Grid.Column="1" Content="Axis03" />
+                <Label Name="lblCoordAxis03" Grid.Row="5" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis03" Grid.Row="5" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis03" Grid.Row="5" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis03" Grid.Row="5" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis03" Grid.Row="5" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis04" Grid.Row="6" Grid.Column="0" Content="4" />
+                <Label Name="lblNameAxis04" Grid.Row="6" Grid.Column="1" Content="Axis04" />
+                <Label Name="lblCoordAxis04" Grid.Row="6" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis04" Grid.Row="6" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis04" Grid.Row="6" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis04" Grid.Row="6" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis04" Grid.Row="6" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis05" Grid.Row="7" Grid.Column="0" Content="5" />
+                <Label Name="lblNameAxis05" Grid.Row="7" Grid.Column="1" Content="Axis05" />
+                <Label Name="lblCoordAxis05" Grid.Row="7" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis05" Grid.Row="7" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis05" Grid.Row="7" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis05" Grid.Row="7" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis05" Grid.Row="7" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis06" Grid.Row="8" Grid.Column="0" Content="6" />
+                <Label Name="lblNameAxis06" Grid.Row="8" Grid.Column="1" Content="Axis06" />
+                <Label Name="lblCoordAxis06" Grid.Row="8" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis06" Grid.Row="8" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis06" Grid.Row="8" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis06" Grid.Row="8" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis06" Grid.Row="8" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis07" Grid.Row="9" Grid.Column="0" Content="7" />
+                <Label Name="lblNameAxis07" Grid.Row="9" Grid.Column="1" Content="Axis07" />
+                <Label Name="lblCoordAxis07" Grid.Row="9" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis07" Grid.Row="9" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis07" Grid.Row="9" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis07" Grid.Row="9" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis07" Grid.Row="9" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+                <Label Name="lblNumberAxis08" Grid.Row="10" Grid.Column="0" Content="8" />
+                <Label Name="lblNameAxis08" Grid.Row="10" Grid.Column="1" Content="Axis08" />
+                <Label Name="lblCoordAxis08" Grid.Row="10" Grid.Column="2" Content="0.000" />
+                <Label Name="ledLimitMAxis08" Grid.Row="10" Grid.Column="3" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledHomeAxis08" Grid.Row="10" Grid.Column="4" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledLimitPAxis08" Grid.Row="10" Grid.Column="5" Template="{StaticResource TemplateGreenLED}"/>
+                <Label Name="ledAmpFaultAxis08" Grid.Row="10" Grid.Column="6" Template="{StaticResource TemplateRedLED}"/>
+
+            </Grid>
+        </ScrollViewer>
+    </Border>
+</Page>

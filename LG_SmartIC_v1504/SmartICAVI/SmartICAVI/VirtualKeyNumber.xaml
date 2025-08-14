@@ -1,0 +1,170 @@
+﻿<Window x:Class="SmartICAVI.VirtualKeyNumber"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:SmartICAVI"
+        ResizeMode="CanResizeWithGrip"
+        Style="{StaticResource StyleOperateWindow}"
+        WindowStartupLocation="CenterScreen"
+        ShowInTaskbar="False"
+        Topmost="True"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
+        Title="VirtualKeyNumber" Height="550" Width="500">
+
+
+    <Window.Resources>
+        <Style x:Key="StyleKeyButton" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="Black"/>
+
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate DataType="{x:Type src:KeyButton}">
+                        <Grid ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Name="tblUp" Grid.Row="0" Margin="2,0,23,2" DockPanel.Dock="Top" Text="{Binding Path=Up}" FontSize="{Binding Path=UpSize}" Foreground="Black" FontWeight="{Binding Path=UpWeight}"/>
+                            <TextBlock Name="tblDown" Grid.Row="1" Margin="10,2,15,0" DockPanel.Dock="Bottom"  Text="{Binding Path=Down}" FontSize="{Binding Path=DownSize}" Foreground="Black" FontWeight="{Binding Path=DownWeight}"/>
+                        </Grid>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="LayoutRoot" Margin="6,2,6,0">
+        <Grid.Resources>
+            <Style x:Key="specialKeyStyle" TargetType="Button">
+                <Setter Property="Control.Background" Value="#716F64" />
+                <Setter Property="Control.Foreground" Value="White" />
+                <Setter Property="Button.FontSize" Value="12"/>
+                <Setter Property="Button.Margin" Value="0,0,2,1"/>
+                <Style.Triggers>
+                    <Trigger Property="Control.IsMouseOver" Value="True">
+                        <Setter Property="Control.Foreground" Value="Blue"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--Text-->
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="10,5" Height="50" Name="lbText" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right"/>
+
+            <TextBox Grid.Row="1" Grid.Column="0" Name="tbxText" Height="50" HorizontalAlignment="Stretch" FontSize="24" />
+            <Button Grid.Row="1" Grid.Column="1" Name="btnLeft" Height="50" Click="btnLeft_Click">
+                <Canvas VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Path Fill="DimGray">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure StartPoint="-15,0" >
+                                    <LineSegment Point="-5,10"/>
+                                    <LineSegment Point="-5,5"/>
+                                    <LineSegment Point="15,5"/>
+                                    <LineSegment Point="15,-5"/>
+                                    <LineSegment Point="-5,-5"/>
+                                    <LineSegment Point="-5,-10"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="2" Name="btnRight" Height="50" Click="btnRight_Click">
+                <Canvas VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Path Fill="DimGray">
+                        <Path.Data>
+                            <PathGeometry>
+                                <PathFigure StartPoint="15,0" >
+                                    <LineSegment Point="5,10"/>
+                                    <LineSegment Point="5,5"/>
+                                    <LineSegment Point="-15,5"/>
+                                    <LineSegment Point="-15,-5"/>
+                                    <LineSegment Point="5,-5"/>
+                                    <LineSegment Point="5,-10"/>
+                                </PathFigure>
+                            </PathGeometry>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Button>
+            <Button Grid.Row="1" Grid.Column="3" Name="btnDelAll" Height="50" Content="Del. All" Click="btnDelAll_Click" />
+        </Grid>
+
+        <!--12345-->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Button Name="btnVK_OemMinus" Grid.Row="0" Grid.Column="0" Content="-" FontSize="30"/>
+            <Button Name="btnBackspace" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" ToolTip="backspace" Padding="0" Style="{StaticResource specialKeyStyle}">
+                <!--Style="{StaticResource specialKeyStyle}"-->
+                <Button.Content>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="lblBackspace" Text="BS" FontSize="18" VerticalAlignment="Top" />
+                        <Canvas x:Name="arrow30" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+                            <Path x:Name="pathLeftArrow" Width="38" Height="9" Canvas.Left="-15" Canvas.Top="-1" Stretch="Fill" Fill="#FFF2F2F2" Data="F1 M 0.684,18.073 L12.790,5.968 L12.790,14.385 L54.794,14.385 L54.794,21.761 L12.790,21.761 L12.790,30.178 Z "/>
+                        </Canvas>
+                    </Grid>
+                </Button.Content>
+            </Button>
+
+            <Button Name="btnVK_7" Grid.Row="1" Grid.Column="0" Content="7" FontSize="30"/>
+            <Button Name="btnVK_8" Grid.Row="1" Grid.Column="1" Content="8" FontSize="30"/>
+            <Button Name="btnVK_9" Grid.Row="1" Grid.Column="2" Content="9" FontSize="30"/>
+
+            <Button Name="btnVK_4" Grid.Row="2" Grid.Column="0" Content="4" FontSize="30"/>
+            <Button Name="btnVK_5" Grid.Row="2" Grid.Column="1" Content="5" FontSize="30"/>
+            <Button Name="btnVK_6" Grid.Row="2" Grid.Column="2" Content="6" FontSize="30"/>
+
+            <Button Name="btnVK_1" Grid.Row="3" Grid.Column="0" Content="1" FontSize="30"/>
+            <Button Name="btnVK_2" Grid.Row="3" Grid.Column="1" Content="2" FontSize="30"/>
+            <Button Name="btnVK_3" Grid.Row="3" Grid.Column="2" Content="3" FontSize="30"/>
+
+            <Button Name="btnVK_0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="0" FontSize="30"/>
+
+            <Button Name="btnVK_OemPeriod" Grid.Row="4" Grid.Column="2" Content="." FontSize="30"/>
+
+            <Button Name="btnCancel" Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" CommandParameter="{Binding EscapeKey}" FontSize="18" Style="{StaticResource specialKeyStyle}">Cancel</Button>
+
+            <Button Name="btnEnter" Grid.Row="2" Grid.RowSpan="3" Grid.Column="3" CommandParameter="{Binding EnterKey}" FontSize="18" Style="{StaticResource specialKeyStyle}">Enter</Button>
+
+        </Grid>
+        <!--/12345-->
+    </Grid>
+</Window>

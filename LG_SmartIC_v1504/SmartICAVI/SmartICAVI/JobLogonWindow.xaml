@@ -1,0 +1,87 @@
+﻿<Window x:Class="SmartICAVI.JobLogonWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource StyleCustomWindow}"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Opacity="0.99"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
+        Title="JobLogonWindow" Height="900" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition />
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        
+        <UniformGrid Grid.Row="0" Columns="4">
+            <CheckBox Name="btnAll" Tag="btnAll"  Grid.Column="0" Margin="5" Click="btnUserAccount_Click" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                <TextBlock Text="전체" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </CheckBox>
+
+            <CheckBox Name="btnOperator" Tag="btnOperator"  Grid.Column="1" Margin="5" Click="btnUserAccount_Click" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                <TextBlock Text="오퍼레이터" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </CheckBox>
+
+            <CheckBox Name="btnAdmin" Tag="btnAdmin"  Grid.Column="2" Margin="5" Click="btnUserAccount_Click" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                <TextBlock Text="관리자" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </CheckBox>
+
+            <CheckBox Name="btnMaint" Tag="btnMaint"  Grid.Column="3" Margin="5" Click="btnUserAccount_Click" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                <TextBlock Text="유지보수" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </CheckBox>
+
+        </UniformGrid>
+
+        <ListView Name="lvUserAccount" Grid.Row="1" Grid.Column="0" Margin="10" BorderBrush="Black" Foreground="Black" FontSize="18" Background="Transparent" IsSynchronizedWithCurrentItem="True" SelectionChanged="lvUserAccount_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="사용자 ID" Width="200" DisplayMemberBinding="{Binding Path=ID}"/>
+                        <GridViewColumn Header="계정 권한" Width="200" DisplayMemberBinding="{Binding Path=AccountType}"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Name="tblD" Grid.Column="0" Margin="10" Text="사용자 ID : " FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <TextBlock Name="tbSelectedlD" Grid.Column="1" Margin="10" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Name="tbPassword" Grid.Column="0" Margin="10" Text="암 호 : " FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <PasswordBox Name="tbxPassword" Grid.Column="1" Margin="10, 5" FontSize="18" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
+
+
+        <UniformGrid Grid.Row="4" Columns="2">
+            <Button Name="btnCancel" Margin="5,0,5,5" Click="btnCancel_Click" Template="{StaticResource TemplateButton_MenuStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Margin="10,0" Source="Images/Cancel32.png" Stretch="None"/>
+                    <TextBlock Text="취   소" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Name="btnOK" Margin="5,0,5,5" Click="btnOK_Click" Template="{StaticResource TemplateButton_MenuStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Margin="10,0" Source="Images/Apply32.png" Stretch="None"/>
+                    <TextBlock Name="tblOK" Text="확   인" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </UniformGrid>
+    </Grid>
+</Window>

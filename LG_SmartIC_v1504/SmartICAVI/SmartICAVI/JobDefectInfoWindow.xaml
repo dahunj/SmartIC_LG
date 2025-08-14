@@ -1,0 +1,503 @@
+﻿<Window x:Class="SmartICAVI.JobDefectInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource StyleCustomWindow}"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Opacity="0.99"
+        Loaded="Window_Loaded"
+        Title="JobDefectInfoWindow" Height="950" Width="700">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Column="0" Name="lblMessage" Content="메시지확인" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Grid.Column="1" Name="lblDefectCode" Content="Defect Code" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Grid.Column="2" Name="lblDefectDefine" Content="Define Name" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Grid.Column="3" Name="lblDefectName" Content="User Name" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Label Grid.Column="4" Name="lblDefectAccumulate" Content="Accumulate" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        </Grid>
+
+        <ScrollViewer Name="scrollViewer" Grid.Row="1" Margin="5, 0, 5, 5" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer.Resources>
+                <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                    <Setter Property="MinWidth" Value="40" />
+                    <Setter Property="MinHeight" Value="40" />
+                </Style>
+            </ScrollViewer.Resources>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="170"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="33"/>
+                </Grid.RowDefinitions>
+                
+                <CheckBox Grid.Row="0" Grid.Column="0" Name="cbxMessage_00" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="1" Grid.Column="0" Name="cbxMessage_01" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="2" Grid.Column="0" Name="cbxMessage_02" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="3" Grid.Column="0" Name="cbxMessage_03" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="4" Grid.Column="0" Name="cbxMessage_04" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="5" Grid.Column="0" Name="cbxMessage_05" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="6" Grid.Column="0" Name="cbxMessage_06" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="7" Grid.Column="0" Name="cbxMessage_07" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="8" Grid.Column="0" Name="cbxMessage_08" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="9" Grid.Column="0" Name="cbxMessage_09" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <CheckBox Grid.Row="10" Grid.Column="0" Name="cbxMessage_10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="11" Grid.Column="0" Name="cbxMessage_11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="12" Grid.Column="0" Name="cbxMessage_12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="13" Grid.Column="0" Name="cbxMessage_13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="14" Grid.Column="0" Name="cbxMessage_14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="15" Grid.Column="0" Name="cbxMessage_15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="16" Grid.Column="0" Name="cbxMessage_16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="17" Grid.Column="0" Name="cbxMessage_17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="18" Grid.Column="0" Name="cbxMessage_18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="19" Grid.Column="0" Name="cbxMessage_19" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <CheckBox Grid.Row="20" Grid.Column="0" Name="cbxMessage_20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="21" Grid.Column="0" Name="cbxMessage_21" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="22" Grid.Column="0" Name="cbxMessage_22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="23" Grid.Column="0" Name="cbxMessage_23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="24" Grid.Column="0" Name="cbxMessage_24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="25" Grid.Column="0" Name="cbxMessage_25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="26" Grid.Column="0" Name="cbxMessage_26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="27" Grid.Column="0" Name="cbxMessage_27" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="28" Grid.Column="0" Name="cbxMessage_28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="29" Grid.Column="0" Name="cbxMessage_29" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <CheckBox Grid.Row="30" Grid.Column="0" Name="cbxMessage_30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="31" Grid.Column="0" Name="cbxMessage_31" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="32" Grid.Column="0" Name="cbxMessage_32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="33" Grid.Column="0" Name="cbxMessage_33" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="34" Grid.Column="0" Name="cbxMessage_34" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="35" Grid.Column="0" Name="cbxMessage_35" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="36" Grid.Column="0" Name="cbxMessage_36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="37" Grid.Column="0" Name="cbxMessage_37" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="38" Grid.Column="0" Name="cbxMessage_38" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="39" Grid.Column="0" Name="cbxMessage_39" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <CheckBox Grid.Row="40" Grid.Column="0" Name="cbxMessage_40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="41" Grid.Column="0" Name="cbxMessage_41" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="42" Grid.Column="0" Name="cbxMessage_42" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="43" Grid.Column="0" Name="cbxMessage_43" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="44" Grid.Column="0" Name="cbxMessage_44" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="45" Grid.Column="0" Name="cbxMessage_45" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="46" Grid.Column="0" Name="cbxMessage_46" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="47" Grid.Column="0" Name="cbxMessage_47" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="48" Grid.Column="0" Name="cbxMessage_48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="49" Grid.Column="0" Name="cbxMessage_49" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <CheckBox Grid.Row="50" Grid.Column="0" Name="cbxMessage_50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="51" Grid.Column="0" Name="cbxMessage_51" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="52" Grid.Column="0" Name="cbxMessage_52" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="53" Grid.Column="0" Name="cbxMessage_53" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="54" Grid.Column="0" Name="cbxMessage_54" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="55" Grid.Column="0" Name="cbxMessage_55" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="56" Grid.Column="0" Name="cbxMessage_56" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="57" Grid.Column="0" Name="cbxMessage_57" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="58" Grid.Column="0" Name="cbxMessage_58" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="59" Grid.Column="0" Name="cbxMessage_59" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <CheckBox Grid.Row="60" Grid.Column="0" Name="cbxMessage_60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="61" Grid.Column="0" Name="cbxMessage_61" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <CheckBox Grid.Row="62" Grid.Column="0" Name="cbxMessage_62" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+
+                <Label Grid.Row="0" Grid.Column="1" Name="lblDefectCode_00" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="1" Name="lblDefectCode_01" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="2" Grid.Column="1" Name="lblDefectCode_02" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="3" Grid.Column="1" Name="lblDefectCode_03" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="4" Grid.Column="1" Name="lblDefectCode_04" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="5" Grid.Column="1" Name="lblDefectCode_05" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="6" Grid.Column="1" Name="lblDefectCode_06" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="7" Grid.Column="1" Name="lblDefectCode_07" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="8" Grid.Column="1" Name="lblDefectCode_08" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="9" Grid.Column="1" Name="lblDefectCode_09" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="10" Grid.Column="1" Name="lblDefectCode_10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="11" Grid.Column="1" Name="lblDefectCode_11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="12" Grid.Column="1" Name="lblDefectCode_12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="13" Grid.Column="1" Name="lblDefectCode_13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="14" Grid.Column="1" Name="lblDefectCode_14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="15" Grid.Column="1" Name="lblDefectCode_15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="16" Grid.Column="1" Name="lblDefectCode_16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="17" Grid.Column="1" Name="lblDefectCode_17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="18" Grid.Column="1" Name="lblDefectCode_18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="19" Grid.Column="1" Name="lblDefectCode_19" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="20" Grid.Column="1" Name="lblDefectCode_20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="21" Grid.Column="1" Name="lblDefectCode_21" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="22" Grid.Column="1" Name="lblDefectCode_22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="23" Grid.Column="1" Name="lblDefectCode_23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="24" Grid.Column="1" Name="lblDefectCode_24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="25" Grid.Column="1" Name="lblDefectCode_25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="26" Grid.Column="1" Name="lblDefectCode_26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="27" Grid.Column="1" Name="lblDefectCode_27" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="28" Grid.Column="1" Name="lblDefectCode_28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="29" Grid.Column="1" Name="lblDefectCode_29" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="30" Grid.Column="1" Name="lblDefectCode_30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="31" Grid.Column="1" Name="lblDefectCode_31" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="32" Grid.Column="1" Name="lblDefectCode_32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="33" Grid.Column="1" Name="lblDefectCode_33" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="34" Grid.Column="1" Name="lblDefectCode_34" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="35" Grid.Column="1" Name="lblDefectCode_35" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="36" Grid.Column="1" Name="lblDefectCode_36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="37" Grid.Column="1" Name="lblDefectCode_37" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="38" Grid.Column="1" Name="lblDefectCode_38" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="39" Grid.Column="1" Name="lblDefectCode_39" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="40" Grid.Column="1" Name="lblDefectCode_40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="41" Grid.Column="1" Name="lblDefectCode_41" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="42" Grid.Column="1" Name="lblDefectCode_42" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="43" Grid.Column="1" Name="lblDefectCode_43" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="44" Grid.Column="1" Name="lblDefectCode_44" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="45" Grid.Column="1" Name="lblDefectCode_45" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="46" Grid.Column="1" Name="lblDefectCode_46" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="47" Grid.Column="1" Name="lblDefectCode_47" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="48" Grid.Column="1" Name="lblDefectCode_48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="49" Grid.Column="1" Name="lblDefectCode_49" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="50" Grid.Column="1" Name="lblDefectCode_50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="51" Grid.Column="1" Name="lblDefectCode_51" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="52" Grid.Column="1" Name="lblDefectCode_52" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="53" Grid.Column="1" Name="lblDefectCode_53" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="54" Grid.Column="1" Name="lblDefectCode_54" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="55" Grid.Column="1" Name="lblDefectCode_55" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="56" Grid.Column="1" Name="lblDefectCode_56" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="57" Grid.Column="1" Name="lblDefectCode_57" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="58" Grid.Column="1" Name="lblDefectCode_58" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="59" Grid.Column="1" Name="lblDefectCode_59" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="60" Grid.Column="1" Name="lblDefectCode_60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="61" Grid.Column="1" Name="lblDefectCode_61" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="62" Grid.Column="1" Name="lblDefectCode_62" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <!--<Label Grid.Row="63" Grid.Column="1" Name="lblDefectCode_63" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="64" Grid.Column="1" Name="lblDefectCode_64" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+
+
+
+                <Label Grid.Row="0" Grid.Column="2" Name="lblDefectDefine_00" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="1" Grid.Column="2" Name="lblDefectDefine_01" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="2" Grid.Column="2" Name="lblDefectDefine_02" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="3" Grid.Column="2" Name="lblDefectDefine_03" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="4" Grid.Column="2" Name="lblDefectDefine_04" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="5" Grid.Column="2" Name="lblDefectDefine_05" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="6" Grid.Column="2" Name="lblDefectDefine_06" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="7" Grid.Column="2" Name="lblDefectDefine_07" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="8" Grid.Column="2" Name="lblDefectDefine_08" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="9" Grid.Column="2" Name="lblDefectDefine_09" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="10" Grid.Column="2" Name="lblDefectDefine_10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="11" Grid.Column="2" Name="lblDefectDefine_11" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="12" Grid.Column="2" Name="lblDefectDefine_12" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="13" Grid.Column="2" Name="lblDefectDefine_13" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="14" Grid.Column="2" Name="lblDefectDefine_14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="15" Grid.Column="2" Name="lblDefectDefine_15" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="16" Grid.Column="2" Name="lblDefectDefine_16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="17" Grid.Column="2" Name="lblDefectDefine_17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="18" Grid.Column="2" Name="lblDefectDefine_18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="19" Grid.Column="2" Name="lblDefectDefine_19" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="20" Grid.Column="2" Name="lblDefectDefine_20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="21" Grid.Column="2" Name="lblDefectDefine_21" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="22" Grid.Column="2" Name="lblDefectDefine_22" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="23" Grid.Column="2" Name="lblDefectDefine_23" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="24" Grid.Column="2" Name="lblDefectDefine_24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="25" Grid.Column="2" Name="lblDefectDefine_25" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="26" Grid.Column="2" Name="lblDefectDefine_26" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="27" Grid.Column="2" Name="lblDefectDefine_27" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="28" Grid.Column="2" Name="lblDefectDefine_28" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="29" Grid.Column="2" Name="lblDefectDefine_29" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="30" Grid.Column="2" Name="lblDefectDefine_30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="31" Grid.Column="2" Name="lblDefectDefine_31" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="32" Grid.Column="2" Name="lblDefectDefine_32" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="33" Grid.Column="2" Name="lblDefectDefine_33" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="34" Grid.Column="2" Name="lblDefectDefine_34" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="35" Grid.Column="2" Name="lblDefectDefine_35" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="36" Grid.Column="2" Name="lblDefectDefine_36" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="37" Grid.Column="2" Name="lblDefectDefine_37" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="38" Grid.Column="2" Name="lblDefectDefine_38" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="39" Grid.Column="2" Name="lblDefectDefine_39" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="40" Grid.Column="2" Name="lblDefectDefine_40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="41" Grid.Column="2" Name="lblDefectDefine_41" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="42" Grid.Column="2" Name="lblDefectDefine_42" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="43" Grid.Column="2" Name="lblDefectDefine_43" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="44" Grid.Column="2" Name="lblDefectDefine_44" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="45" Grid.Column="2" Name="lblDefectDefine_45" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="46" Grid.Column="2" Name="lblDefectDefine_46" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="47" Grid.Column="2" Name="lblDefectDefine_47" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="48" Grid.Column="2" Name="lblDefectDefine_48" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="49" Grid.Column="2" Name="lblDefectDefine_49" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="50" Grid.Column="2" Name="lblDefectDefine_50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="51" Grid.Column="2" Name="lblDefectDefine_51" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="52" Grid.Column="2" Name="lblDefectDefine_52" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="53" Grid.Column="2" Name="lblDefectDefine_53" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="54" Grid.Column="2" Name="lblDefectDefine_54" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="55" Grid.Column="2" Name="lblDefectDefine_55" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="56" Grid.Column="2" Name="lblDefectDefine_56" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="57" Grid.Column="2" Name="lblDefectDefine_57" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="58" Grid.Column="2" Name="lblDefectDefine_58" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="59" Grid.Column="2" Name="lblDefectDefine_59" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <Label Grid.Row="60" Grid.Column="2" Name="lblDefectDefine_60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="61" Grid.Column="2" Name="lblDefectDefine_61" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="62" Grid.Column="2" Name="lblDefectDefine_62" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <!--<Label Grid.Row="63" Grid.Column="2" Name="lblDefectDefine_63" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Grid.Row="64" Grid.Column="2" Name="lblDefectDefine_64" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
+
+
+
+                <TextBox Grid.Row="0" Grid.Column="3" Name="tbxDefectName_00" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="1" Grid.Column="3" Name="tbxDefectName_01" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="2" Grid.Column="3" Name="tbxDefectName_02" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="3" Grid.Column="3" Name="tbxDefectName_03" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="4" Grid.Column="3" Name="tbxDefectName_04" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="5" Grid.Column="3" Name="tbxDefectName_05" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="6" Grid.Column="3" Name="tbxDefectName_06" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="7" Grid.Column="3" Name="tbxDefectName_07" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="8" Grid.Column="3" Name="tbxDefectName_08" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="9" Grid.Column="3" Name="tbxDefectName_09" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="10" Grid.Column="3" Name="tbxDefectName_10" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="11" Grid.Column="3" Name="tbxDefectName_11" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="12" Grid.Column="3" Name="tbxDefectName_12" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="13" Grid.Column="3" Name="tbxDefectName_13" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="14" Grid.Column="3" Name="tbxDefectName_14" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="15" Grid.Column="3" Name="tbxDefectName_15" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="16" Grid.Column="3" Name="tbxDefectName_16" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="17" Grid.Column="3" Name="tbxDefectName_17" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="18" Grid.Column="3" Name="tbxDefectName_18" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="19" Grid.Column="3" Name="tbxDefectName_19" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="20" Grid.Column="3" Name="tbxDefectName_20" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="21" Grid.Column="3" Name="tbxDefectName_21" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="22" Grid.Column="3" Name="tbxDefectName_22" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="23" Grid.Column="3" Name="tbxDefectName_23" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="24" Grid.Column="3" Name="tbxDefectName_24" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="25" Grid.Column="3" Name="tbxDefectName_25" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="26" Grid.Column="3" Name="tbxDefectName_26" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="27" Grid.Column="3" Name="tbxDefectName_27" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="28" Grid.Column="3" Name="tbxDefectName_28" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="29" Grid.Column="3" Name="tbxDefectName_29" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="30" Grid.Column="3" Name="tbxDefectName_30" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="31" Grid.Column="3" Name="tbxDefectName_31" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="32" Grid.Column="3" Name="tbxDefectName_32" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="33" Grid.Column="3" Name="tbxDefectName_33" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="34" Grid.Column="3" Name="tbxDefectName_34" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="35" Grid.Column="3" Name="tbxDefectName_35" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="36" Grid.Column="3" Name="tbxDefectName_36" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="37" Grid.Column="3" Name="tbxDefectName_37" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="38" Grid.Column="3" Name="tbxDefectName_38" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="39" Grid.Column="3" Name="tbxDefectName_39" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="40" Grid.Column="3" Name="tbxDefectName_40" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="41" Grid.Column="3" Name="tbxDefectName_41" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="42" Grid.Column="3" Name="tbxDefectName_42" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="43" Grid.Column="3" Name="tbxDefectName_43" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="44" Grid.Column="3" Name="tbxDefectName_44" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="45" Grid.Column="3" Name="tbxDefectName_45" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="46" Grid.Column="3" Name="tbxDefectName_46" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="47" Grid.Column="3" Name="tbxDefectName_47" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="48" Grid.Column="3" Name="tbxDefectName_48" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="49" Grid.Column="3" Name="tbxDefectName_49" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="50" Grid.Column="3" Name="tbxDefectName_50" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="51" Grid.Column="3" Name="tbxDefectName_51" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="52" Grid.Column="3" Name="tbxDefectName_52" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="53" Grid.Column="3" Name="tbxDefectName_53" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="54" Grid.Column="3" Name="tbxDefectName_54" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="55" Grid.Column="3" Name="tbxDefectName_55" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="56" Grid.Column="3" Name="tbxDefectName_56" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="57" Grid.Column="3" Name="tbxDefectName_57" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="58" Grid.Column="3" Name="tbxDefectName_58" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="59" Grid.Column="3" Name="tbxDefectName_59" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="60" Grid.Column="3" Name="tbxDefectName_60" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="61" Grid.Column="3" Name="tbxDefectName_61" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="62" Grid.Column="3" Name="tbxDefectName_62" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="0" Grid.Column="4" Name="tbxDefectAccumulate_00" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="1" Grid.Column="4" Name="tbxDefectAccumulate_01" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="2" Grid.Column="4" Name="tbxDefectAccumulate_02" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="3" Grid.Column="4" Name="tbxDefectAccumulate_03" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="4" Grid.Column="4" Name="tbxDefectAccumulate_04" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="5" Grid.Column="4" Name="tbxDefectAccumulate_05" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="6" Grid.Column="4" Name="tbxDefectAccumulate_06" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="7" Grid.Column="4" Name="tbxDefectAccumulate_07" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="8" Grid.Column="4" Name="tbxDefectAccumulate_08" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="9" Grid.Column="4" Name="tbxDefectAccumulate_09" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="10" Grid.Column="4" Name="tbxDefectAccumulate_10" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="11" Grid.Column="4" Name="tbxDefectAccumulate_11" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="12" Grid.Column="4" Name="tbxDefectAccumulate_12" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="13" Grid.Column="4" Name="tbxDefectAccumulate_13" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="14" Grid.Column="4" Name="tbxDefectAccumulate_14" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="15" Grid.Column="4" Name="tbxDefectAccumulate_15" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="16" Grid.Column="4" Name="tbxDefectAccumulate_16" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="17" Grid.Column="4" Name="tbxDefectAccumulate_17" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="18" Grid.Column="4" Name="tbxDefectAccumulate_18" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="19" Grid.Column="4" Name="tbxDefectAccumulate_19" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="20" Grid.Column="4" Name="tbxDefectAccumulate_20" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="21" Grid.Column="4" Name="tbxDefectAccumulate_21" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="22" Grid.Column="4" Name="tbxDefectAccumulate_22" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="23" Grid.Column="4" Name="tbxDefectAccumulate_23" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="24" Grid.Column="4" Name="tbxDefectAccumulate_24" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="25" Grid.Column="4" Name="tbxDefectAccumulate_25" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="26" Grid.Column="4" Name="tbxDefectAccumulate_26" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="27" Grid.Column="4" Name="tbxDefectAccumulate_27" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="28" Grid.Column="4" Name="tbxDefectAccumulate_28" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="29" Grid.Column="4" Name="tbxDefectAccumulate_29" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="30" Grid.Column="4" Name="tbxDefectAccumulate_30" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="31" Grid.Column="4" Name="tbxDefectAccumulate_31" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="32" Grid.Column="4" Name="tbxDefectAccumulate_32" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="33" Grid.Column="4" Name="tbxDefectAccumulate_33" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="34" Grid.Column="4" Name="tbxDefectAccumulate_34" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="35" Grid.Column="4" Name="tbxDefectAccumulate_35" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="36" Grid.Column="4" Name="tbxDefectAccumulate_36" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="37" Grid.Column="4" Name="tbxDefectAccumulate_37" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="38" Grid.Column="4" Name="tbxDefectAccumulate_38" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="39" Grid.Column="4" Name="tbxDefectAccumulate_39" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="40" Grid.Column="4" Name="tbxDefectAccumulate_40" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="41" Grid.Column="4" Name="tbxDefectAccumulate_41" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="42" Grid.Column="4" Name="tbxDefectAccumulate_42" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="43" Grid.Column="4" Name="tbxDefectAccumulate_43" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="44" Grid.Column="4" Name="tbxDefectAccumulate_44" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="45" Grid.Column="4" Name="tbxDefectAccumulate_45" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="46" Grid.Column="4" Name="tbxDefectAccumulate_46" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="47" Grid.Column="4" Name="tbxDefectAccumulate_47" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="48" Grid.Column="4" Name="tbxDefectAccumulate_48" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="49" Grid.Column="4" Name="tbxDefectAccumulate_49" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="50" Grid.Column="4" Name="tbxDefectAccumulate_50" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="51" Grid.Column="4" Name="tbxDefectAccumulate_51" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="52" Grid.Column="4" Name="tbxDefectAccumulate_52" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="53" Grid.Column="4" Name="tbxDefectAccumulate_53" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="54" Grid.Column="4" Name="tbxDefectAccumulate_54" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="55" Grid.Column="4" Name="tbxDefectAccumulate_55" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="56" Grid.Column="4" Name="tbxDefectAccumulate_56" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="57" Grid.Column="4" Name="tbxDefectAccumulate_57" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="58" Grid.Column="4" Name="tbxDefectAccumulate_58" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="59" Grid.Column="4" Name="tbxDefectAccumulate_59" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                <TextBox Grid.Row="60" Grid.Column="4" Name="tbxDefectAccumulate_60" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="61" Grid.Column="4" Name="tbxDefectAccumulate_61" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                <TextBox Grid.Row="62" Grid.Column="4" Name="tbxDefectAccumulate_62" Margin="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+        </ScrollViewer>
+        
+        <UniformGrid Grid.Row="2" Columns="2">
+            <Button Name="btnCancel" Margin="5,0,5,5" Click="btnCancel_Click" Template="{StaticResource TemplateButton_MenuStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Margin="10,0" Source="Images/Cancel32.png" Stretch="None"/>
+                    <TextBlock Text="취   소" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Name="btnOK" Margin="5,0,5,5" Click="btnOK_Click" Template="{StaticResource TemplateButton_MenuStyle}">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Margin="10,0" Source="Images/Apply32.png" Stretch="None"/>
+                    <TextBlock Name="tblOK" Text="적   용" Foreground="White" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </UniformGrid>
+    </Grid>
+</Window>

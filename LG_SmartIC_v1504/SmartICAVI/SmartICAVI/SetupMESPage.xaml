@@ -1,0 +1,244 @@
+﻿<Page x:Class="SmartICAVI.SetupMESPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      x:Name="page"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1280"
+      Background="Cornsilk"
+      Loaded="page_Loaded"
+      Unloaded="page_Unloaded"
+	Title="SetupMESPage">
+
+    <!--<Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.1" To="1" Duration="0:0:0.7" AccelerationRatio="0.9"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>-->
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+
+        <Border Grid.Column="0" Padding="10" Style="{StaticResource StyleBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Name="lbTitleCommu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Content="통신 셋업" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+
+                <Label Name="lbIPAddress" Grid.Row="1" Grid.Column="1" Content="IP Address" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+                <Label Name="lbPort" Grid.Row="1" Grid.Column="2" Content="Port" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+                <Label Name="lbHandlerPort" Grid.Row="1" Grid.Column="3" Content="Handler Port" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+                <Label Name="lbNetworkDrive" Grid.Row="1" Grid.Column="4" Content="Network Drive" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+                <Label Name="lbPublicFolder" Grid.Row="1" Grid.Column="5" Content="공유폴더" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+
+
+                <Label Name="lbTopVision" Content="TOP1" Grid.Row="2" Grid.Column="0"  Margin="5" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxTopVisionIPAddress" Text="127.0.0.1" Tag="TOP1 VISION IP Address" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTopVisionPort" Text="8011" Tag="TOP1 VISION Port Number" Grid.Row="2" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTopVisionHandlerPort" Text="8001" Tag="TOP1 VISION HANDLER Port Number" Grid.Row="2" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTopVisionNetworkDrive" Text="Y:" Tag="TOP1 VISION Network Drive" Grid.Row="2" Grid.Column="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTopVisionPublicFolder" Text="Defect" Tag="TOP1 VISION Public Folder" Grid.Row="2" Grid.Column="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+                <Label Name="lbTop2Vision" Content="TOP2" Grid.Row="3" Grid.Column="0"  Margin="5" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxTop2VisionIPAddress" Text="127.0.0.1" Tag="TOP2 VISION IP Address" Grid.Row="3" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTop2VisionPort" Text="8011" Tag="TOP2 VISION Port Number" Grid.Row="3" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTop2VisionHandlerPort" Text="8001" Tag="TOP2 VISION HANDLER Port Number" Grid.Row="3" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTop2VisionNetworkDrive" Text="X:" Tag="TOP2 VISION Network Drive" Grid.Row="3" Grid.Column="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxTop2VisionPublicFolder" Text="Defect" Tag="TOP2 VISION Public Folder" Grid.Row="3" Grid.Column="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+
+
+                <Label Name="lbBottomVision" Content="BOTTOM1" Grid.Row="4" Grid.Column="0"  Margin="5" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxBottomVisionIPAddress" Text="127.0.0.1" Tag="BOTTOM1 VISION IP Address" Grid.Row="4" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottomVisionPort" Text="8012" Tag="BOTTOM1 VISION Port Number" Grid.Row="4" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottomVisionHandlerPort" Text="8002" Tag="BOTTOM1 VISION HANDLER Port Number" Grid.Row="4" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottomVisionNetworkDrive" Text="W:" Tag="BOTTOM1 VISION Network Drive" Grid.Row="4" Grid.Column="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottomVisionPublicFolder" Text="Defect" Tag="BOTTOM1 VISION Public Folder" Grid.Row="4" Grid.Column="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+                <Label Name="lbBottom2Vision" Content="BOTTOM2" Grid.Row="5" Grid.Column="0"  Margin="5" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxBottom2VisionIPAddress" Text="127.0.0.1" Tag="BOTTOM1 VISION IP Address" Grid.Row="5" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottom2VisionPort" Text="8012" Tag="BOTTOM1 VISION Port Number" Grid.Row="5" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottom2VisionHandlerPort" Text="8002" Tag="BOTTOM1 VISION HANDLER Port Number" Grid.Row="5" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottom2VisionNetworkDrive" Text="V:" Tag="BOTTOM2 VISION Network Drive" Grid.Row="5" Grid.Column="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxBottom2VisionPublicFolder" Text="Defect" Tag="BOTTOM2 VISION Public Folder" Grid.Row="5" Grid.Column="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+
+
+                <Label Name="lbMonoVision" Content="MONO1" Grid.Row="6" Grid.Column="0"  Margin="5" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxMonoVisionIPAddress" Text="127.0.0.1" Tag="MONO1 VISION IP Address" Grid.Row="6" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMonoVisionPort" Text="8013" Tag="MONO1 VISION Port Number" Grid.Row="6" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMonoVisionHandlerPort" Text="8003" Tag="MONO1 VISION HANDLER Port Number" Grid.Row="6" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMonoVisionNetworkDrive" Text="U:" Tag="MONO1 VISION Network Drive" Grid.Row="6" Grid.Column="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMonoVisionPublicFolder" Text="Defect" Tag="MONO1 VISION Public Folder" Grid.Row="6" Grid.Column="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+                <Label Name="lbMono2Vision" Content="MONO2" Grid.Row="7" Grid.Column="0"  Margin="5" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxMono2VisionIPAddress" Text="127.0.0.1" Tag="MONO1 VISION IP Address" Grid.Row="7" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMono2VisionPort" Text="8013" Tag="MONO1 VISION Port Number" Grid.Row="7" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMono2VisionHandlerPort" Text="8003" Tag="MONO1 VISION HANDLER Port Number" Grid.Row="7" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMono2VisionNetworkDrive" Text="T:" Tag="MONO2 VISION Network Drive" Grid.Row="7" Grid.Column="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxMono2VisionPublicFolder" Text="Defect" Tag="MONO2 VISION Public Folder" Grid.Row="7" Grid.Column="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+
+
+                <Label Name="lbServer" Content="SERVER" Grid.Row="9" Grid.Column="0"  Margin="5" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxServerIPAddress" Text="127.0.0.1" Tag="Server IP Address" Grid.Row="9" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxServerPort" Text="8013" Tag="Server Port Number" Grid.Row="9" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxServerHandlerPort" Text="8003" Tag="Server Port Number" Grid.Row="9" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxServerNetworkDrive" Text="Z:" Tag="Server Network Drive" Grid.Row="9" Grid.Column="4" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                <TextBox Name="tbxServerPublicFolder" Text="PublicData" Tag="Server Public Folder" Grid.Row="9" Grid.Column="5" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+
+            </Grid>
+        </Border>
+
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Padding="10" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Name="lbTitleOnOff" Grid.Row="0" Grid.ColumnSpan="4" Content="ONLINE / OFFLINE 설정" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+
+                    <CheckBox x:Name="cbOnline" Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="5" Click="cbOnline_Click" Template="{StaticResource CheckBoxTemplate}">
+                        <Label Name="lbOnline" Content="온라인" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </CheckBox>
+                    <CheckBox x:Name="cbOffline" Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2"  Margin="5" Click="cbOffline_Click" Template="{StaticResource CheckBoxTemplate}">
+                        <Label Name="lbOffline" Content="오프라인" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </CheckBox>
+
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Padding="10" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Name="lbTitleMES2" Grid.Row="0" Grid.ColumnSpan="4" Content="MES 셋업" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+
+                    <Label Name="lblService" Grid.Row="1" Grid.Column="0" Content="Service : " FontSize="18" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center"/>
+                    <TextBox Name="tbxService" Grid.Row="1" Grid.Column="1" Margin="10" Tag="Service : " Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>  <!--SelectionChanged="tbx_SelectionChanged"/>-->
+                    <Label Name="lblNetwork" Grid.Row="2" Grid.Column="0" Content="Network : " FontSize="18" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center"/>
+                    <TextBox Name="tbxNetwork" Grid.Row="2" Grid.Column="1" Margin="10" Tag="Network : " Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>  <!--SelectionChanged="tbx_SelectionChanged"/>-->
+                    <Label Name="lblDeamon" Grid.Row="3" Grid.Column="0" Content="Daemon : " FontSize="18" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center"/>
+                    <TextBox Name="tbxDeamon" Grid.Row="3" Grid.Column="1" Margin="10" Tag="Deamon : " Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>  <!--SelectionChanged="tbx_SelectionChanged"/>-->
+
+
+                    <Label Name="lblPubSubject" Grid.Row="1" Grid.Column="2" Content="Pub Subject : " FontSize="18" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center"/>
+                    <TextBox Name="tbxPubSubject" Grid.Row="1" Grid.Column="3" Margin="10" Tag="Publish Subject : " Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>  <!--SelectionChanged="tbx_SelectionChanged"/>-->
+                    <Label Name="lblPubTimeout" Grid.Row="2" Grid.Column="2" Content="Pub Timeout : " FontSize="18" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center"/>
+                    <TextBox Name="tbxPubTimeout" Grid.Row="2" Grid.Column="3" Margin="10" Tag="Publish Timeout : " Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp"/> <!--SelectionChanged="tbx_SelectionChanged"/>-->
+                    <Label Name="lblSubSubject" Grid.Row="3" Grid.Column="2" Content="Sub Subject : " FontSize="18" HorizontalContentAlignment="Right"  VerticalContentAlignment="Center"/>
+                    <TextBox Name="tbxSubSubject" Grid.Row="3" Grid.Column="3" Margin="10" Tag="Subscribe Subject : " Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/> <!--SelectionChanged="tbx_SelectionChanged"/>-->
+
+                    <Button Name="btnMESReset" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Margin="5" Click="btnMESReset_Click" Template="{StaticResource TemplateCustomButton}">
+                        <StackPanel>
+                            <TextBlock Name="tblMESReset" Text="MES 재 설정" FontSize="18" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!--<ut:GroupCheckBox x:Name="cbOnlineMode" Grid.Row="5" Grid.ColumnSpan="2"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                        <Label Name="lbOnlineMode" Content="온/오프라인 모드설정" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </ut:GroupCheckBox>
+
+                    <ut:SelectCheckBox x:Name="cbOnline" Grid.Row="5" Grid.Column="2"  Margin="5" Click="cbOnline_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                        <Label Name="lbOnline" Grid.Row="10" Grid.Column="0" Content="온라인" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </ut:SelectCheckBox>
+                    <ut:SelectCheckBox x:Name="cbOffline" Grid.Row="5" Grid.Column="3"  Margin="5" Click="cbOffline_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                        <Label Name="lbOffline" Grid.Row="10" Grid.Column="0" Content="오프라인" FontSize="18" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                    </ut:SelectCheckBox>
+
+
+
+                    <Button Name="btnMES" Grid.Row="1" Margin="30" Visibility="Collapsed" Click="btnMES_Click" Template="{StaticResource TemplateCustomButton}">
+                        <StackPanel>
+                            <TextBlock Name="tblMES" Text="MES 셋업 창" FontSize="32" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Button>-->
+                </Grid>
+            </Border>
+        </Grid>
+
+        <DockPanel Grid.Row="1" Grid.Column="1" LastChildFill="False">
+            <Button Name="btnCancel" Tag="Cancel" DockPanel.Dock="Right" Click="btnCancel_Click" Margin="5" Padding="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource TemplateCustomButton}">
+                <StackPanel>
+                    <Image Source="Images/Cancel32.png" Stretch="None"/>
+                    <TextBlock Text="취소" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Name="btnSave" Tag="Save" DockPanel.Dock="Right" Click="btnSave_Click" Margin="5" Padding="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource TemplateCustomButton}">
+                <StackPanel>
+                    <Image Source="Images/Save32.png" Stretch="None"/>
+                    <TextBlock Text="저장" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </DockPanel>
+    </Grid>
+</Page>

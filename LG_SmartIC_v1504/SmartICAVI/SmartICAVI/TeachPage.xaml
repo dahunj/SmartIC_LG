@@ -1,0 +1,90 @@
+﻿<Page x:Class="SmartICAVI.TeachPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1280"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="TeachPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Name="borderTeachPages" Grid.Column="0" Style="{StaticResource StyleBorder}">
+            <Grid ClipToBounds="True" >
+                <Frame Name="teachPage" JournalOwnership="UsesParentJournal" Source="TeachEmptyPage.xaml"/>
+            </Grid>
+        </Border>
+
+        <Border Name="borderTeachStep" Grid.Column="1" Style="{StaticResource StyleBorder}">
+            <UniformGrid Rows="13">
+                <UniformGrid Columns="2">
+                    <Label Name="lblRecipeName" Content="레시피(모델) 이름 : "/>
+                    <TextBlock Name="tblRecipeName" Text="NoDefine"/>
+                </UniformGrid>
+
+                <CheckBox Name="cbxInitPage" Tag="cbxInitPage" Margin="5" Click="cbxPage_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                    <TextBlock Text="파라미터 설정"/>
+                </CheckBox>
+                
+                <Image Source="Images/DownBlue32.png" Stretch="None"/>
+
+                <CheckBox Name="cbxTopPage" Tag="cbxTopPage" Margin="5" Click="cbxPage_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                    <TextBlock Text="TOP Vision 티칭"/>
+                </CheckBox>
+
+                <Image Source="Images/DownBlue32.png" Stretch="None"/>
+
+                <CheckBox Name="cbxBottomPage" Tag="cbxBottomPage" Margin="5" Click="cbxPage_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                    <TextBlock Text="BOTTOM Vision 티칭"/>
+                </CheckBox>
+
+                <Image Source="Images/DownBlue32.png" Stretch="None"/>
+
+                <CheckBox Name="cbxMonoPage" Tag="cbxMonoPage" Margin="5" Click="cbxPage_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                    <TextBlock Text="Mono Vision 티칭"/>
+                </CheckBox>
+
+                <Image Source="Images/DownBlue32.png" Stretch="None"/>
+
+                <CheckBox Name="cbxPunchPage" Tag="cbxPunchPage" Margin="5" Click="cbxPage_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                    <TextBlock Text="Punch 티칭"/>
+                </CheckBox>
+
+                <Image Source="Images/DownBlue32.png" Stretch="None"/>
+
+                <Button Name="btnSave" Margin="5" Click="btnSave_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                    <TextBlock Text="저 장"/>
+                </Button>
+
+
+
+            </UniformGrid>
+        </Border>
+    </Grid>
+</Page>

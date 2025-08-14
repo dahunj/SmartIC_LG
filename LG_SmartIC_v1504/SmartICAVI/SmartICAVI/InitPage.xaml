@@ -1,0 +1,112 @@
+﻿<Page x:Class="SmartICAVI.InitPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:uc="clr-namespace:SmartICAVI"
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1280"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="InitPage">
+    
+    <Page.Resources>
+        <Style x:Key="styleLabel" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Padding" Value="7"/>
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="BorderBrush" Value="DarkGreen"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Border Name="borderMachine" Grid.Row="0" Style="{StaticResource StyleBorder}">
+                <uc:MachineControl x:Name="ucMachine" />
+            </Border>
+            <Label Content="초 기 화 구 동" Grid.Row="0" Margin="20" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+
+            <Border Name="borderListBox" Grid.Row="1" Style="{StaticResource StyleBorder}">
+                <ListBox Name="listbox" Padding="10" Margin="5" Foreground="Black" FontSize="18" Background="Transparent">
+                    <ListBox.Resources>
+                        <!--<Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Padding" Value="5"/>
+                            <EventSetter Event="MouseDoubleClick" Handler="listboxItem_MouseDoubleClick"/>
+                        </Style>-->
+                        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                            <Setter Property="MinWidth" Value="40" />
+                            <Setter Property="MinHeight" Value="40" />
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="7*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Border Name="borderInitStep" Grid.Row="0" Style="{StaticResource StyleBorder}">
+                <UniformGrid Margin="5" Rows="8">
+                    <Label Name="lblSensorCheck" Margin="20,10" Content="센서 채크" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource styleLabel}"/>
+                    <Image Source="Images/DownBlue32.png" Stretch="None"/>
+                    <Label Name="lblTopZ" Margin="20,10" Content="상면(TOP) 비젼 Z 축" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblBottomZ" Margin="20,10" Content="하면(BOTTOM) 비젼 Z 축" MinWidth="100" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblPunchX" Margin="20,10" Content="펀치 X 축" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblPunchY" Margin="20,10" Content="펀치 Y 축" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource styleLabel}"/>
+                    <Image Source="Images/DownBlue32.png" Stretch="None"/>
+                    <Label Name="lblInitDone" Margin="20,10" Content="초기화 완료" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource styleLabel}"/>
+                </UniformGrid>
+            </Border>
+            
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Name="btnStart" Grid.Row="1" Grid.Column="0" Click="btnStart_Click" Tag="Stop" Margin="10" Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_GreenStyle}">
+                    <StackPanel VerticalAlignment="Center">
+                        <Image Margin="10"  Source="Images/Home48.png" Stretch="None"/>
+                        <TextBlock Text="초기화 시작" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </CheckBox>
+
+                <ut:StopButton x:Name="btnStop" Grid.Row="1" Grid.Column="1" Click="btnStop_Click" Tag="Stop" Margin="10" Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_StopStyle}">
+                    <StackPanel VerticalAlignment="Center">
+                        <Image Margin="10"  Source="Images/Stop48.png" Stretch="None"/>
+                        <TextBlock Text="초기화 정지" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ut:StopButton>
+            </Grid>
+            
+        </Grid>
+        
+    </Grid>
+</Page>

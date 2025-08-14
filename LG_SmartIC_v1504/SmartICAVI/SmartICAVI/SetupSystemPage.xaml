@@ -1,0 +1,716 @@
+﻿<Page x:Class="SmartICAVI.SetupSystemPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      x:Name="page"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1280"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="SetupSystemPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" Padding="10" Style="{StaticResource StyleBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Name="lbTitleSystem" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="시스템 셋업" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+
+                <ScrollViewer Name="scrollViewer" Grid.Row="1" Grid.Column="0" Grid.RowSpan="13" Grid.ColumnSpan="4" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer.Resources>
+                        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                            <Setter Property="MinWidth" Value="40" />
+                            <Setter Property="MinHeight" Value="40" />
+                        </Style>
+                    </ScrollViewer.Resources>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>                            
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                        </Grid.RowDefinitions>
+                        
+                        <Label Name="lbMachineID" Grid.Row="0" Grid.Column="0"  Margin="5"  Content="설비 ID" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="tbMachineID" Text="Synapse" Grid.Row="0" Grid.Column="1" Margin="10" Tag="설비 ID" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp" />
+
+                        <Label Name="lbProcessID" Grid.Row="1" Grid.Column="0"  Content="공정 ID" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="tbProcessID" Text="SmartIC-AVI" Grid.Row="1" Grid.Column="1" Margin="10" Tag="공정 ID" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp" />
+
+                        <Label Name="lbToolID" Grid.Row="2" Grid.Column="0"  Content="툴 ID" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="tbToolID" Text="Punch" Grid.Row="2" Grid.Column="1" Margin="10,10,2,10" Tag="툴 ID" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp" />
+                        
+                        
+                        
+
+                        <Label Name="lbUseCheckGuide" Grid.Row="3" Grid.Column="0"  Margin="5" Content="소재 이탈 체크" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="3" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseCheckGuide" x:Name="rdCheckGuideUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseCheckGuide" x:Name="rdCheckGuideDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseVirtualKeyboard" Grid.Row="4" Grid.Column="0"  Margin="5" Content="가상키보드 사용" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="4" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseVirtualKeyboard" x:Name="rdVirtualKeyboardUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseVirtualKeyboard" x:Name="rdVIrtualKeyboardDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <ut:GroupCheckBox x:Name="cbUseSelectParams" Visibility="Hidden" Grid.Row="5" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbUseSelectParams" Content="파라미터 선택기능 사용" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Visibility="Hidden" Grid.Row="5" Grid.Column="1" Columns="3" Margin="10">
+                            <ut:SelectRadioButton GroupName="gpUseSelectParams" x:Name="rdSelectParamsUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <ut:SelectRadioButton GroupName="gpUseSelectParams" x:Name="rdSelectparamsDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+
+                        <ut:GroupCheckBox Visibility="Hidden" x:Name="cbUseVision" Grid.Row="6" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbUseVision" Content="비전검사 사용" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Visibility="Hidden" Grid.Row="6" Grid.Column="1" Columns="3" Margin="10">
+                            <ut:SelectRadioButton GroupName="gpUseVision" x:Name="rdVisionUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <ut:SelectRadioButton GroupName="gpUseVision" x:Name="rdVisionDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseTop" Content="TOP 비전 사용" Grid.Row="5" Grid.Column="0"  Margin="5" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="5" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseTopVision" x:Name="rdTopVisionUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseTopVision" x:Name="rdTopVisionDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseBottom" Content="BOTTOM 비전 사용" Grid.Row="6" Grid.Column="0"  Margin="5" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="6" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseBottomVision" x:Name="rdBottomVisionUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseBottomVision" x:Name="rdBottomVisionDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseMono" Content="MONO 비전 사용" Grid.Row="7" Grid.Column="0"  Margin="5" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="7" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseMonoVision" x:Name="rdMonoVisionUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseMonoVision" x:Name="rdMonoVisionDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUsePunch" Grid.Row="8" Grid.Column="0"  Margin="5" Content="펀칭 사용" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="8" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUsePunch" x:Name="rdPunchUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUsePunch" x:Name="rdPunchDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUsePunchCNG" Grid.Row="9" Grid.Column="0"  Margin="5" Content="연불구간 펀칭 사용" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="9" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUsePunchCNG" x:Name="rdPunchCNGUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUsePunchCNG" x:Name="rdPunchCNGDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseAlwaysAlign" Grid.Row="10" Grid.Column="0"  Margin="5" Content="유닛별 펀칭 얼라인" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="10" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseAlwaysAlign" x:Name="rdAlwaysAlignUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseAlwaysAlign" x:Name="rdAlwaysAlignDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUsePunchInspect" Grid.Row="11" Grid.Column="0"  Margin="5" Content="펀칭홀 검사 사용" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="11" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUsePunchInspect" x:Name="rdPunchInspectUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUsePunchInspect" x:Name="rdPunchInspectDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUsePunchTolerance" Grid.Row="12" Grid.Column="0"  Margin="5" Content="펀칭홀 허용공차 확인" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="12" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUsePunchTolerance" x:Name="rdPunchToleranceUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUsePunchTolerance" x:Name="rdPunchToleranceDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUsePunchInspectUnit" Grid.Row="13" Grid.Column="0"  Margin="5" Content="펀칭홀 검사 유닛" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbPunchInspectUnit" Text="1000" Grid.Row="13" Grid.Column="1" Margin="10" Tag="펀칭홀 검사 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbUseHoleStop" Grid.Row="14" Grid.Column="0"  Margin="5" Content="T-Hole 확인기능" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="14" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseHoleStop" x:Name="rdHoleStopUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseHoleStop" x:Name="rdHoleStopDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseJointStop" Grid.Row="15" Grid.Column="0"  Margin="5" Content="Joint 확인기능" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="15" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseJointStop" x:Name="rdJointStopUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseJointStop" x:Name="rdJointStopDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseModify" Grid.Row="16" Grid.Column="0"  Margin="5" Content="Verify 기능사용" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="16" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseModify" x:Name="rdModifyUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseModify" x:Name="rdModifyDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseSectionYield" Grid.Row="17" Grid.Column="0"  Margin="5" Content="구간수율 사용" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="17" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseSectionYield" x:Name="rdSectionYieldUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseSectionYield" x:Name="rdSectionYieldDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseCleanRoller" Grid.Row="18" Grid.Column="0"  Margin="5" Content="클린롤러 사용" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="18" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseCleanRoller" x:Name="rdCleanRollerUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseCleanRoller" x:Name="rdCleanRollerDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseMissPrint" Grid.Row="19" Grid.Column="0"  Margin="5" Content="노광편차 확인기능" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="19" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseMissPrint" x:Name="rdMissPrintUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseMissPrint" x:Name="rdMissPrintDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseDualError" Grid.Row="20" Grid.Column="0"  Margin="5" Content="스프라켓홀 확인기능" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="20" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseDualError" x:Name="rdDualErrorUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseDualError" x:Name="rdDualErrorDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseJobDoneBuzzer" Grid.Row="21" Content="완공알림 설정" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="21" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseJobDoneBuzzer" Name="rdJobDoneBuzzerUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseJobDoneBuzzer" Name="rdUseJobDoneBuzzerDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <TextBox Name="tbJobDoneBuzzer" Text="0" Tag="완공알림 시간(sec)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseLightAlarmBuzzer" Grid.Row="22" Content="펀치알람 설정" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="22" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseLightAlarmBuzzer" x:Name="rdLightAlarmBuzzerUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseLightAlarmBuzzer" x:Name="rdLightAlarmBuzzerDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <TextBox Name="tbLightAlarmBuzzer" Text="0" Tag="펀치알람 시간 설정(sec)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseBackFeeding" Grid.Row="23" Content="검사중 백피딩" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="23" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseBackFeeding" x:Name="rdBackFeedingUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseBackFeeding" x:Name="rdBackFeedingDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <TextBox Name="tbBackFeeding" Text="0" Tag="백피딩" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUseAlignTolerance" Grid.Row="24" Content="얼라인 허용오차 확인" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="24" Grid.Column="1" Columns="3" Margin="10">
+                            <RadioButton GroupName="gpUseAlignTolerance" x:Name="rdAlignToleranceUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <RadioButton GroupName="gpUseAlignTolerance" x:Name="rdAlignToleranceDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <TextBox Name="tbxAlignTolerance" Text="0" Tag="얼라인 허용오차" ToolTip="얼라인 허용오차" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <ut:GroupCheckBox Visibility="Hidden" x:Name="cbUseHeavyAlarmBuzzer" Grid.Row="12" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbUseHeavyAlarmBuzzer" Content="헤비알람 설정" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Visibility="Hidden" Grid.Row="12" Grid.Column="1" Columns="3" Margin="10">
+                            <ut:SelectRadioButton GroupName="gpUseHeavyAlarmBuzzer" x:Name="rdHeavyAlarmBuzzerUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <ut:SelectRadioButton GroupName="gpUseHeavyAlarmBuzzer" x:Name="rdHeavyAlarmBuzzerDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <TextBox Name="tbHeavyAlarmBuzzer" Text="0" Tag="헤비알람 알림 시간(sec)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Name="lbPunchLimit" Grid.Row="25" Grid.Column="0"  Margin="5" Content="펀치 사용제한" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="25" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbPunchLimit" Text="50000" Grid.Row="13" Grid.Column="1" Margin="10" Tag="펀치 사용제한" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <Button Name="btnPunchCountReset" DockPanel.Dock="Right" Tag="LogPath" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnPunchCountReset_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                                <Label Content="펀치 카운트 리셋" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                            </Button>
+                        </UniformGrid>
+                        
+                        <Label Name="lbLightTimeTop" Grid.Row="26" Grid.Column="0"  Margin="5" Content="조명시간 TOP" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="26" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbLightTimeTop" Text="0" Grid.Row="13" Grid.Column="1" Margin="10" Tag="조명시간 TOP" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <Button Name="btnLightTimeTopSet" DockPanel.Dock="Right" Tag="LogPath" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnLightTimeTopSet_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                                <Label Content="조명시간 세팅" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                            </Button>
+                        </UniformGrid>
+
+                        <Label Name="lbLightTimeBottom" Grid.Row="27" Grid.Column="0"  Margin="5" Content="조명시간 BOTTOM" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="27" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbLightTimeBottom" Text="0" Grid.Row="13" Grid.Column="1" Margin="10" Tag="조명시간 BOTTOM" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <Button Name="btnLightTimeBottomSet" DockPanel.Dock="Right" Tag="LogPath" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnLightTimeBottomSet_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                                <Label Content="조명시간 세팅" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                            </Button>
+                        </UniformGrid>
+
+                        <Label Name="lbLightTimeMono" Grid.Row="28" Grid.Column="0"  Margin="5" Content="조명시간 MONO" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="28" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbLightTimeMono" Text="0" Grid.Row="13" Grid.Column="1" Margin="10" Tag="조명시간 MONO" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <Button Name="btnLightTimeMonoSet" DockPanel.Dock="Right" Tag="LogPath" Margin="10" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="btnLightTimeMonoSet_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                                <Label Content="조명시간 세팅" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"/>
+                            </Button>
+                        </UniformGrid>
+
+                        <Label Name="lbPunchImageLimit" Grid.Row="29" Grid.Column="0"  Margin="5" Content="펀칭홀 Display 유닛" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbPunchImageLimit" Text="200" Grid.Row="29" Grid.Column="1" Margin="10" Tag="펀칭홀 Display 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbUsePunchFirstUnit" Grid.Row="30" Grid.Column="0"  Margin="5" Content="첫번째 유닛 펀칭" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="30" Grid.Column="1" Columns="2" Margin="10">
+                            <ut:SelectRadioButton GroupName="gpUsePunchFirstUnit" x:Name="rdPunchFirstUnitUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <ut:SelectRadioButton GroupName="gpUsePunchFirstUnit" x:Name="rdPunchFirstUnitDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Name="lbUsePunchLastUnit" Grid.Row="31" Grid.Column="0"  Margin="5" Content="마지막 유닛 펀칭" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="31" Grid.Column="1" Columns="2" Margin="10">
+                            <ut:SelectRadioButton GroupName="gpUsePunchLastUnit" x:Name="rdPunchLastUnitUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <ut:SelectRadioButton GroupName="gpUsePunchLastUnit" x:Name="rdPunchLastUnitDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                        </UniformGrid>
+
+                        <Label Grid.Row="32" Grid.Column="0"  Margin="5" Content="설정 유닛 펀칭" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="32" Grid.Column="1" Columns="3" Margin="10">
+                            <ut:SelectRadioButton GroupName="gpUsePunchSetUnit" x:Name="rdPunchSetUnitUse" Tag="1" Margin="5" Content="사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <ut:SelectRadioButton GroupName="gpUsePunchSetUnit" x:Name="rdPunchSetUnitDisuse" Tag="0" Margin="5" Content="비사용" VerticalAlignment="Center" Style="{StaticResource StyleRadioButton}"/>
+                            <TextBox Name="tbPunchSetUnit" Text="0" ToolTip="설정 유닛 펀칭" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Visibility="Hidden" Name="lbSectionMinUnits" Grid.Row="30" Grid.Column="0"  Margin="5" Content="1구간 최소유닛 수" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Visibility="Hidden" Name="tbSectionMinUnits" Text="18000" Grid.Row="30" Grid.Column="1" Margin="10" Tag="1구간 최소유닛 수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                    </Grid>
+                    
+                    
+                </ScrollViewer>
+
+                
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Padding="10" Style="{StaticResource StyleBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="59"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Name="lbTitlePosition" Grid.Row="0" Content="위치 셋업" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+
+                <ScrollViewer Name="scrollViewer2" Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="0">
+                    <ScrollViewer.Resources>
+                        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                            <Setter Property="MinWidth" Value="40" />
+                            <Setter Property="MinHeight" Value="40" />
+                        </Style>
+                    </ScrollViewer.Resources>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                            <RowDefinition Height="59"/>
+                        </Grid.RowDefinitions>
+
+                        
+                        <Label Name="lbDistanceTopBottom" Grid.Row="1" Grid.Column="0"  Margin="5" Content="TOP-BOTTOM 거리(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="tbDistanceTopBottom" Text="0" Grid.Row="1" Grid.Column="1" Margin="10" Tag="센서간 거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbDistanceTopMono" Grid.Row="2" Grid.Column="0"  Margin="5" Content="TOP-MONO 거리(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="tbDistanceTopMono" Text="0" Grid.Row="2" Grid.Column="1" Margin="10" Tag="End 센서간 거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbTopVisionZ" Grid.Row="3" Grid.Column="0"  Margin="5" Content="TopVision Z(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="tbTopVisionZ" Text="0"  Grid.Row="3" Grid.Column="1" Margin="10" Tag="TopVision Z(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbBottomVisionZ" Grid.Row="4" Grid.Column="0"  Margin="5" Content="BottomVision Z(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox x:Name="tbBottomVisionZ" Text="0" Grid.Row="4" Grid.Column="1" Margin="10" Tag="TopVision Z(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+
+                        <Label Name="lbAlignVisionXY" Grid.Row="5" Grid.Column="0"  Margin="5" Content="Align Vision X,Y" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="5" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbAlignVisionX" Text="0" Margin="10" Tag="Align Vision X(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbAlignVisionY" Text="0" Margin="10" Tag="Align Vision Y(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Name="lbPunchXY" Grid.Row="6" Grid.Column="0"  Margin="5" Content="PunchA X,Y" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="6" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbPunchX" Text="0" Margin="10" Tag="Punch X(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbPunchY" Text="0" Margin="10" Tag="Punch Y(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Name="lbPunchCenterXY" Grid.Row="7" Grid.Column="0"  Margin="5" Content="Center Punch X,Y" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="7" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbPunchCenterX" Text="0" Margin="10" Tag="Center Punch X(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbPunchCenterY" Text="0" Margin="10" Tag="Center Punch Y(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+                        <Label Name="lbPunchBXY" Grid.Row="8" Grid.Column="0"  Margin="5" Content="PunchB X,Y" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="8" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbPunchBX" Text="0" Margin="10" Tag="PunchB X(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbPunchBY" Text="0" Margin="10" Tag="PunchB Y(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+
+                        <Label Name="lbRellReference" Grid.Row="9" Grid.Column="0"  Margin="5" Content="공급/수급 버퍼위치(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="9" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbUncoilerReference" Text="0" Margin="10" Tag="공급릴 기준위치(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbRecoilerReference" Text="0" Margin="10" Tag="공급릴 기준위치(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+
+                        <Label Name="lbBufferLimit" Grid.Row="10" Grid.Column="0"  Margin="5" Content="버퍼 (-)/(+)리미트(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <UniformGrid Grid.Row="10" Grid.Column="1" Columns="2">
+                            <TextBox Name="tbBufferLimitN" Text="0" Margin="10" Tag="버퍼 (-)리미트(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbBufferLimitP" Text="0" Margin="10" Tag="버퍼 (+)리미트" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        </UniformGrid>
+
+
+                        <Label Name="lbPunchStroke" Grid.Row="11" Grid.Column="0"  Margin="5" Content="펀치 최대이송거리(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbPunchStroke" Text="0" Grid.Row="11" Grid.Column="1" Margin="10" Tag="펀치 최대이송거리" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+                        <Label Name="lbPunchDistance" Grid.Row="12" Grid.Column="0"  Margin="5" Content="Top-Align 거리" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbPunchDistance" Text="0" Grid.Row="12" Grid.Column="1" Margin="10" Tag="Top-Align 거리" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+                        <Label Name="lbScanTolerance" Grid.Row="13" Grid.Column="0"  Margin="5" Content="스캔 여유길이" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbScanTolerance" Text="0" Grid.Row="13" Grid.Column="1" Margin="10" Tag="스캔 여유길이" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbPunchDelay" Grid.Row="14" Grid.Column="0"  Margin="5" Content="펀치 대기시간 (mSec)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbPunchDelay" Text="0" Grid.Row="14" Grid.Column="1" Margin="10" Tag="펀치 대기시간" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbDelayFeed" Grid.Row="15" Grid.Column="0"  Margin="5" Content="피딩 대기시간 (mSec)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbDelayFeed" Text="0" Grid.Row="15" Grid.Column="1" Margin="10" Tag="피딩 대기시간" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+                        <Label Name="lbScanDummyTop" Grid.Row="16" Grid.Column="0"  Margin="5" Content="TOP 더미스캔(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbScanDummyTop" Text="95.0" Grid.Row="16" Grid.Column="1" Margin="10" Tag="TOP 더미스캔 길이(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbScanDummyBottom" Grid.Row="17" Grid.Column="0"  Margin="5" Content="BOTTOM 더미스캔(mm)" Padding="5,0,20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbScanDummyBottom" Text="95.0" Grid.Row="17" Grid.Column="1" Margin="10" Tag="BOTTOM 더미스캔 길이(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbScanDummyMono" Grid.Row="18" Grid.Column="0"  Margin="5" Content="MONO 더미스캔(mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbScanDummyMono" Text="95.0" Grid.Row="18" Grid.Column="1" Margin="10" Tag="MONO 더미스캔 길이(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+                        <Label Name="lbMotionTolerance" Grid.Row="19" Grid.Column="0"  Margin="5" Content="모션 허용공차 (mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbMotionTolerance" Text="0.01" Grid.Row="19" Grid.Column="1" Margin="10" Tag="모션 허용공차 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Visibility="Hidden" Name="lbImageTolerance" Grid.Row="12" Grid.Column="0"  Margin="5" Content="이미지 여유길이" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Visibility="Hidden" Name="tbImageTolerance" Text="0" Grid.Row="12" Grid.Column="1" Margin="10" Tag="이미지 여유길이" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Visibility="Hidden" Name="lbIndexTolerance" Grid.Row="13" Grid.Column="0"  Margin="5" Content="검사 인덱스 Check" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Visibility="Hidden" Name="tbIndexTolerance" Text="1000.0" Grid.Row="13" Grid.Column="1" Margin="10" Tag="검사 인텍스 Check" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbTriggerColor_Period" Grid.Row="20" Grid.Column="0"  Margin="5" Content="Color 트리거 간격 (mm)" Padding="20,0" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbTiriggerColor_Period" Text="95.0" Grid.Row="20" Grid.Column="1" Margin="10" Tag="Color 트리거 간격 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        <Label Name="lbTriggerColor_Width" Grid.Row="21" Grid.Column="0"  Margin="5" Content="Color 트리거 유지시간 (uSec)" Padding="20,0" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbTiriggerColor_Width" Text="95.0" Grid.Row="21" Grid.Column="1" Margin="10" Tag="Color 트리거 유지시간 (uSec)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        <Label Name="lbTriggerColor_Level" Grid.Row="22" Grid.Column="0"  Margin="5" Content="Color 트리거 레벨 (0, 1)" Padding="20,0" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbTiriggerColor_Level" Text="95.0" Grid.Row="22" Grid.Column="1" Margin="10" Tag="Color 트리거 레벨 (0, 1)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Name="lbTriggerMono_Period" Grid.Row="23" Grid.Column="0"  Margin="5" Content="Mono 트리거 간격 (mm)" Padding="20,0" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbTiriggerMono_Period" Text="95.0" Grid.Row="23" Grid.Column="1" Margin="10" Tag="Mono 트리거 간격 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        <Label Name="lbTriggerMono_Width" Grid.Row="24" Grid.Column="0"  Margin="5" Content="Mono 트리거 유지시간 (uSec)" Padding="20,0" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbTiriggerMono_Width" Text="95.0" Grid.Row="24" Grid.Column="1" Margin="10" Tag="트리거 유지시간 (uSec)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                        <Label Name="lbTriggerMono_Level" Grid.Row="25" Grid.Column="0"  Margin="5" Content="Mono 트리거 레벨 (0, 1)" Padding="20,0" FontSize="14" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbTiriggerMono_Level" Text="95.0" Grid.Row="25" Grid.Column="1" Margin="10" Tag="Mono 트리거 레벨 (0, 1)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Grid.Row="26" Grid.Column="0"  Margin="5" Content="레이저 X 위치 (mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbLaser_X_Pos" Text="95.0" Grid.Row="26" Grid.Column="1" Margin="10" Tag="레이저 X 위치 오차 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        <Label Grid.Row="27" Grid.Column="0"  Margin="5" Content="레이저 Y 위치 (mm)" Padding="20,0" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                        <TextBox Name="tbLaser_Y_Pos" Text="95.0" Grid.Row="27" Grid.Column="1" Margin="10" Tag="레이저 Y 위치 오차 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+
+
+        <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Padding="10" Style="{StaticResource StyleBorder}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Name="lbTitleFile" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="File 셋업" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+
+
+                            <Label Name="lbLogTrace" Grid.Row="1" Grid.Column="0"  Margin="5" Content="로그 저장위치" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <DockPanel Grid.Row="1" Grid.Column="1">
+                                <Button Name="btnLogPath" DockPanel.Dock="Right" Tag="LogPath" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                                    <Image Source="Images/Path32.png" Stretch="None"/>
+                                </Button>
+                                <TextBox Name="tbxLogPath" Text="C:/Log" Tag="로그 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            </DockPanel>
+
+                            <Label Name="lbLogSavePeriod" Grid.Row="2" Grid.Column="0"  Margin="5" Content="로그 저장일" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <TextBox Name="tbLogSavePeriod" Text="30" Grid.Row="2" Grid.Column="1" Margin="10" Tag="로그 저장일" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+                            <Label Name="lbResultData" Visibility="Hidden" Grid.Row="3" Grid.Column="0"  Margin="5" Content="결과데이터 저장위치" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <DockPanel Grid.Row="3" Grid.Column="1" Visibility="Hidden">
+                                <Button Name="btnResultDataPath" DockPanel.Dock="Right" Tag="ResultDataPath" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                                    <Image Source="Images/Path32.png" Stretch="None"/>
+                                </Button>
+                                <TextBox Name="tbxResultDataPath" Text="C:/Result" Tag="결과데이터 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            </DockPanel>
+
+
+                            <Label Name="lbReportData" Grid.Row="3" Grid.Column="0"  Margin="5" Content="레포트데이터 저장위치" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <DockPanel Grid.Row="3" Grid.Column="1">
+                                <Button Name="btnReportDataPath" DockPanel.Dock="Right" Tag="ReportDataPath" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                                    <Image Source="Images/Path32.png" Stretch="None"/>
+                                </Button>
+                                <TextBox Name="tbxReportDataPath" Text="C:/Report" Tag="레포트데이터 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            </DockPanel>
+
+                            <Label Name="lbResultDataPeriod" Grid.Row="4" Grid.Column="0"  Margin="5" Content="레포트데이터 저장일" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            <TextBox Name="tbResultDataPeriod" Text="30" Grid.Row="4" Grid.Column="1" Margin="10" Tag="결과 데이터 저장일" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        </Grid>
+                    </Border>
+
+
+                    <Border Grid.Row="1" Padding="10" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="3*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <Label Name="lbTitleVisionImage" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Review Image" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+                    
+                    <Label Grid.Row="1" Grid.Column="0" Content="TOP1" Margin="10" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DockPanel Grid.Row="1" Grid.Column="1">
+                        <Button Name="btnTop1Path" DockPanel.Dock="Right" Tag="Top1Path" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <Image Source="Images/Path32.png" Stretch="None"/>
+                        </Button>
+                        <TextBox Name="tbxTop1Path" Text="C:/Top1" Tag="Top1 이미지 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="TOP2" Margin="10" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DockPanel Grid.Row="2" Grid.Column="1">
+                        <Button Name="btnTop2Path" DockPanel.Dock="Right" Tag="Top2Path" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <Image Source="Images/Path32.png" Stretch="None"/>
+                        </Button>
+                        <TextBox Name="tbxTop2Path" Text="C:/Top2" Tag="Top2 이미지 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="3" Grid.Column="0" Content="BOTTOM1" Margin="10" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DockPanel Grid.Row="3" Grid.Column="1">
+                        <Button Name="btnBottom1Path" DockPanel.Dock="Right" Tag="Bottom1Path" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <Image Source="Images/Path32.png" Stretch="None"/>
+                        </Button>
+                        <TextBox Name="tbxBottom1Path" Text="C:/Bottom1" Tag="Bottom1 이미지 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="4" Grid.Column="0" Content="BOTTOM2" Margin="10" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DockPanel Grid.Row="4" Grid.Column="1">
+                        <Button Name="btnBottom2Path" DockPanel.Dock="Right" Tag="Bottom2Path" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <Image Source="Images/Path32.png" Stretch="None"/>
+                        </Button>
+                        <TextBox Name="tbxBottom2Path" Text="C:/Bottom2" Tag="Bottom2 이미지 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="5" Grid.Column="0" Content="MONO1" Margin="10" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DockPanel Grid.Row="5" Grid.Column="1">
+                        <Button Name="btnMono1Path" DockPanel.Dock="Right" Tag="Mono1Path" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <Image Source="Images/Path32.png" Stretch="None"/>
+                        </Button>
+                        <TextBox Name="tbxMono1Path" Text="C:/Mono1" Tag="Mono1 이미지 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="6" Grid.Column="0" Content="MONO2" Margin="10" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DockPanel Grid.Row="6" Grid.Column="1">
+                        <Button Name="btnMono2Path" DockPanel.Dock="Right" Tag="Mono2Path" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <Image Source="Images/Path32.png" Stretch="None"/>
+                        </Button>
+                        <TextBox Name="tbxMono2Path" Text="C:/Mono2" Tag="Mono2 이미지 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                    </DockPanel>
+
+                    <Label Grid.Row="7" Grid.Column="0" Content="Server" Margin="10" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <DockPanel Grid.Row="7" Grid.Column="1">
+                        <Button Name="btnServerPath" DockPanel.Dock="Right" Tag="ServerPath" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnPath_Click" Template="{StaticResource TemplateButton_BackgroundStyle}">
+                            <Image Source="Images/Path32.png" Stretch="None"/>
+                        </Button>
+                        <TextBox Name="tbxServerPath" Text="S:/PublicData" Tag="서버 이미지 저장위치" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                    </DockPanel>
+
+                </Grid>
+            </Border>
+
+            <!--<Border Grid.Row="1" Padding="10" Style="{StaticResource StyleBorder}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Name="lbTitleCommu" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Content="통신 셋업" FontSize="24" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center"/>
+
+                            <Label Name="lbIPAddress" Grid.Row="1" Grid.Column="1" Content="IP Address" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+                            <Label Name="lbPort" Grid.Row="1" Grid.Column="2" Content="Port" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+                            <Label Name="lbHandlerPort" Grid.Row="1" Grid.Column="3" Content="Handler Port" FontSize="18" HorizontalContentAlignment="Center"  VerticalContentAlignment="Bottom"/>
+
+
+                            <ut:GroupCheckBox x:Name="cbTopVision" Grid.Row="2" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                                <Label Name="lbTopVision" Content="TOP" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            </ut:GroupCheckBox>
+                            <TextBox Name="tbxTopVisionIPAddress" Text="127.0.0.1" Tag="TOP VISION IP Address" Grid.Row="2" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            <TextBox Name="tbxTopVisionPort" Text="8011" Tag="TOP VISION Port Number" Grid.Row="2" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            <TextBox Name="tbxTopVisionHandlerPort" Text="8001" Tag="TOP VISION HANDLER Port Number" Grid.Row="2" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+                            <ut:GroupCheckBox x:Name="cbBottomVision" Grid.Row="3" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                                <Label Name="lbBottomVision" Content="BOTTOM" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            </ut:GroupCheckBox>
+                            <TextBox Name="tbxBottomVisionIPAddress" Text="127.0.0.1" Tag="BOTTOM VISION IP Address" Grid.Row="3" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            <TextBox Name="tbxBottomVisionPort" Text="8012" Tag="BOTTOM VISION Port Number" Grid.Row="3" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            <TextBox Name="tbxBottomVisionHandlerPort" Text="8002" Tag="BOTTOM VISION HANDLER Port Number" Grid.Row="3" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+                            <ut:GroupCheckBox x:Name="cbMonoVision"  Grid.Row="4" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                                <Label Name="lbMonoVision" Content="MONO" FontSize="18" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                            </ut:GroupCheckBox>
+                            <TextBox Name="tbxMonoVisionIPAddress" Text="127.0.0.1" Tag="MONO VISION IP Address" Grid.Row="4" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            <TextBox Name="tbxMonoVisionPort" Text="8013" Tag="MONO VISION Port Number" Grid.Row="4" Grid.Column="2" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+                            <TextBox Name="tbxMonoVisionHandlerPort" Text="8003" Tag="MONO VISION HANDLER Port Number" Grid.Row="4" Grid.Column="3" Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp"/>
+
+
+
+                        </Grid>
+                    </Border>-->
+                </Grid>
+
+
+        <DockPanel Grid.Row="1" Grid.Column="2" LastChildFill="False">
+            <Button Name="btnCancel" Tag="Cancel" DockPanel.Dock="Right" Click="btnCancel_Click" Margin="5" Padding="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource TemplateCustomButton}">
+                <StackPanel>
+                    <Image Source="Images/Cancel32.png" Stretch="None"/>
+                    <TextBlock Text="취소" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Name="btnSave" Tag="Save" DockPanel.Dock="Right" Click="btnSave_Click" Margin="5" Padding="5" Width="150" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource TemplateCustomButton}">
+                <StackPanel>
+                    <Image Source="Images/Save32.png" Stretch="None"/>
+                    <TextBlock Text="저장" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </DockPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,57 @@
+﻿<Page x:Class="SmartICAVI.SetupPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1280"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="SetupPage">
+
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Right" LastChildFill="False">
+
+            <CheckBox Name="btnSystem" Tag="btnSystem" DockPanel.Dock="Top" Click="btnCheckBox_Click" Margin="5" Width="90" Height="70" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                <StackPanel>
+                    <Image Margin="5" Source="Images/SystemGreen32.png" Stretch="None"/>
+                    <TextBlock Name="tbxSystem" Text="시스템" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </CheckBox>
+
+            <CheckBox Name="btnMotion" Tag="btnMotion" DockPanel.Dock="Top" Click="btnCheckBox_Click" Margin="5" Width="90" Height="70" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                <StackPanel>
+                    <Image Margin="5" Source="Images/MotionGreen32.png" Stretch="None"/>
+                    <TextBlock Name="tbxMotion" Text="모션" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </CheckBox>
+
+            <CheckBox Name="btnMes" Tag="btnMes" DockPanel.Dock="Top" Click="btnCheckBox_Click" Margin="5" Width="90" Height="70" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                <StackPanel>
+                    <Image Margin="5" Source="Images/CommuGreen32.png" Stretch="None"/>
+                    <TextBlock Name="tbxMes" Text="Commu" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </CheckBox>
+
+            <CheckBox Name="btnVerify" Tag="btnVerify" DockPanel.Dock="Top" Click="btnCheckBox_Click" Margin="5" Width="90" Height="70" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                <StackPanel>
+                    <Image Margin="5" Source="Images/DioGreen32.png" Stretch="None"/>
+                    <TextBlock Name="tbxVerify" Text="Verify" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </CheckBox>
+
+            <CheckBox Name="btnUserAccount" Tag="btnUserAccount" DockPanel.Dock="Top" Click="btnCheckBox_Click" Margin="5" Width="90" Height="70" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                <StackPanel>
+                    <Image Margin="5" Source="Images/UserGreen32.png" Stretch="None"/>
+                    <TextBlock Name="tbxUserAccount" Text="UAC" Foreground="Black" FontFamily="Segoe UI" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </CheckBox>
+        </DockPanel>
+
+        <Grid ClipToBounds="True" DockPanel.Dock="Left" Margin="5" >
+            <Frame Name="setupFrame" JournalOwnership="UsesParentJournal" Source="SetupSystemPage.xaml" />
+        </Grid>
+    </DockPanel>
+</Page>

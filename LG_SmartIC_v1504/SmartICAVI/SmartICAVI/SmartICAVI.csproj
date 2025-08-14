@@ -1,0 +1,844 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BBA4B6FE-3BFC-4D9D-A881-225A2F2B0621}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SmartICAVI</RootNamespace>
+    <AssemblyName>SmartICAVI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>MainIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FlyCapture2Managed_v100">
+      <HintPath>C:\Program Files\Point Grey Research\FlyCapture2\bin\FlyCapture2Managed_v100.dll</HintPath>
+    </Reference>
+    <Reference Include="halcondotnet">
+      <HintPath>C:\Program Files\MVTec\HALCON-10.0\bin\dotnet35\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="InspectService.cs" />
+    <Compile Include="IInspect.cs" />
+    <Compile Include="InspectExtern.cs" />
+    <Compile Include="InspectSmartIC.cs" />
+    <Compile Include="InspectVirtual.cs" />
+    <Compile Include="ISequence.cs" />
+    <Compile Include="SeqAuto.cs" />
+    <Compile Include="SeqInit.cs" />
+    <Compile Include="SeqManual.cs" />
+    <Compile Include="SeqVirtual.cs" />
+    <Compile Include="SequenceService.cs" />
+    <Compile Include="SystemService.cs" />
+    <Compile Include="DataService.cs" />
+    <Compile Include="DataDefect.cs" />
+    <Compile Include="DataDefectInfo.cs" />
+    <Compile Include="DataMotion.cs" />
+    <Compile Include="DataRecipe.cs" />
+    <Compile Include="DataResult.cs" />
+    <Compile Include="DataSystem.cs" />
+    <Compile Include="DataUserAccounts.cs" />
+    <Compile Include="EnumSmartIC.cs" />
+    <Compile Include="AioService.cs" />
+    <Compile Include="AioAXT.cs" />
+    <Compile Include="AioVirtual.cs" />
+    <Compile Include="IAio.cs" />
+    <Compile Include="BaseboardService.cs" />
+    <Compile Include="BaseBoardAXT.cs" />
+    <Compile Include="BaseBoardAXTWindow.xaml.cs">
+      <DependentUpon>BaseBoardAXTWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BaseBoardVirtual.cs" />
+    <Compile Include="IBaseBoard.cs" />
+    <Compile Include="CntService.cs" />
+    <Compile Include="CntAXT.cs" />
+    <Compile Include="CntVirtual.cs" />
+    <Compile Include="ICnt.cs" />
+    <Compile Include="DioService.cs" />
+    <Compile Include="DioAXT.cs" />
+    <Compile Include="DioVirtual.cs" />
+    <Compile Include="IDio.cs" />
+    <Compile Include="GrabService.cs" />
+    <Compile Include="GrabExtern.cs" />
+    <Compile Include="GrabPointGray.cs" />
+    <Compile Include="GrabVirtual.cs" />
+    <Compile Include="IGrab.cs" />
+    <Compile Include="KeyHookingService.cs" />
+    <Compile Include="IMes.cs" />
+    <Compile Include="MesSmartIC.cs" />
+    <Compile Include="MesVirtual.cs" />
+    <Compile Include="MesService.cs" />
+    <Compile Include="AXT\AIODef.cs" />
+    <Compile Include="AXT\AxtAIO.cs" />
+    <Compile Include="AXT\AxtCAMC5M.cs" />
+    <Compile Include="AXT\AxtCAMCFS.cs" />
+    <Compile Include="AXT\AxtCAMCFS20.cs" />
+    <Compile Include="AXT\AxtCAMCFS20KDNS.cs" />
+    <Compile Include="AXT\AxtCNT.cs" />
+    <Compile Include="AXT\AxtDIO.cs" />
+    <Compile Include="AXT\AxtKeCAMCFS.cs" />
+    <Compile Include="AXT\AxtKeCAMCFS20.cs" />
+    <Compile Include="AXT\AxtKeLib.cs" />
+    <Compile Include="AXT\AxtLib.cs" />
+    <Compile Include="AXT\AxtLibDef.cs" />
+    <Compile Include="AXT\AxtTrigger.cs" />
+    <Compile Include="AXT\AxtTriggerDef.cs" />
+    <Compile Include="AXT\MotionDef.cs" />
+    <Compile Include="IMotion.cs" />
+    <Compile Include="MotionAXT.cs" />
+    <Compile Include="MotionVirtual.cs" />
+    <Compile Include="MotionService.cs" />
+    <Compile Include="StrobeVirtual.cs" />
+    <Compile Include="VisionBottom2Service.cs" />
+    <Compile Include="VisionBottomService.cs" />
+    <Compile Include="VisionCamService.cs" />
+    <Compile Include="VisionMono2Service.cs" />
+    <Compile Include="VisionMonoService.cs" />
+    <Compile Include="VisionTop2Service.cs" />
+    <Compile Include="VisionTopService.cs" />
+    <Compile Include="VisionUtill.cs" />
+    <Compile Include="TsMesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TsMesForm.Designer.cs">
+      <DependentUpon>TsMesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JobDefectInfoWindow.xaml.cs">
+      <DependentUpon>JobDefectInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JobInitWindow.xaml.cs">
+      <DependentUpon>JobInitWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JobWindowService.cs" />
+    <Compile Include="JobCngWindow.xaml.cs">
+      <DependentUpon>JobCngWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JobHoleWindow.xaml.cs">
+      <DependentUpon>JobHoleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JobLogonWindow.xaml.cs">
+      <DependentUpon>JobLogonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JobMessageWindow.xaml.cs">
+      <DependentUpon>JobMessageWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="JobRecheckWindow.xaml.cs">
+      <DependentUpon>JobRecheckWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualEndPage.xaml.cs">
+      <DependentUpon>ManualEndPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualFeeding2Page.xaml.cs">
+      <DependentUpon>ManualFeeding2Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InputWindow.xaml.cs" />
+    <Compile Include="ReviewService.cs" />
+    <Compile Include="ReviewImageControl.xaml.cs">
+      <DependentUpon>ReviewImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImageViewerWindow.xaml.cs">
+      <DependentUpon>ImageViewerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReviewWindow.xaml.cs">
+      <DependentUpon>ReviewWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupUserAccountPage.xaml.cs">
+      <DependentUpon>SetupUserAccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupVerifyPage.xaml.cs">
+      <DependentUpon>SetupVerifyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachBottomPage.xaml.cs">
+      <DependentUpon>TeachBottomPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachEmptyPage.xaml.cs">
+      <DependentUpon>TeachEmptyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachInitPage.xaml.cs">
+      <DependentUpon>TeachInitPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachMonoPage.xaml.cs">
+      <DependentUpon>TeachMonoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachPunchPage.xaml.cs">
+      <DependentUpon>TeachPunchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachTopPage.xaml.cs">
+      <DependentUpon>TeachTopPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachPage.xaml.cs">
+      <DependentUpon>TeachPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeachRecipeNameWindow.xaml.cs">
+      <DependentUpon>TeachRecipeNameWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Log_Bottom.cs" />
+    <Compile Include="Log_BottomVision2.cs" />
+    <Compile Include="Log_Cam.cs" />
+    <Compile Include="Log_Debug.cs" />
+    <Compile Include="Log_Mono.cs" />
+    <Compile Include="Log_MonoVision2.cs" />
+    <Compile Include="Log_Review.cs" />
+    <Compile Include="Log_SeqPunch.cs" />
+    <Compile Include="Log_Temp.cs" />
+    <Compile Include="Log_Top.cs" />
+    <Compile Include="Log_TopVision2.cs" />
+    <Compile Include="Log_LastPunchCheck.cs" />
+    <Compile Include="Rs232.cs" />
+    <Compile Include="Rs232_Byte.cs" />
+    <Compile Include="IStrobe.cs" />
+    <Compile Include="StrobeALT.cs" />
+    <Compile Include="StrobeService.cs" />
+    <Compile Include="Resources\CustomWindow.xaml.cs">
+      <DependentUpon>CustomWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AutoPage.xaml.cs">
+      <DependentUpon>AutoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmptyPage.xaml.cs">
+      <DependentUpon>EmptyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="InitPage.xaml.cs">
+      <DependentUpon>InitPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MachineControl.xaml.cs">
+      <DependentUpon>MachineControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualPage.xaml.cs">
+      <DependentUpon>ManualPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualDioPage.xaml.cs">
+      <DependentUpon>ManualDioPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualFeedingPage.xaml.cs">
+      <DependentUpon>ManualFeedingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualPunchFeedPage.xaml.cs">
+      <DependentUpon>ManualPunchFeedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualPunchXPage.xaml.cs">
+      <DependentUpon>ManualPunchXPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualPunchYPage.xaml.cs">
+      <DependentUpon>ManualPunchYPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualRecoilerPage.xaml.cs">
+      <DependentUpon>ManualRecoilerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualTunningWindow.xaml.cs">
+      <DependentUpon>ManualTunningWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualUncoilerPage.xaml.cs">
+      <DependentUpon>ManualUncoilerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualVisionBottomPage.xaml.cs">
+      <DependentUpon>ManualVisionBottomPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualVisionFeedPage.xaml.cs">
+      <DependentUpon>ManualVisionFeedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManualVisionTopPage.xaml.cs">
+      <DependentUpon>ManualVisionTopPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MsgService.cs" />
+    <Compile Include="AlarmWindow.xaml.cs">
+      <DependentUpon>AlarmWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MessageWindow.xaml.cs" />
+    <Compile Include="MonitorWindow.xaml.cs">
+      <DependentUpon>MonitorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorDioPage.xaml.cs">
+      <DependentUpon>MonitorDioPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorLogPage.xaml.cs">
+      <DependentUpon>MonitorLogPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorMESPage.xaml.cs">
+      <DependentUpon>MonitorMESPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorMotionPage.xaml.cs">
+      <DependentUpon>MonitorMotionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MonitorSystemPage.xaml.cs">
+      <DependentUpon>MonitorSystemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RecipePage.xaml.cs">
+      <DependentUpon>RecipePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportWindow.xaml.cs">
+      <DependentUpon>ReportWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupMESPage.xaml.cs">
+      <DependentUpon>SetupMESPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupMotionPage.xaml.cs">
+      <DependentUpon>SetupMotionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupSystemPage.xaml.cs">
+      <DependentUpon>SetupSystemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SetupPage.xaml.cs">
+      <DependentUpon>SetupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SystemLockPage.xaml.cs">
+      <DependentUpon>SystemLockPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="KeyButton.cs" />
+    <Compile Include="VirtualKeyboard.xaml.cs">
+      <DependentUpon>VirtualKeyboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VirtualKeyboardService.cs" />
+    <Compile Include="VirtualKeyNumber.xaml.cs">
+      <DependentUpon>VirtualKeyNumber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Animation\AnimationExtensions.cs" />
+    <Compile Include="Animation\ExampleTransition.cs" />
+    <Compile Include="Animation\ExtensionMethods.cs" />
+    <Compile Include="Animation\NavigationAnimator.cs" />
+    <Compile Include="Animation\Spline.cs" />
+    <Compile Include="FileUtill.cs" />
+    <Compile Include="IniFile.cs" />
+    <Compile Include="LogUtill.cs" />
+    <Compile Include="Log_BottomVision.cs" />
+    <Compile Include="Log_Error.cs" />
+    <Compile Include="Log_Exception.cs" />
+    <Compile Include="Log_History.cs" />
+    <Compile Include="Log_Mes.cs" />
+    <Compile Include="Log_MonoVision.cs" />
+    <Compile Include="Log_TopVision.cs" />
+    <Compile Include="Log_Trace.cs" />
+    <Compile Include="XMLParser.cs" />
+    <Compile Include="HWindowWPF.cs" />
+    <Compile Include="SocketTCPClient.cs" />
+    <Compile Include="SocketTCPMultiServer.cs" />
+    <Compile Include="SocketTCPServer.cs" />
+    <Compile Include="SocketUDPClient.cs" />
+    <Compile Include="SocketUDPServer.cs" />
+    <Compile Include="SysTime.cs" />
+    <Compile Include="UserControls\ApplyButton.cs" />
+    <Compile Include="UserControls\DoubleToIntConverter.cs" />
+    <Compile Include="UserControls\GroupCheckBox.cs" />
+    <Compile Include="UserControls\GroupControl.cs" />
+    <Compile Include="UserControls\ISelectControl.cs" />
+    <Compile Include="UserControls\JogButton.cs" />
+    <Compile Include="UserControls\MouseCanvas.cs" />
+    <Compile Include="UserControls\MoveCheckBox.cs" />
+    <Compile Include="UserControls\RunMoveCheckBox.cs" />
+    <Compile Include="UserControls\SelectButton.cs" />
+    <Compile Include="UserControls\SelectCheckBox.cs" />
+    <Compile Include="UserControls\SelectComboBox.cs" />
+    <Compile Include="UserControls\SelectRadioButton.cs" />
+    <Compile Include="UserControls\SelectTextBox.cs" />
+    <Compile Include="UserControls\StopButton.cs" />
+    <Page Include="BaseBoardAXTWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Resources\CustomButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomCalender.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomCheckBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomLabel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\CustomLED.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomRadioButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomTabControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Resources\CustomWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AutoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmptyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="InitPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobDefectInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobInitWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobCngWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobHoleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobLogonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobMessageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="JobRecheckWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MachineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualDioPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualEndPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualFeeding2Page.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualFeedingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualPunchFeedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualPunchXPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualPunchYPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualRecoilerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualTunningWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualUncoilerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualVisionBottomPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualVisionFeedPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManualVisionTopPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AlarmWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MessageWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="InputWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MonitorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MonitorDioPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MonitorLogPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MonitorMESPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MonitorMotionPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MonitorSystemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RecipePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReviewImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImageViewerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReviewWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupMESPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupMotionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupSystemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupUserAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupVerifyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SetupPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SystemLockPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TeachBottomPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeachEmptyPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeachInitPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeachMonoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeachPunchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeachTopPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeachPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeachRecipeNameWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VirtualKeyboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="VirtualKeyNumber.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TsMesForm.resx">
+      <DependentUpon>TsMesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="MainIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Apply32.png" />
+    <Resource Include="Images\Auto32.png" />
+    <Resource Include="Images\Back32.png" />
+    <Resource Include="Images\DownFGreen32.png" />
+    <Resource Include="Images\DownGreen32.png" />
+    <Resource Include="Images\FBack32.png" />
+    <Resource Include="Images\FForward32.png" />
+    <Resource Include="Images\Forward32.png" />
+    <Resource Include="Images\Lock32.png" />
+    <Resource Include="Images\LogOut32.png" />
+    <Resource Include="Images\Manual32.png" />
+    <Resource Include="Images\Monitor32.png" />
+    <Resource Include="Images\Recipe32.png" />
+    <Resource Include="Images\Report32.png" />
+    <Resource Include="Images\Reset32.png" />
+    <Resource Include="Images\Setup32.png" />
+    <Resource Include="Images\ShutDown32.png" />
+    <Resource Include="Images\SoundOff32.png" />
+    <Resource Include="Images\Stop48.png" />
+    <Resource Include="Images\ToDay32.png" />
+    <Resource Include="Images\UpBlue32.png" />
+    <Resource Include="Images\UpFBlue32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Home32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\CancelGreen32.png" />
+    <Resource Include="Images\CommuGreen32.png" />
+    <Resource Include="Images\DioGreen32.png" />
+    <Resource Include="Images\LogGreen32.png" />
+    <Resource Include="Images\MotionGreen32.png" />
+    <Resource Include="Images\SystemGreen32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Home48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\DownBlue32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Auto48.png" />
+    <Resource Include="Images\Pause48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cancel32.png" />
+    <Resource Include="Images\New32.png" />
+    <Resource Include="Images\Save32.png" />
+    <Resource Include="Images\SaveAs32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Delete32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Open32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ZoomIn32.png" />
+    <Resource Include="Images\ZoomOut32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Grab32.png" />
+    <Resource Include="Images\Live32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageArea32.png" />
+    <Resource Include="Images\ImageDelete32.png" />
+    <Resource Include="Images\ImageDontCare32.png" />
+    <Resource Include="Images\ImageSelect32.png" />
+    <Resource Include="Images\ImageTeach32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageApply32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ImageJog32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\MoveUpDown32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Move32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\EndGreen32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Path32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Back48.png" />
+    <Resource Include="Images\FastBack48.png" />
+    <Resource Include="Images\FastForward48.png" />
+    <Resource Include="Images\Forward48.png" />
+    <Resource Include="Images\Move48.png" />
+    <Resource Include="Images\MoveBack48.png" />
+    <Resource Include="Images\MoveForward48.png" />
+    <Resource Include="Images\PitchBackward48.png" />
+    <Resource Include="Images\PitchForward48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SetZero48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Apply48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Teach32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxaxTibcoRv">
+      <Guid>{B275C15A-AFA1-4684-804C-3726889E8D0D}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="axTibcoRv">
+      <Guid>{B275C15A-AFA1-4684-804C-3726889E8D0D}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Transparent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ReStart32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UserGreen32.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

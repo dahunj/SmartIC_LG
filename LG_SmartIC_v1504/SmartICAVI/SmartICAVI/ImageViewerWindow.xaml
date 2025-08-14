@@ -1,0 +1,41 @@
+﻿<Window x:Class="SmartICAVI.ImageViewerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource StyleOperateWindow}"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResizeWithGrip"
+        WindowState="Maximized"
+        Loaded="Window_Loaded"
+        Unloaded="Window_Unloaded"
+        Closed="Window_Closed"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        Title="ImageViewer" Height="300" Width="300">
+    
+    <Window.Resources>
+        <ItemsPanelTemplate x:Key="panelTemplate">
+            <!--<StackPanel Orientation="Horizontal" IsItemsHost="True"/>-->
+            <UniformGrid IsItemsHost="True"/>
+        </ItemsPanelTemplate>
+    </Window.Resources>
+    
+    <UniformGrid Name="uniGrid" Columns="2">
+        <!--<ScrollViewer Name="scrollViewer1" Margin="5" Padding="5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Image Name="image1" Stretch="None" Source="Images/Stop48.png"/>
+        </ScrollViewer>
+        <ScrollViewer Name="scrollViewer2" Margin="5" Padding="5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <Image Name="image2" Stretch="None" Source="Images/Stop48.png"/>
+        </ScrollViewer>-->
+        <ListBox Name="lbxImage1" Margin="5" Padding="5" Background="Transparent" ItemsPanel="{StaticResource panelTemplate}">
+            <ListBoxItem HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Image Name="image1" Stretch="None" Source="Images/Stop48.png"/>
+            </ListBoxItem>
+        </ListBox>
+
+        <ListBox Name="lbxImage2" Margin="5" Padding="5" Background="Transparent" ItemsPanel="{StaticResource panelTemplate}">
+            <ListBoxItem HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Image Name="image2" Stretch="None" Source="Images/Stop48.png"/>
+            </ListBoxItem>
+        </ListBox>
+    </UniformGrid>
+    
+</Window>

@@ -1,0 +1,145 @@
+﻿<Page x:Class="SmartICAVI.ManualVisionFeedPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="600"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="ManualVisionFeedPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+
+    <!--<Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.2" To="1" Duration="0:0:0.7" AccelerationRatio="0.5" FillBehavior="HoldEnd" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>-->
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Name="title" Grid.Row="0" Content="비 전 FEED" Background="Olive" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        <UniformGrid Grid.Row="1" Rows="2">
+            <Border Name="borderInport" Style="{StaticResource StyleBorder}">
+                <!--<DockPanel>
+                    <Label Name="lblTitleInport" DockPanel.Dock="Top" Content="센 서 입 력" HorizontalAlignment="Center"/>
+                    <UniformGrid Rows="5" Columns="2" Visibility="Hidden" DockPanel.Dock="Bottom">
+                        <StackPanel Name="stpLimitN" Orientation="Horizontal" MinWidth="220">
+                            <Label Name="ledLimitN" Template="{StaticResource TemplateBlueLED}"/>
+                            <Label Name="lbLimitN" Content="- 리미트"/>
+                        </StackPanel>
+
+                        <StackPanel Name="stpLimitP" Orientation="Horizontal" MinWidth="220">
+                            <Label Name="ledLimitP" Template="{StaticResource TemplateBlueLED}"/>
+                            <Label Name="lbLimitP" Content="+ 리미트"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </DockPanel>-->
+            </Border>
+
+            <Border Name="borderMotion" Style="{StaticResource StyleBorder}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Name="lbTitleMotion" Content="조 그 구 동" HorizontalAlignment="Center"/>
+                        <!--<Label Content="   [" HorizontalAlignment="Center"/>
+                        <Label Content="위치(mm) :" HorizontalAlignment="Center"/>
+                        <Label Name="lbPosition" Content="0.000" HorizontalAlignment="Center"/>
+                        <Label Content="]" HorizontalAlignment="Center"/>-->
+                    </StackPanel>
+
+                    <Grid DockPanel.Dock="Bottom">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Jog-->
+                        <ut:GroupCheckBox x:Name="cbxJog" Grid.Row="0" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbJog" Content="조그 구동 선택" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <ut:JogButton x:Name="btnJogN" Grid.Row="0" Grid.Column="1" Tag="btnJogN" Margin="5" Padding="1" PreviewMouseLeftButtonDown="btnJog_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="btnJog_PreviewMouseLeftButtonUp" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Back32.png" Margin="10,0" Stretch="None"/>
+                                <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ut:JogButton>
+                        <ut:JogButton x:Name="btnJogP" Grid.Row="0" Grid.Column="2" Tag="btnJogP" Margin="5" Padding="1" PreviewMouseLeftButtonDown="btnJog_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="btnJog_PreviewMouseLeftButtonUp" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Forward32.png" Margin="10,0" Stretch="None"/>
+                                <TextBlock Text="+ 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ut:JogButton>
+
+                        <!--RMove-->
+                        <ut:GroupCheckBox x:Name="cbxRMove" Grid.Row="1" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbRMove" Content="상대이동 선택" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Columns="3">
+                            <ut:MoveCheckBox x:Name="btnRMoveN" Grid.Row="1" Grid.Column="3" Tag="btnRMoveN" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Back32.png" Margin="10,0" Stretch="None"/>
+                                    <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                            <ut:SelectTextBox x:Name="tbxRMove" Text="0.000" Grid.Row="1" Grid.Column="1" Margin="10" TextAlignment="Center" Tag="이동거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <ut:MoveCheckBox x:Name="btnRMoveP" Grid.Row="1" Grid.Column="3" Tag="btnRMoveP" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Forward32.png" Margin="10,0" Stretch="None"/>
+                                    <TextBlock Text="+ 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                        </UniformGrid>
+
+                        <!--AMove-->
+                        <ut:GroupCheckBox x:Name="cbxAMove" Grid.Row="2" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbAMove" Content="절대이동 선택" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Columns="3">
+                            <ut:MoveCheckBox x:Name="btnAMoveN" Visibility="Hidden" Grid.Row="1" Grid.Column="3" Tag="btnAMoveN" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Back32.png" Margin="10,0" Stretch="None"/>
+                                    <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                            <ut:SelectTextBox x:Name="tbxAMove" Text="0.000" Grid.Row="2" Grid.Column="1" Margin="10" TextAlignment="Center" Tag="이동거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <ut:MoveCheckBox x:Name="btnAMove" Grid.Row="2" Grid.Column="3" Tag="btnAMove" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Move32.png" Margin="10,0" Stretch="None"/>
+                                    <TextBlock Text="이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                        </UniformGrid>
+
+                    </Grid>
+                </DockPanel>
+            </Border>
+
+        </UniformGrid>
+
+    </Grid>
+</Page>

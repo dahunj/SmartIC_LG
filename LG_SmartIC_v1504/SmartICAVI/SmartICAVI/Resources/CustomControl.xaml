@@ -1,0 +1,179 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <LinearGradientBrush x:Key="LinearGreen" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="Green" Offset="0.0"/>
+                <GradientStop Color="DarkGreen" Offset="1.0"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearBlue" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="Blue" Offset="0.0"/>
+                <GradientStop Color="DarkBlue" Offset="1.0"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="LinearRed" StartPoint="0,0" EndPoint="0,1">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="Red" Offset="0.0"/>
+                <GradientStop Color="DarkRed" Offset="1.0"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </LinearGradientBrush>
+
+    <Style x:Key="StyleBorder" TargetType="Border">
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BorderBrush" Value="DimGray"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="5"/>
+    </Style>
+
+    <Style x:Key="StyleLabel" TargetType="Label">
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="17"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <ControlTemplate x:Key="TemplateLabelMove" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="10" BorderThickness="0" Background="{StaticResource LinearGreen}" TextBlock.Foreground="Black" TextBlock.FontSize="24" Opacity="0.7">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LinearGreen}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
+                
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                To="Blue"
+                                                Duration="0:0:1" AutoReverse="True"  RepeatBehavior="Forever" AccelerationRatio="0.9"/>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                To="DarkBlue"
+                                                Duration="0:0:1" AutoReverse="True"  RepeatBehavior="Forever"  AccelerationRatio="0.9"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                Duration="0:0:0.3" AccelerationRatio="1"/>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Duration="0:0:0.3" AccelerationRatio="1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TemplateLabelAlarm" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="10" BorderThickness="0" Background="{StaticResource LinearRed}" TextBlock.Foreground="White" TextBlock.FontSize="24" Opacity="0.8">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="Visibility" Value="Visible">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LinearRed}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
+                <!-- Animation -->
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                To="Orange"
+                                                Duration="0:0:1" AutoReverse="True"  RepeatBehavior="Forever" AccelerationRatio="0.9"/>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                To="OrangeRed"
+                                                Duration="0:0:1" AutoReverse="True"  RepeatBehavior="Forever"  AccelerationRatio="0.9"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                Duration="0:0:0.3" AccelerationRatio="1"/>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Duration="0:0:0.3" AccelerationRatio="1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TemplateLabelInput" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="10" BorderThickness="0" Background="{StaticResource LinearBlue}" TextBlock.Foreground="White" TextBlock.FontSize="24" Opacity="0.8">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="TemplateLabelOutput" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="10" BorderThickness="0" Background="{StaticResource LinearGreen}" TextBlock.Foreground="White" TextBlock.FontSize="24" Opacity="0.8">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="TemplateLabelAction" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="10" BorderThickness="1" BorderBrush="DarkGreen" Background="{StaticResource TransparentBrush}" TextBlock.Foreground="Black" TextBlock.FontSize="24">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="true">
+                <!--<Setter TargetName="Border" Property="Background" Value="{StaticResource LinearGreen}" />-->
+                <Setter TargetName="Border" Property="BorderBrush" Value="Black" />
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                To="GreenYellow"
+                                                Duration="0:0:1" AutoReverse="True"  RepeatBehavior="Forever" AccelerationRatio="0.9"/>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                To="DarkGreen"
+                                                Duration="0:0:1" AutoReverse="True"  RepeatBehavior="Forever"  AccelerationRatio="0.9"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)"
+                                                Duration="0:0:0.3" AccelerationRatio="1"/>
+                            <ColorAnimation Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Border.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)"
+                                                Duration="0:0:0.3" AccelerationRatio="1"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

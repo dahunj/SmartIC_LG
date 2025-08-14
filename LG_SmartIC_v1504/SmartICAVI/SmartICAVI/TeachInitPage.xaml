@@ -1,0 +1,275 @@
+﻿<Page x:Class="SmartICAVI.TeachInitPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+      d:DesignHeight="800" d:DesignWidth="900"
+	Title="TeachInitPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Label Name="title" Grid.Row="0" Content="티 칭 파 라 미 터" Background="Olive" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+        <DockPanel LastChildFill="False" Grid.Row="1" >
+            <Button Name="btnOpen" Tag="Open" DockPanel.Dock="Left" Click="btnOpen_Click" Margin="5" Padding="5" Width="110"  VerticalAlignment="Stretch" Template="{StaticResource TemplateButton_BorderStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <Image Source="Images/Open32.png" Stretch="None"/>
+                    <TextBlock Text="열 기" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <Button Name="btnNew" Tag="New" DockPanel.Dock="Left" Click="btnNew_Click" Margin="5" Padding="5" Width="110"  VerticalAlignment="Stretch" Template="{StaticResource TemplateButton_BorderStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <Image Source="Images/New32.png" Stretch="None"/>
+                    <TextBlock Text="새로만들기" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+
+            <Button Name="btnCopy" Tag="Copy" DockPanel.Dock="Left" Click="btnCopy_Click" Margin="5" Padding="5" Width="110"  VerticalAlignment="Stretch" Template="{StaticResource TemplateButton_BorderStyle}">
+                <StackPanel VerticalAlignment="Center">
+                    <Image Source="Images/SaveAs32.png" Stretch="None"/>
+                    <TextBlock Text="복사" FontSize="17" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </DockPanel>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Content="레시피(모델) 이름 : "/>
+                <TextBlock Name="tblRecipeName" Grid.Row="0" Grid.Column="1"/>
+
+                <Label Grid.Row="1" Grid.Column="0" Content="펀칭위치 X,Y(mm) : "/>
+                <UniformGrid Grid.Row="1" Grid.Column="1" Columns="2">
+                    <TextBox x:Name="tbxPunchPosX" Text="4.75" Margin="10,5" Tag="펀치 위치 X(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                    <TextBox x:Name="tbxPunchPosY" Text="4.75" Margin="10,5" Tag="펀치 위치 Y(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                </UniformGrid>
+                
+
+                <Label Grid.Row="2" Grid.Column="0" Content="Center 펀칭위치 X,Y(mm) : "/>
+                <UniformGrid Grid.Row="2" Grid.Column="1" Columns="2">
+                    <TextBox x:Name="tbxPunchCenterPosX" Text="4.75" Margin="10,5" Tag="Center 펀치 위치 X(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                    <TextBox x:Name="tbxPunchCenterPosY" Text="4.75" Margin="10,5" Tag="Center 펀치 위치 Y(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                </UniformGrid>
+                
+
+                <Label Grid.Row="3" Grid.Column="0" Content="PF 홀 : "/>
+                <TextBox x:Name="tbxPF" Grid.Row="3" Grid.Column="1"  Text="2" Margin="10,5" Tag="PF 홀 갯수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <Label Grid.Row="4" Grid.Column="0" Content="열 수 : "/>
+                <TextBox x:Name="tbxLineNo" Grid.Row="4" Grid.Column="1"  Text="2" Margin="10,5" Tag="PF 홀 갯수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                
+                <Label Grid.Row="5" Grid.Column="0" Content="연속불량 갯수 : "/>
+                <TextBox x:Name="tbxContinuousNG" Grid.Row="5" Grid.Column="1"  Text="8" Margin="10,5" Tag="연속불량 갯수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <Label Grid.Row="6" Grid.Column="0" Content="최소구간 유닛 수 : "/>
+                <TextBox x:Name="tbxSectionMinUnits" Grid.Row="6" Grid.Column="1"  Text="13000" Margin="10,5" Tag="최소구간 유닛 수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+                <Label Grid.Row="8" Grid.Column="0" Content="스캔유닛 갯수 : "/>
+                <TextBox x:Name="tbxScanUnit" Grid.Row="8" Grid.Column="1"  Text="10" Margin="10,5" Tag="스캔유닛 갯수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <Label Grid.Row="9" Grid.Column="0" Content="스캔길이(mm) : "/>
+                <UniformGrid Grid.Row="9" Grid.Column="1" Columns="2">
+                    <TextBlock Name="tblScanLength" Text="0.0"/>
+                    <Button Name="btnScanLength" Tag="Scan Length" Click="btnScanLength_Click" Margin="10, 5" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Template="{StaticResource TemplateButton_BorderStyle}">
+                        <Label Content="길이 계산"/>
+                    </Button>
+                </UniformGrid>
+                
+                
+                <Label Visibility="Hidden" Grid.Row="8" Grid.Column="0" Content="Pre Scan 길이(mm) : "/>
+                <TextBox Visibility="Hidden" x:Name="tbxPreScan" Grid.Row="8" Grid.Column="1"  Text="5.0" Margin="10,5" Tag="스캔유닛 갯수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <Label Grid.Row="10" Grid.Column="0" Content="소재 초기위치 옵셋(mm) : "/>
+                <TextBox Name="tbxOffsetInitX" Grid.Row="10" Grid.Column="1"  Text="0.0" Margin="10,5" Tag="소재 초기위치 옵셋(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <Label Grid.Row="11" Grid.Column="0" Content="펀치 기준점 써치영역(mm)"/>
+                <TextBox Name="tbxSearchArea" Grid.Row="11" Grid.Column="1"  Text="4.0" Margin="10,5" Tag="펀치 기준점 써치영역(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+
+                <Label Grid.Row="12" Grid.Column="0" Content="펀치 허용공차X,Y(mm)"/>
+                <UniformGrid Grid.Row="12" Grid.Column="1" Columns="2">
+                    <TextBox Name="tbxPunchToleranceX" Text="0.2" Margin="10,5" Tag="펀치 허용공차 X(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                    <TextBox Name="tbxPunchToleranceY" Text="0.2" Margin="10,5" Tag="펀치 허용공차 Y(mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                </UniformGrid>
+
+            </Grid>
+
+            <Border Name="borderSectionYield" Grid.Column="1" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="13*"/>
+                        
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Content="구간수율 설정" HorizontalAlignment="Center"/>
+                    <Label Grid.Row="1" Grid.Column="0" Content="구 간" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="유 닛" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                    <Label Grid.Row="1" Grid.Column="2" Content="수 율 (%)" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+
+                    <ScrollViewer Name="scrollViewer" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="1 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="2 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="2" Grid.Column="0" Content="3 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="3" Grid.Column="0" Content="4 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="4" Grid.Column="0" Content="5 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="5" Grid.Column="0" Content="6 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="6" Grid.Column="0" Content="7 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="7" Grid.Column="0" Content="8 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="8" Grid.Column="0" Content="9 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="9" Grid.Column="0" Content="10 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="10" Grid.Column="0" Content="11 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="11" Grid.Column="0" Content="12 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="12" Grid.Column="0" Content="13 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="13" Grid.Column="0" Content="14 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="14" Grid.Column="0" Content="15 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="15" Grid.Column="0" Content="16 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="16" Grid.Column="0" Content="17 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="17" Grid.Column="0" Content="18 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="18" Grid.Column="0" Content="19 구 간" HorizontalAlignment="Center"/>
+                            <Label Grid.Row="19" Grid.Column="0" Content="20 구 간" HorizontalAlignment="Center"/>
+                            
+                            <Label Visibility="Hidden" Grid.Row="20" Grid.Column="0" Content="최소구간" HorizontalAlignment="Center"/>
+
+                            <TextBox Name="tbxSectionUnit1" Grid.Row="0" Grid.Column="1"  Text="500" Margin="10,5" Tag="1구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit2" Grid.Row="1" Grid.Column="1"  Text="1000" Margin="10,5" Tag="2구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit3" Grid.Row="2" Grid.Column="1"  Text="1500" Margin="10,5" Tag="3구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit4" Grid.Row="3" Grid.Column="1"  Text="2000" Margin="10,5" Tag="4구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit5" Grid.Row="4" Grid.Column="1"  Text="2500" Margin="10,5" Tag="5구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit6" Grid.Row="5" Grid.Column="1"  Text="3000" Margin="10,5" Tag="6구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit7" Grid.Row="6" Grid.Column="1"  Text="3500" Margin="10,5" Tag="7구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit8" Grid.Row="7" Grid.Column="1"  Text="4000" Margin="10,5" Tag="8구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit9" Grid.Row="8" Grid.Column="1"  Text="4500" Margin="10,5" Tag="9구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit10" Grid.Row="9" Grid.Column="1"  Text="5000" Margin="10,5" Tag="10구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit11" Grid.Row="10" Grid.Column="1"  Text="5500" Margin="10,5" Tag="11구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit12" Grid.Row="11" Grid.Column="1"  Text="6000" Margin="10,5" Tag="12구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit13" Grid.Row="12" Grid.Column="1"  Text="7000" Margin="10,5" Tag="13구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit14" Grid.Row="13" Grid.Column="1"  Text="8000" Margin="10,5" Tag="14구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit15" Grid.Row="14" Grid.Column="1"  Text="9000" Margin="10,5" Tag="15구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit16" Grid.Row="15" Grid.Column="1"  Text="10000" Margin="10,5" Tag="16구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit17" Grid.Row="16" Grid.Column="1"  Text="11000" Margin="10,5" Tag="17구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit18" Grid.Row="17" Grid.Column="1"  Text="12000" Margin="10,5" Tag="18구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit19" Grid.Row="18" Grid.Column="1"  Text="13000" Margin="10,5" Tag="19구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionUnit20" Grid.Row="19" Grid.Column="1"  Text="14000" Margin="10,5" Tag="20구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Visibility="Hidden" Name="tbxSectionUnitMin" Grid.Row="20" Grid.Column="1"  Text="6500" Margin="10,5" Tag="최소구간 유닛" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                            <TextBox Name="tbxSectionYield1" Grid.Row="0" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="1구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield2" Grid.Row="1" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="2구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield3" Grid.Row="2" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="3구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield4" Grid.Row="3" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="4구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield5" Grid.Row="4" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="5구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield6" Grid.Row="5" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="6구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield7" Grid.Row="6" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="7구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield8" Grid.Row="7" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="8구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield9" Grid.Row="8" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="9구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield10" Grid.Row="9" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="10구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield11" Grid.Row="10" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="11구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield12" Grid.Row="11" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="12구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield13" Grid.Row="12" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="13구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield14" Grid.Row="13" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="14구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield15" Grid.Row="14" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="15구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield16" Grid.Row="15" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="16구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield17" Grid.Row="16" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="17구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield18" Grid.Row="17" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="18구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield19" Grid.Row="18" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="19구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Name="tbxSectionYield20" Grid.Row="19" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="20구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <TextBox Visibility="Hidden" Name="tbxSectionYieldMin" Grid.Row="20" Grid.Column="2"  Text="95.0" Margin="10,5" Tag="최소구간 수율" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                        </Grid>
+                    </ScrollViewer>
+                    
+                    
+
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>

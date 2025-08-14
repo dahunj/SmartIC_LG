@@ -1,0 +1,161 @@
+﻿<Page x:Class="SmartICAVI.SetupUserAccountPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="SetupUserAccountPage">
+
+    <Page.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="7"/>
+            <Setter Property="Padding" Value="7"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Margin="5" Padding="100,20" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="7">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+
+                    <CheckBox Name="btnAll" Tag="btnAll"  Grid.Column="0" Margin="5,10" Click="btnUserAccount_Click" MinWidth="120" MinHeight="80" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                        <TextBlock Text="전체" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="btnOperator" Tag="btnOperator"  Grid.Column="1" Margin="5,10" Click="btnUserAccount_Click" MinWidth="120" MinHeight="80" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                        <TextBlock Text="오퍼레이터" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="btnAdmin" Tag="btnAdmin"  Grid.Column="2" Margin="5,10" Click="btnUserAccount_Click" MinWidth="120" MinHeight="80" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                        <TextBlock Text="관리자" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <CheckBox Name="btnMaint" Tag="btnMaint"  Grid.Column="3" Margin="5,10" Click="btnUserAccount_Click" MinWidth="120" MinHeight="80" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                        <TextBlock Text="유지보수" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center"/>
+                    </CheckBox>
+
+                    <Button Name="btnDelete" Grid.Column="4" Tag="btnDelete" ToolTip="계정 삭제"  Margin="5,10" MinWidth="120" MinHeight="70" Template="{StaticResource TemplateCustomButton}" Click="btnDelete_Click">
+                        <StackPanel>
+                            <Image Source="Images/Cancel32.png" Margin="10" Stretch="None"/>
+                            <TextBlock Name="tblDelete" Text="계정삭제" Margin="2" FontFamily="Arial" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+                <TextBlock Name="tblSelectedID" Grid.Row="1" Margin="10" HorizontalAlignment="Left"/>
+
+                <ListView Name="lvUserAccount" Grid.Row="2" Grid.Column="0" Margin="10" BorderBrush="Black" Foreground="Black" FontSize="18" Background="Transparent" IsSynchronizedWithCurrentItem="True" SelectionChanged="lvUserAccount_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="사용자 ID" Width="200" DisplayMemberBinding="{Binding Path=ID}"/>
+                                <GridViewColumn Header="계정 권한" Width="200" DisplayMemberBinding="{Binding Path=AccountType}"/>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1" Margin="5" Padding="100,50" BorderBrush="DarkGray" BorderThickness="1" CornerRadius="7">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Name="tblAccountType" Grid.Row="1" Grid.Column="0" Text="계정권한 설정"/>
+
+                <ComboBox Name="cbAccountType" Grid.Row="1" Grid.Column="1" Padding="10" Margin="10,15" HorizontalAlignment="Stretch" FontSize="20" FontFamily="Arial"/>
+
+                <TextBlock Name="tblUserID" Grid.Row="2" Grid.Column="0" Text="사용자 ID 설정"/>
+                <TextBox Name="tbxUserID" Grid.Row="2" Grid.Column="1" Margin="10,15"/>
+                <Button Name="btnIDCheck" Grid.Row="2" Grid.Column="2" ToolTip="중복 ID 확인"  Margin="10" Template="{StaticResource TemplateCustomButton}" Click="btnIDCheck_Click">
+                    <StackPanel>
+                        <!--<Image Source="Images/Cancel.png" Margin="10" Stretch="None"/>-->
+                        <TextBlock Name="tblIDCheck" Text="ID 중복 확인" Margin="2" FontFamily="Arial" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <TextBlock Name="tblPassword1" Grid.Row="3" Grid.Column="0" Text="암호 설정"/>
+                <PasswordBox Name="tbxPassword1" Grid.Row="3" Grid.Column="1" Margin="10,15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+
+                <TextBlock Name="tblPassword2" Grid.Row="4" Grid.Column="0" Text="암호 확인"/>
+                <PasswordBox Name="tbxPassword2" Grid.Row="4" Grid.Column="1" Margin="10,15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+
+                
+
+                <Button Name="btnAdd" Grid.Row="5" Grid.Column="1" ToolTip="계정저장"  Margin="10" Template="{StaticResource TemplateCustomButton}" Click="btnAdd_Click">
+                    <StackPanel>
+                        <!--<Image Source="Images/Cancel.png" Margin="10" Stretch="None"/>-->
+                        <TextBlock Name="tblAdd" Text="계정 저장" Margin="2" FontFamily="Arial" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

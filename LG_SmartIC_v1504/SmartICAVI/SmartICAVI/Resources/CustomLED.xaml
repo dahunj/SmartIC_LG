@@ -1,0 +1,131 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <RadialGradientBrush x:Key="LedGrayBrush" GradientOrigin="0.3, 0.3">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="WhiteSmoke" Offset="0.0"/>
+                <GradientStop Color="DimGray" Offset="1"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="LedBlueBrush" GradientOrigin="0.3, 0.3">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="WhiteSmoke" Offset="0.0"/>
+                <GradientStop Color="DarkBlue" Offset="1"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="LedGreenBrush" GradientOrigin="0.3, 0.3">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="WhiteSmoke" Offset="0.0"/>
+                <GradientStop Color="Green" Offset="1"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <RadialGradientBrush x:Key="LedRedBrush" GradientOrigin="0.3, 0.3">
+        <GradientBrush.GradientStops>
+            <GradientStopCollection>
+                <GradientStop Color="WhiteSmoke" Offset="0.0"/>
+                <GradientStop Color="DarkRed" Offset="1"/>
+            </GradientStopCollection>
+        </GradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <!--Green LED-->
+    <ControlTemplate x:Key="TemplateGreenLED" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="12" Background="{StaticResource LedGrayBrush}" TextBlock.Foreground="White" Width="24" Height="24">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedGrayBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedGreenBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Blue LED-->
+    <ControlTemplate x:Key="TemplateBlueLED" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="12" Background="{StaticResource LedGrayBrush}" TextBlock.Foreground="White" Width="24" Height="24">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedGrayBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedBlueBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Red LED-->
+    <ControlTemplate x:Key="TemplateRedLED" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="12" Background="{StaticResource LedGrayBrush}" TextBlock.Foreground="White" Width="24" Height="24">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedGrayBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedRedBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Green/Red LED-->
+    <ControlTemplate x:Key="TemplateGreenRedLED" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="12" Background="{StaticResource LedRedBrush}" TextBlock.Foreground="White" Width="24" Height="24">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedRedBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedGreenBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!--Red/Green LED-->
+    <ControlTemplate x:Key="TemplateRedGreenLED" TargetType="{x:Type Label}">
+        <Border x:Name="Border" CornerRadius="12" Background="{StaticResource LedRedBrush}" TextBlock.Foreground="White" Width="24" Height="24">
+            <ContentPresenter Margin="{TemplateBinding Button.Padding}" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedGreenBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource LedRedBrush}" />
+                <Setter TargetName="Border" Property="BorderBrush" Value="White" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+</ResourceDictionary>

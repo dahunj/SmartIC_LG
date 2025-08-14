@@ -1,0 +1,201 @@
+﻿<Page x:Class="SmartICAVI.ManualFeedingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="600"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+	Title="ManualFeedingPage">
+
+    <Page.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--<Label Name="title" Grid.Row="0" Content="BOTTOM 비 전 (Z 축)" Background="Olive" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>-->
+
+        <CheckBox x:Name="btnAutoRun" Grid.Row="0" Tag="btnAutoRun" Margin="5" Padding="1" Click="btnAutoRun_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                <!--<Image Source="Images/Back32.png" Margin="2,0" Stretch="None"/>-->
+                <TextBlock Text="자동 구동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </StackPanel>
+        </CheckBox>
+
+        <UniformGrid Grid.Row="1" Rows="2">
+            <Border Name="borderVisionFeed" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Name="titleVision" Grid.Row="0" Content="비전부 피딩" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Jog-->
+                        <ut:GroupCheckBox x:Name="cbxVisionJog" Grid.Row="0" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbVisionJog" Content="조그 구동 선택" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <ut:JogButton x:Name="btnVisionJogN" Grid.Row="0" Grid.Column="1" Tag="btnVisionJogN" Margin="5" Padding="1" PreviewMouseLeftButtonDown="btnJog_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="btnJog_PreviewMouseLeftButtonUp" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Back32.png" Margin="10,0" Stretch="None"/>
+                                <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ut:JogButton>
+                        <ut:JogButton x:Name="btnVisionJogP" Grid.Row="0" Grid.Column="2" Tag="btnVisionJogP" Margin="5" Padding="1" PreviewMouseLeftButtonDown="btnJog_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="btnJog_PreviewMouseLeftButtonUp" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Forward32.png" Margin="10,0" Stretch="None"/>
+                                <TextBlock Text="+ 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ut:JogButton>
+
+                        <!--RMove-->
+                        <ut:GroupCheckBox x:Name="cbxVisionRMove" Grid.Row="1" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbVisionRMove" Content="상대이동 선택" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Columns="3">
+                            <ut:MoveCheckBox x:Name="btnVisionRMoveN" Grid.Row="1" Grid.Column="3" Tag="btnVisionRMoveN" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Back32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                            <TextBox x:Name="tbxVisionRMove" Text="0.000" Grid.Row="1" Grid.Column="1" Margin="10" TextAlignment="Center" Tag="이동거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <ut:MoveCheckBox x:Name="btnVisionRMoveP" Grid.Row="1" Grid.Column="3" Tag="btnVisionRMoveP" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Forward32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="+ 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                        </UniformGrid>
+
+                        <!--AMove-->
+                        <ut:GroupCheckBox x:Name="cbxVisionAMove" Grid.Row="2" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbVisionAMove" Content="절대이동 선택" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Columns="3">
+                            <ut:MoveCheckBox Visibility="Hidden" x:Name="btnVisionAMoveN" Grid.Row="1" Grid.Column="3" Tag="btnVisionAMoveN" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Back32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                            <TextBox x:Name="tbxVisionAMove" Text="0.000" Grid.Row="2" Grid.Column="1" Margin="10" TextAlignment="Center" Tag="이동거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <ut:MoveCheckBox x:Name="btnVisionAMove" Grid.Row="2" Grid.Column="3" Tag="btnVisionAMove" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Move32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                        </UniformGrid>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <Border Name="borderPunchFeed" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Label Name="titlePunch" Grid.Row="0" Content="펀치부 피딩" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                    <Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--Jog-->
+                        <ut:GroupCheckBox x:Name="cbxPunchJog" Grid.Row="0" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbPunchJog" Content="조그 구동 선택" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <ut:JogButton x:Name="btnPunchJogN" Grid.Row="0" Grid.Column="1" Tag="btnPunchJogN" Margin="5" Padding="1" PreviewMouseLeftButtonDown="btnJog_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="btnJog_PreviewMouseLeftButtonUp" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Back32.png" Margin="10,0" Stretch="None"/>
+                                <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ut:JogButton>
+                        <ut:JogButton x:Name="btnPunchJogP" Grid.Row="0" Grid.Column="2" Tag="btnPunchJogP" Margin="5" Padding="1" PreviewMouseLeftButtonDown="btnJog_PreviewMouseLeftButtonDown" PreviewMouseLeftButtonUp="btnJog_PreviewMouseLeftButtonUp" Template="{StaticResource TemplateButton_BorderStyle}">
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Image Source="Images/Forward32.png" Margin="10,0" Stretch="None"/>
+                                <TextBlock Text="+ 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ut:JogButton>
+
+                        <!--RMove-->
+                        <ut:GroupCheckBox x:Name="cbxPunchRMove" Grid.Row="1" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbPunchRMove" Content="상대이동 선택" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Columns="3">
+                            <ut:MoveCheckBox x:Name="btnPunchRMoveN" Grid.Row="1" Grid.Column="3" Tag="btnPunchRMoveN" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Back32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                            <TextBox x:Name="tbxPunchRMove" Text="0.000" Grid.Row="1" Grid.Column="1" Margin="10" TextAlignment="Center" Tag="이동거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <ut:MoveCheckBox x:Name="btnPunchRMoveP" Grid.Row="1" Grid.Column="3" Tag="btnPunchRMoveP" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Forward32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="+ 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                        </UniformGrid>
+
+                        <!--AMove-->
+                        <ut:GroupCheckBox x:Name="cbxPunchAMove" Grid.Row="2" Grid.Column="0"  Margin="5" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                            <Label Name="lbPunchAMove" Content="절대이동 선택" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </ut:GroupCheckBox>
+                        <UniformGrid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Columns="3">
+                            <ut:MoveCheckBox Visibility="Hidden" x:Name="btnPunchAMoveN" Grid.Row="1" Grid.Column="3" Tag="btnPunchAMoveN" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Back32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="- 이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                            <TextBox x:Name="tbxPunchAMove" Text="0.000" Grid.Row="2" Grid.Column="1" Margin="10" TextAlignment="Center" Tag="이동거리 (mm)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+                            <ut:MoveCheckBox x:Name="btnPunchAMove" Grid.Row="2" Grid.Column="3" Tag="btnPunchAMove" Margin="5" Padding="1" Click="btnMove_Click" Template="{StaticResource TemplateCheckBox_SelectStyle}">
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <Image Source="Images/Move32.png" Margin="2,0" Stretch="None"/>
+                                    <TextBlock Text="이동" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </ut:MoveCheckBox>
+                        </UniformGrid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </UniformGrid>
+    </Grid>
+</Page>

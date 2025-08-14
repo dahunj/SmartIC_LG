@@ -1,0 +1,1064 @@
+﻿<Page x:Class="SmartICAVI.AutoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ut="clr-namespace:SmartICAVI.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="1024" d:DesignWidth="1880"
+      Background="Cornsilk"
+      Loaded="Page_Loaded"
+      Unloaded="Page_Unloaded"
+      FocusableChanged="Page_FocusableChanged"
+	Title="AutoPage">
+
+    <Page.Resources>
+        <Style x:Key="styleLabel" TargetType="{x:Type Label}">
+            <Setter Property="FontSize" Value="26"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="220"/>
+            </Grid.ColumnDefinitions>
+            
+            <!--Align Vision-->
+            <Border Name="borderAlignVision" Grid.Column="0" Style="{StaticResource StyleBorder}">
+                <Grid Name="camView">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Name="tblAlignVision" Text="PUNCH ALIGN" FontSize="18" Background="Olive" Foreground="White" TextAlignment="Center" VerticalAlignment="Stretch"/>
+
+                    <Canvas Name="canvas" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Black">
+                        <!--<Image Name="imageAlign" Stretch="Fill" Canvas.Left="0" Canvas.Top="0" Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}"/>-->
+                    </Canvas>
+
+                    <UniformGrid Grid.Row="2" Columns="2" Visibility="Hidden">
+                        <TextBlock Name="tblAlignX" Text="X Offset : " FontSize="18" TextAlignment="Left" VerticalAlignment="Center"/>
+                        <TextBlock Name="tblAlignY" Text="Y Offset : " FontSize="18" TextAlignment="Left" VerticalAlignment="Center"/>
+                    </UniformGrid>
+                    
+                </Grid>
+            </Border>
+            
+            <!--Summary-->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+
+                <!--LotID-->
+                <!--<CheckBox Name="cbxLotID" Grid.Row="1" Grid.Column="0" Margin="2" Click="cbxLotID_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">-->
+                <Label Name="lblLotID" Grid.Row="0" Grid.Column="0" Content="Lot ID" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <!--</CheckBox>-->
+                <TextBox Name="tbxLotID" Grid.Row="0" Grid.Column="1" Margin="2,2,10,2" Tag="Lot ID" FontSize="15" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <!--UserID-->
+                <!--<CheckBox Name="cbxUserID" Grid.Row="2" Grid.Column="0" Margin="2" Click="cbxUserID_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">-->
+                <Label Name="lblUserID" Grid.Row="1" Grid.Column="0" Content="사용자 ID" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <!--</CheckBox>-->
+                <TextBox Name="tbxUserID" Grid.Row="1" Grid.Column="1" Margin="2,2,10,2" Tag="사용자 ID" FontSize="15" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbx_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <!--ToolID-->
+                <Label Name="lblToolID" Grid.Row="2" Grid.Column="0" Content="툴 ID" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBox Name="tbxToolID" Grid.Row="2" Grid.Column="1" Margin="2,2,10,2" Tag="툴 ID" Style="{StaticResource StyleTextBox}" FontSize="15" PreviewMouseUp="tbx_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                
+                <!--NGContinue-->
+                <!--<CheckBox Name="cbxNGContinue" Grid.Row="3" Grid.Column="0" Margin="2" Click="cbxNGContinue_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">-->
+                <Label Name="lblNGContinue" Grid.Row="3" Grid.Column="0" Content="연속불량" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <!--</CheckBox>-->
+                <TextBox x:Name="tbxNGContinue" Grid.Row="3" Grid.Column="1" Margin="2,2,10,2" Tag="연속불량" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                
+                <!--PFHole-->
+                <Label Name="lblPFHoleDummy" Content="PF홀 수량" Grid.Row="4" Grid.Column="0" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <!--<ut:GroupCheckBox x:Name="cbxPFHole" Grid.Row="3" Grid.Column="0" Margin="2" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblPFHole" Content="PF홀 수량" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </ut:GroupCheckBox>-->
+                <TextBox x:Name="tbxPFHole" Grid.Row="4" Grid.Column="1" Margin="2,2,10,2" Tag="PF홀 수량" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <Label Name="lblSectionMinUnits" Content="최소구간 유닛 수" Grid.Row="5" Grid.Column="0" FontSize="16" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBox x:Name="tbxSectionMinUnits" Grid.Row="5" Grid.Column="1" Margin="2,2,10,2" Tag="최소구간 유닛 수" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                
+                <!--NextMachine-->
+                <Label Name="lblNextMachineDummy" Content="다음공정" Grid.Row="6" Grid.Column="0" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <!--<ut:GroupCheckBox x:Name="cbxNextMachine" Grid.Row="6" Grid.Column="0" Margin="2" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblNextMachine" Content="다음공정" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </ut:GroupCheckBox>-->
+                <ComboBox x:Name="cbNextMachine" Grid.Row="6" Grid.Column="1" Margin="2,5,10,5" Padding="10,0" SelectionChanged="cbNextMachine_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Stretch" FontSize="16" FontWeight="Bold"/>
+
+
+                <!--Continuous-->
+                <CheckBox Name="cbxNormalJob" Grid.Row="0" Grid.Column="2" Margin="2" Click="cbxNormalJob_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblNormalJob" Content="연속작업" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </CheckBox>
+
+                <!--TotalCount-->
+                <CheckBox Name="cbxTotalCount" Grid.Row="1" Grid.Column="2" Margin="2" Click="cbxTotalCount_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblTotalCount" Content="Total수량" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </CheckBox>
+                <ut:SelectTextBox x:Name="tbxTotalCount" Grid.Row="1" Grid.Column="3" Margin="2" Tag="검사수량" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <!--GoodCount-->
+                <CheckBox Name="cbxGoodCount" Grid.Row="2" Grid.Column="2" Margin="2" Click="cbxGoodCount_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblGoodCount" Content="GOOD 수량" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </CheckBox>
+                <ut:SelectTextBox x:Name="tbxGoodCount" Grid.Row="2" Grid.Column="3" Margin="2" Tag="OK 수량" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>
+
+                <!--NGCount-->
+                <Label Name="lblNGCountDummy" Content="NG 수량" Grid.Row="3" Grid.Column="3" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <!--<ut:GroupCheckBox x:Name="cbxNGCount" Grid.Row="3" Grid.Column="2" Visibility="Hidden" Margin="2" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblNGCount" Content="NG 수량" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </ut:GroupCheckBox>
+                <ut:SelectTextBox x:Name="tbxNGCount" Visibility="Hidden" Grid.Row="3" Grid.Column="3" Margin="2" Tag="NG 수량" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>-->
+
+                <!--Yield-->
+                <!--<Label Name="lblYieldDummy" Content="수율 (%)" Grid.Row="4" Grid.Column="3" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>-->
+                <CheckBox Name="cbxYield" Grid.Row="4" Grid.Column="3" Margin="2" Click="cbxYield_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblYield" Content="수율 (%)" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </CheckBox>
+                <!--<ut:GroupCheckBox x:Name="cbxYield" Grid.Row="4" Grid.Column="2" Visibility="Hidden" Margin="2" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblYield" Content="수율 (%)" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </ut:GroupCheckBox>
+                <ut:SelectTextBox x:Name="tbxYield" Visibility="Hidden" Grid.Row="4" Grid.Column="3" Margin="2" Tag="수율 (%)" Style="{StaticResource StyleTextBox}" PreviewMouseUp="tbxNumber_PreviewMouseUp" SelectionChanged="tbx_SelectionChanged"/>-->
+
+                <!--Jont Count-->
+                <Label Name="lblJointCount" Grid.Row="5" Grid.Column="3" Content="Joint 수" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+                <!--Light Time-->
+                <Label Visibility="Hidden" Name="lblLightTime" Grid.Row="6" Grid.Column="3" Content="조명시간(H)" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+
+                <CheckBox Name="cbxVerify" Grid.Row="5" Grid.Column="2" Margin="2" Click="cbxVerify_Click" Template="{StaticResource TemplateCheckBox_GroupStyle}">
+                    <Label Name="lblVerify" Content="VERIFY" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </CheckBox>
+
+                
+
+                <!--Title-->
+                <Label Name="lblUserDefine" Grid.Row="0" Grid.Column="3" Content="설정값" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+                <Label Name="lblSection1" Grid.Row="0" Grid.Column="4" Content="Top" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+                <Label Name="lblSection2" Grid.Row="0" Grid.Column="5" Content="Bottom" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+                <Label Name="lblSection3" Grid.Row="0" Grid.Column="6" Content="Mono" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+                <Label Name="lblSectionTotal" Grid.Row="0" Grid.Column="7" Content="Total" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Bottom"/>
+
+
+                <!--1구간-->
+                <Label Name="lblTotalCountSection1" Grid.Row="1" Grid.Column="4" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblGoodCountSection1" Grid.Row="2" Grid.Column="4" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblNGCountSection1" Grid.Row="3" Grid.Column="4" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblYieldSection1" Grid.Row="4" Grid.Column="4" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblJointCountSection1" Grid.Row="5" Grid.Column="4" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Visibility="Hidden" Name="lblLightTime1" Grid.Row="6" Grid.Column="4" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+
+                <Button Name="btnCheckDefect" Grid.Row="6" Grid.Column="2" Margin="2" Click="btnCheckDefect_Click" Template="{StaticResource TemplateButton_BorderStyle}">
+                    <Label Name="lblCheckDefect" Content="Defect 설정" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                </Button>
+
+                <Label Name="lblLength" Grid.Row="6" Grid.Column="3" Content="길이(m)" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Label Name="lblLengthValue" Grid.Row="6" Grid.Column="4" Content="" Margin="2,7" Padding="5" Background="Olive" Style="{StaticResource styleLabel}"/>
+
+
+                <UniformGrid Grid.Row="6" Grid.Column="5" Columns="2">
+                    <Label Name="lblLine" Grid.Row="6" Grid.Column="4" Content="열 수 " FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+                    <Label Name="lblLineValue" Grid.Row="6" Grid.Column="5" Content="" Margin="2,7" Padding="5" Background="Olive" Style="{StaticResource styleLabel}"/>
+                </UniformGrid>
+                
+
+                <!--2구간-->
+                <Label Name="lblTotalCountSection2" Grid.Row="1" Grid.Column="5" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblGoodCountSection2" Grid.Row="2" Grid.Column="5" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblNGCountSection2" Grid.Row="3" Grid.Column="5" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblYieldSection2" Grid.Row="4" Grid.Column="5" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblJointCountSection2" Grid.Row="5" Grid.Column="5" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Visibility="Hidden" Name="lblLightTime2" Grid.Row="6" Grid.Column="5" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+
+                <!--3구간-->
+                <Label Name="lblTotalCountSection3" Grid.Row="1" Grid.Column="6" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblGoodCountSection3" Grid.Row="2" Grid.Column="6" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblNGCountSection3" Grid.Row="3" Grid.Column="6" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblYieldSection3" Grid.Row="4" Grid.Column="6" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblJointCountSection3" Grid.Row="5" Grid.Column="6" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Visibility="Hidden" Name="lblLightTime3" Grid.Row="6" Grid.Column="6" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+
+                <Label Name="lblYieldSection" Content="전/후 수율 " Grid.Row="6" Grid.Column="6" FontSize="22" FontFamily="Arial" HorizontalContentAlignment="Right" VerticalContentAlignment="Center"/>
+
+
+                <!--Total-->
+                <Label Name="lblTotalCountTotal" Grid.Row="1" Grid.Column="7" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblGoodCountTotal" Grid.Row="2" Grid.Column="7" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblNGCountTotal" Grid.Row="3" Grid.Column="7" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblYieldTotal" Grid.Row="4" Grid.Column="7" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <Label Name="lblJointCountTotal" Grid.Row="5" Grid.Column="7" Content="" Margin="2" Background="Olive" Style="{StaticResource styleLabel}"/>
+                <UniformGrid Grid.Row="6" Grid.Column="7" Margin="2" Columns="2">
+                    <Label Name="lblYieldTotal1" Content="" Background="Olive" FontSize="18" Margin="1,5" Padding="5" Style="{StaticResource styleLabel}"/>
+                    <Label Name="lblYieldTotal2" Content="" Background="Olive" FontSize="18" Margin="1,5" Padding="5" Style="{StaticResource styleLabel}"/>
+                </UniformGrid>
+            </Grid>
+
+            <!--Button-->
+            <UniformGrid Grid.Column="2" Rows="3">
+                <CheckBox Name="btnStart" Tag="Start" Click="btnStart_Click" Margin="10, 5, 10, 5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Image Source="Images/Auto48.png" Margin="5" Stretch="None"/>
+                        <TextBlock Name="tblStart" Text="작업시작" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </CheckBox>
+
+                <CheckBox Name="btnPause" Tag="Pause" Click="btnPause_Click" Margin="10, 5, 10, 5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Image Source="Images/Pause48.png" Margin="5" Stretch="None"/>
+                        <TextBlock Name="tblPause"  Text="일시정지" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </CheckBox>
+
+
+                <CheckBox Name="btnStop" Tag="Stop" Click="btnStop_Click" Margin="10, 5, 10, 5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Image Source="Images/Stop48.png" Margin="5" Stretch="None"/>
+                        <TextBlock Name="tblStop" Text="작업취소" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </CheckBox>
+            </UniformGrid>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Name="borderTopVision" Grid.Row="0" Grid.Column="0" Margin="5, 15" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Name="tblTopVision" Text="TOP" FontSize="18" Background="Olive" Foreground="White" TextAlignment="Center" VerticalAlignment="Stretch" Grid.Row="0"/>
+
+                    <UniformGrid Rows="4" Columns="15" Grid.Row="1">
+                        <Label Name="lblTopLineNo15" Content="15" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo14" Content="14" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo13" Content="13" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo12" Content="12" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo11" Content="11" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo10" Content="10" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo09" Content="09" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo08" Content="08" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo07" Content="07" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo06" Content="06" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo05" Content="05" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo04" Content="04" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo03" Content="03" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo02" Content="02" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblTopLineNo01" Content="01" Style="{StaticResource styleLabelLineNo}"/>
+
+                        <Label Name="lblTopLine115" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine114" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine113" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine112" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine111" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine110" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine109" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine108" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine107" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine106" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine105" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine104" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine103" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine102" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine101" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblTopLine215" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine214" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine213" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine212" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine211" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine210" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine209" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine208" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine207" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine206" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine205" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine204" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine203" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine202" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine201" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblTopLine315" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine314" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine313" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine312" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine311" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine310" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine309" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine308" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine307" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine306" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine305" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine304" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine303" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine302" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblTopLine301" Style="{StaticResource styleLabelNormalNo}"/>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+
+            <Border Name="borderBottomVision" Grid.Row="0" Grid.Column="1" Margin="5, 15" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Name="tblBottomVision" Text="BOTTOM" FontSize="18" Background="Olive" Foreground="White" TextAlignment="Center" VerticalAlignment="Stretch" Grid.Row="0"/>
+
+                    <UniformGrid Rows="4" Columns="15" Grid.Row="1">
+                        <Label Name="lblBottomLineNo15" Content="15" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo14" Content="14" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo13" Content="13" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo12" Content="12" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo11" Content="11" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo10" Content="10" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo09" Content="09" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo08" Content="08" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo07" Content="07" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo06" Content="06" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo05" Content="05" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo04" Content="04" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo03" Content="03" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo02" Content="02" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblBottomLineNo01" Content="01" Style="{StaticResource styleLabelLineNo}"/>
+
+                        <Label Name="lblBottomLine115" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine114" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine113" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine112" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine111" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine110" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine109" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine108" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine107" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine106" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine105" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine104" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine103" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine102" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine101" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblBottomLine215" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine214" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine213" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine212" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine211" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine210" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine209" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine208" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine207" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine206" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine205" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine204" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine203" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine202" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine201" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblBottomLine315" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine314" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine313" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine312" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine311" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine310" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine309" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine308" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine307" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine306" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine305" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine304" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine303" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine302" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblBottomLine301" Style="{StaticResource styleLabelNormalNo}"/>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+
+            <Border Name="borderMonoVision" Grid.Row="0" Grid.Column="2" Margin="5, 15" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Name="tblMonoVision" Text="MONO" FontSize="18" Background="Olive" Foreground="White" TextAlignment="Center" VerticalAlignment="Stretch" Grid.Row="0"/>
+
+                    <UniformGrid Rows="4" Columns="15" Grid.Row="1">
+                        <Label Name="lblMonoLineNo15" Content="15" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo14" Content="14" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo13" Content="13" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo12" Content="12" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo11" Content="11" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo10" Content="10" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo09" Content="09" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo08" Content="08" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo07" Content="07" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo06" Content="06" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo05" Content="05" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo04" Content="04" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo03" Content="03" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo02" Content="02" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblMonoLineNo01" Content="01" Style="{StaticResource styleLabelLineNo}"/>
+
+                        <Label Name="lblMonoLine115" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine114" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine113" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine112" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine111" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine110" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine109" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine108" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine107" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine106" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine105" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine104" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine103" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine102" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine101" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblMonoLine215" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine214" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine213" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine212" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine211" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine210" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine209" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine208" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine207" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine206" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine205" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine204" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine203" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine202" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine201" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblMonoLine315" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine314" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine313" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine312" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine311" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine310" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine309" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine308" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine307" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine306" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine305" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine304" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine303" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine302" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblMonoLine301" Style="{StaticResource styleLabelNormalNo}"/>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+
+            <Border Name="borderPunch" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5, 15" Style="{StaticResource StyleBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Name="tblPunch" Text="PUNCH" FontSize="18" Background="Olive" Foreground="White" TextAlignment="Center" VerticalAlignment="Stretch" Grid.Row="0"/>
+
+                    <UniformGrid Grid.Row="1" Rows="4" Columns="45">
+                        <Label Name="lblPunchLineNo45" Content="45" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo44" Content="44" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo43" Content="43" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo42" Content="42" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo41" Content="41" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo40" Content="40" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo39" Content="39" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo38" Content="38" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo37" Content="37" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo36" Content="36" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo35" Content="35" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo34" Content="34" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo33" Content="33" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo32" Content="32" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo31" Content="31" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo30" Content="30" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo29" Content="29" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo28" Content="28" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo27" Content="27" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo26" Content="26" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo25" Content="25" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo24" Content="24" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo23" Content="23" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo22" Content="22" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo21" Content="21" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo20" Content="20" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo19" Content="19" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo18" Content="18" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo17" Content="17" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo16" Content="16" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo15" Content="15" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo14" Content="14" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo13" Content="13" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo12" Content="12" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo11" Content="11" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo10" Content="10" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo09" Content="09" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo08" Content="08" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo07" Content="07" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo06" Content="06" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo05" Content="05" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo04" Content="04" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo03" Content="03" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo02" Content="02" Style="{StaticResource styleLabelLineNo}"/>
+                        <Label Name="lblPunchLineNo01" Content="01" Style="{StaticResource styleLabelLineNo}"/>
+
+                        <Label Name="lblPunchLine145" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine144" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine143" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine142" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine141" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine140" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine139" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine138" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine137" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine136" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine135" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine134" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine133" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine132" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine131" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine130" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine129" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine128" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine127" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine126" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine125" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine124" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine123" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine122" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine121" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine120" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine119" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine118" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine117" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine116" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine115" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine114" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine113" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine112" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine111" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine110" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine109" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine108" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine107" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine106" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine105" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine104" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine103" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine102" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine101" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblPunchLine245" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine244" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine243" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine242" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine241" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine240" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine239" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine238" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine237" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine236" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine235" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine234" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine233" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine232" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine231" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine230" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine229" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine228" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine227" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine226" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine225" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine224" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine223" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine222" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine221" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine220" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine219" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine218" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine217" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine216" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine215" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine214" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine213" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine212" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine211" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine210" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine209" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine208" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine207" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine206" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine205" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine204" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine203" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine202" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine201" Style="{StaticResource styleLabelNormalNo}"/>
+
+                        <Label Name="lblPunchLine345" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine344" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine343" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine342" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine341" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine340" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine339" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine338" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine337" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine336" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine335" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine334" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine333" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine332" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine331" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine330" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine329" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine328" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine327" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine326" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine325" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine324" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine323" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine322" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine321" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine320" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine319" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine318" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine317" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine316" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine315" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine314" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine313" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine312" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine311" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine310" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine309" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine308" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine307" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine306" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine305" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine304" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine303" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine302" Style="{StaticResource styleLabelNormalNo}"/>
+                        <Label Name="lblPunchLine301" Style="{StaticResource styleLabelNormalNo}"/>
+                    </UniformGrid>
+
+                    <!--<Grid Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="3*"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="3*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Name="lblPuchLineNumber" Content="" Style="{StaticResource styleLabelLineNo}"/>
+                        
+                        <UniformGrid Grid.Row="2" Grid.Column="0" Rows="3">
+                            <Label Name="lblPuchTopVision1" Content="TOP" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPuchBottomVision1" Content="BOTTOM" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPuchMonoVision1" Content="MONO" Style="{StaticResource styleLabelLineNo}"/>
+                        </UniformGrid>
+
+                        <UniformGrid Grid.Row="4" Grid.Column="0" Rows="3">
+                            <Label Name="lblPuchTopVision2" Content="TOP" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPuchBottomVision2" Content="BOTTOM" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPuchMonoVision2" Content="MONO" Style="{StaticResource styleLabelLineNo}"/>
+                        </UniformGrid>
+
+                        <UniformGrid Grid.Row="0" Grid.Column="1" Columns="45">
+                            <Label Name="lblPunchLineNo45" Content="45" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo44" Content="44" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo43" Content="43" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo42" Content="42" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo41" Content="41" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo40" Content="40" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo39" Content="39" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo38" Content="38" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo37" Content="37" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo36" Content="36" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo35" Content="35" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo34" Content="34" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo33" Content="33" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo32" Content="32" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo31" Content="31" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo30" Content="30" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo29" Content="29" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo28" Content="28" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo27" Content="27" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo26" Content="26" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo25" Content="25" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo24" Content="24" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo23" Content="23" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo22" Content="22" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo21" Content="21" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo20" Content="20" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo19" Content="19" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo18" Content="18" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo17" Content="17" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo16" Content="16" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo15" Content="15" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo14" Content="14" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo13" Content="13" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo12" Content="12" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo11" Content="11" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo10" Content="10" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo09" Content="09" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo08" Content="08" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo07" Content="07" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo06" Content="06" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo05" Content="05" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo04" Content="04" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo03" Content="03" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo02" Content="02" Style="{StaticResource styleLabelLineNo}"/>
+                            <Label Name="lblPunchLineNo01" Content="01" Style="{StaticResource styleLabelLineNo}"/>
+                        </UniformGrid>
+                        
+                        <UniformGrid Grid.Row="2" Grid.Column="1" Rows="3" Columns="45">
+                            <Label Name="lblPunchTopLine145" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine144" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine143" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine142" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine141" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine140" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine139" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine138" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine137" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine136" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine135" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine134" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine133" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine132" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine131" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine130" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine129" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine128" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine127" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine126" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine125" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine124" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine123" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine122" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine121" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine120" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine119" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine118" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine117" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine116" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine115" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine114" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine113" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine112" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine111" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine110" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine109" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine108" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine107" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine106" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine105" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine104" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine103" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine102" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine101" Style="{StaticResource styleLabelNormalNo}"/>
+
+                            <Label Name="lblPunchBottomLine145" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine144" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine143" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine142" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine141" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine140" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine139" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine138" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine137" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine136" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine135" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine134" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine133" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine132" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine131" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine130" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine129" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine128" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine127" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine126" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine125" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine124" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine123" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine122" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine121" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine120" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine119" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine118" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine117" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine116" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine115" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine114" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine113" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine112" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine111" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine110" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine109" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine108" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine107" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine106" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine105" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine104" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine103" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine102" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine101" Style="{StaticResource styleLabelNormalNo}"/>
+
+                            <Label Name="lblPunchMonoLine145" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine144" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine143" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine142" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine141" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine140" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine139" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine138" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine137" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine136" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine135" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine134" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine133" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine132" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine131" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine130" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine129" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine128" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine127" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine126" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine125" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine124" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine123" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine122" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine121" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine120" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine119" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine118" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine117" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine116" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine115" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine114" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine113" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine112" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine111" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine110" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine109" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine108" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine107" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine106" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine105" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine104" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine103" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine102" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine101" Style="{StaticResource styleLabelNormalNo}"/>
+                        </UniformGrid>
+
+                        <UniformGrid Grid.Row="4" Grid.Column="1" Rows="3" Columns="45">
+                            <Label Name="lblPunchTopLine245" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine244" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine243" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine242" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine241" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine240" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine239" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine238" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine237" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine236" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine235" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine234" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine233" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine232" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine231" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine230" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine229" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine228" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine227" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine226" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine225" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine224" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine223" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine222" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine221" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine220" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine219" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine218" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine217" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine216" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine215" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine214" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine213" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine212" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine211" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine210" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine209" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine208" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine207" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine206" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine205" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine204" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine203" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine202" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchTopLine201" Style="{StaticResource styleLabelNormalNo}"/>
+
+                            <Label Name="lblPunchBottomLine245" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine244" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine243" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine242" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine241" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine240" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine239" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine238" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine237" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine236" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine235" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine234" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine233" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine232" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine231" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine230" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine229" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine228" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine227" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine226" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine225" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine224" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine223" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine222" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine221" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine220" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine219" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine218" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine217" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine216" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine215" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine214" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine213" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine212" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine211" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine210" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine209" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine208" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine207" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine206" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine205" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine204" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine203" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine202" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchBottomLine201" Style="{StaticResource styleLabelNormalNo}"/>
+
+                            <Label Name="lblPunchMonoLine245" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine244" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine243" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine242" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine241" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine240" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine239" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine238" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine237" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine236" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine235" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine234" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine233" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine232" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine231" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine230" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine229" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine228" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine227" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine226" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine225" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine224" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine223" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine222" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine221" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine220" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine219" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine218" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine217" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine216" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine215" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine214" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine213" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine212" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine211" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine210" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine209" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine208" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine207" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine206" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine205" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine204" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine203" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine202" Style="{StaticResource styleLabelNormalNo}"/>
+                            <Label Name="lblPunchMonoLine201" Style="{StaticResource styleLabelNormalNo}"/>
+                        </UniformGrid>
+                    </Grid>-->
+                </Grid>
+            </Border>
+        </Grid>
+
+        
+
+    </Grid>
+</Page>

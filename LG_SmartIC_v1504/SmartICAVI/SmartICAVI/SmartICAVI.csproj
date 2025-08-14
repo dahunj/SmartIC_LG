@@ -75,6 +75,7 @@
     <Compile Include="InspectSmartIC.cs" />
     <Compile Include="InspectVirtual.cs" />
     <Compile Include="ISequence.cs" />
+    <Compile Include="Log_SeqTrace.cs" />
     <Compile Include="SeqAuto.cs" />
     <Compile Include="SeqInit.cs" />
     <Compile Include="SeqManual.cs" />

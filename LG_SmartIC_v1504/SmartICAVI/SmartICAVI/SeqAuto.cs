@@ -374,6 +374,7 @@ namespace SmartICAVI
                         }
 
                         SetTimeout(20000);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case 20:
@@ -407,6 +408,7 @@ namespace SmartICAVI
 
                         if (isRecipeDone)
                         {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                             dataService.CurrentStatus = "검사PC 모델 데이터 로딩... 완료";
                         }
@@ -463,6 +465,7 @@ namespace SmartICAVI
                         if (false == dataService.IsUncoilerReady)
                         {
                             SetSequence((int)EnumSmartIC.Sequences.uncoilerBuffer, 1);
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -472,6 +475,7 @@ namespace SmartICAVI
                         if (false == dataService.IsRecoilerReady)
                         {
                             SetSequence((int)EnumSmartIC.Sequences.recoilerBuffer, 1);
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -479,39 +483,57 @@ namespace SmartICAVI
                     case 130:
                         // Uncoiler Ready Check
                         if (dataService.IsUncoilerReady)
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case 140:
                         if (true == dataService.IsRecoilerReady)
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case 150:
                         if (false == seqService.IsBufferInitDone)
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step = 200;
+                        }
                         break;
 
                     case 160:
                         // 버퍼 초기화
                         SetSequence((int)EnumSmartIC.Sequences.bufferInit, 1);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
                     case 170:
                         if (seqService.IsBufferInitDone)
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case 180:
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step = 200;
                         break;
 
                     case 200:
                         // 버퍼 위치 이동
                         SetSequence((int)EnumSmartIC.Sequences.bufferReference, 1);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -519,6 +541,7 @@ namespace SmartICAVI
                         if (true == IsFlag((int)EnumSmartIC.SeqFlags.bufferReady))
                         {
                             isLimitCheck = true;
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -526,28 +549,45 @@ namespace SmartICAVI
                     case 220:
                         motionService.AMove(axisTop, posTop, velTop, accelTop);
                         motionService.AMove(axisBottom, posBottom, velBottom, accelBottom);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
                     case 230:
                         if (motionService.IsMotionDone(axisTop))
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case 240:
                         if (motionService.IsMotionDone(axisBottom))
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case 250:
-                        step += 10;
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
+                            step += 10;
+                        }
+                        
                         break;
 
                     case 260:
                         if (false == isReInspect)
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step = stepInit;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case 270:
@@ -556,7 +596,7 @@ namespace SmartICAVI
                         {
                             reviewService.Start();
                             isReInspect = false;
-
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step = stepScan;     // Scan
                         }
                         break;
@@ -568,13 +608,17 @@ namespace SmartICAVI
                     case stepInit:
                         // Show Init Window
                         jobWindowService.ShowInitJobWindow();
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepInit + 10:
                         if (true == jobWindowService.IsInitJobWindowDone)
                         {
                             if (true == jobWindowService.InitJobResult)
+                            {
+                                Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                                 step += 10;
+                            }
                             else
                                 sysService.State = SystemService.States.stop;
                         }
@@ -600,7 +644,7 @@ namespace SmartICAVI
                         mesService.Send(MesService.commands.send_jobstart);
 
                         //SetTimeout(3000);    // 일단 0.5 초 이내에 응답을 확인 하고, 응답시간이 지났을 경우 레디 위치 이동 후 다시 확인한다.
-                        
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     
@@ -616,7 +660,7 @@ namespace SmartICAVI
                         motionService.RMove(axisPunchFeed, pos, velVision, accelVision);
 
                         //CreateServerDir();
-
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -628,6 +672,7 @@ namespace SmartICAVI
                             if (true == motionService.IsMotionDone(axisPunchFeed))
                             {
                                 SetTimeout(100);
+                                Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                                 step += 10;
                             }
                         }
@@ -648,6 +693,7 @@ namespace SmartICAVI
                             cntService.SetPosition(3, 0.0);
 
                             SetTimeout(100);
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -657,6 +703,7 @@ namespace SmartICAVI
                         {
                             ResetFlag((int)EnumSmartIC.SeqFlags.bufferReady);
                             SetSequence((int)EnumSmartIC.Sequences.bufferReference, 1, 0.01);
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -666,6 +713,7 @@ namespace SmartICAVI
                             //Log_Trace.WriteLine("Current Pos (Buffer) : {0:0.000}", motionService.GetCurrentPosition((int)EnumSmartIC.Axis.buffer));
 
                             isLimitCheck = true;
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -685,6 +733,7 @@ namespace SmartICAVI
                         SetTimeout(1000);
                         //Log_Trace.WriteLine("Current Pos (Vision) : {0:0.000}", motionService.GetCurrentPosition(axisVision));
                         //Log_Trace.WriteLine("Current Pos (Punch) : {0:0.000}", motionService.GetCurrentPosition(axisPunch));
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -694,6 +743,7 @@ namespace SmartICAVI
                             if ("Y" == mesService.Mes.JobPermission)
                             {
                                 dataService.CurrentStatus = "MES 확인...완료";
+                                Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                                 step += 10;
                             }
                             else
@@ -720,12 +770,14 @@ namespace SmartICAVI
                     case stepInit + 100:
                         // Move Back ( Vision Offset + Feeding Offset )
                         motionService.RMove(axisVisionFeed, -(dataService.DataSystem.ScanTolerance + scanDummyTop * 2.0), velVision, accelVision);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepInit + 110:
                         if (true == motionService.IsMotionDone(axisVisionFeed))
                         {
                             SetTimeout(300);
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -733,6 +785,7 @@ namespace SmartICAVI
                         if (true == IsTimeout())
                         {
                             SetTimeout(100);
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step = stepTrigger;
                         }
                         break;
@@ -780,7 +833,7 @@ namespace SmartICAVI
                             if (true == dataService.DataSystem.IsSelectedMono)
                                 cntService.SetTriggerParams(1, triggerStart, 1000000.0, dataService.DataSystem.TriggerMono_Period, dataService.DataSystem.TriggerMono_Width, dataService.DataSystem.TriggerMono_Level);
 
-
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -801,6 +854,7 @@ namespace SmartICAVI
                         if (true == dataService.DataSystem.IsSelectedMono)
                             cntService.SetTriggerEnable(1);
 
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
 
                         break;
@@ -823,6 +877,7 @@ namespace SmartICAVI
                         }
 
                         SetTimeout(10000);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepTrigger + 30:
@@ -832,6 +887,7 @@ namespace SmartICAVI
                             {
                                 if (true == top2Service.IsReply((int)EnumSmartIC.VisionReplys.scan))
                                 {
+                                    Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                                     step += 10;
                                 }
                                 else
@@ -854,6 +910,7 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -863,7 +920,10 @@ namespace SmartICAVI
                             if (true == bottomService.IsReply((int)EnumSmartIC.VisionReplys.scan))
                             {
                                 if (true == bottom2Service.IsReply((int)EnumSmartIC.VisionReplys.scan))
+                                {
+                                    Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                                     step += 10;
+                                }
                                 else
                                 {
                                     if (true == IsTimeout())
@@ -884,6 +944,7 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -894,6 +955,7 @@ namespace SmartICAVI
                             {
                                 if (true == mono2Service.IsReply((int)EnumSmartIC.VisionReplys.scan))
                                 {
+                                    Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                                     step += 10;
                                 }
                                 else
@@ -916,16 +978,21 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
                     case stepTrigger + 60:
                         SetTimeout(100);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepTrigger + 70:
                         if (true == IsTimeout())
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step = stepScan;
+                        }
                         break;
                     #endregion
 
@@ -938,12 +1005,14 @@ namespace SmartICAVI
 
                         dioService.SetOutport(31);
                         dataService.CurrentStatus = "검사 시작...";
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepScan + 10:
                         //posBuffer = motionService.GetCurrentPosition(axisBuffer);
                         SetVisionAutoFeeding();
                         SetPunchAutoFeeding();
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepScan + 20:
@@ -953,6 +1022,7 @@ namespace SmartICAVI
                         if (true == dataService.IsJobDone)
                         {
                             dataService.DataResult.TimeEnd = DateTime.Now;
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step = stepEnd;
                         }
                         break;
@@ -992,7 +1062,7 @@ namespace SmartICAVI
                         motionService.AMove(axisBottom, 0.0, 10.0, 400.0);
 
 
-
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -1003,6 +1073,7 @@ namespace SmartICAVI
                             {
                                 // 2019.07.03 khs - LotEnd 직전에 사번 입력 받도록 입력창 추가 
                                 msgService.ShowInput(0, false);
+                                Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                                 step += 5;
                             }
                         }
@@ -1012,12 +1083,14 @@ namespace SmartICAVI
                         {
                             CopyToServer();
                             jobWindowService.ShowReportWindow();
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 5;
                         }                     
                         break;
                     case stepEnd + 20:
                         if (true == jobWindowService.IsReportWindowClosed)
                         {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -1043,6 +1116,7 @@ namespace SmartICAVI
                         mesService.Send(MesService.commands.send_jobend);
 
                         dataService.DataResult.IsCompleted = true;
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepEnd + 40:
@@ -1057,7 +1131,7 @@ namespace SmartICAVI
                                 Log_Exception.WriteLine("SeqAuto(CopyMapData Local to Server) : " + exc.Message);
                             }
                         }
-
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepEnd + 50:
@@ -1066,24 +1140,31 @@ namespace SmartICAVI
                             // Show Wait Copy Done
                             msgService.ShowMessage((int)EnumSmartIC.LightAlarms.waitCopyToServer);
                             dataService.CurrentStatus = "Defect 데이터 전송중...";
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step = stepEnd + 100;
+                        }
                         break;
                     case stepEnd + 60:
                         if (false == IsCopyToServer)
                         {
+                            Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
                     case stepEnd + 70:
                         msgService.HideMessage((int)EnumSmartIC.LightAlarms.waitCopyToServer);
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step = stepEnd + 100;
                         break;
 
                     case stepEnd + 100:
                         sysService.State = SystemService.States.stop;
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         step = 20000;
                         break;
 
@@ -1109,6 +1190,7 @@ namespace SmartICAVI
                         // Recoiler 정지
                         SetSequence((int)EnumSmartIC.Sequences.recoilerBuffer, 0);
 
+                        Log_SeqTrace.WriteLine("RunProcess, Step: " + step.ToString());
                         dataService.CurrentStatus = "검사 완료";
 
 
@@ -1220,6 +1302,7 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case 10:
@@ -1234,7 +1317,10 @@ namespace SmartICAVI
 
                     case 100:
                         if (false == dataService.IsBackFeeding)        // BackFeeding 이 아닐 경우에만 진행
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 110:
                         // Vision Feeding
@@ -1246,13 +1332,14 @@ namespace SmartICAVI
                         motionService.AMove(axisFeed, VisionPosMove, vel, accel);
 
                         dataService.IsVisionPaused = false;
-
+                        Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case 120:
                         if (SystemService.States.pause == sysService.State)
                         {
                             dataService.IsVisionPaused = true;
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                             step = 200;
                         }
                         else    // Check Limit N
@@ -1264,10 +1351,12 @@ namespace SmartICAVI
                                 Log_Trace.WriteLine("posBuffer ={0} < LimitN = {1}", posBuffer, limitN);
 
                                 motionService.Stop(axisFeed);
+                                Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                                 step += 5;
                             }
                             else if (true == dataService.IsBackFeeding)
                             {
+                                Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                                 step = 100;
                             }
                             else
@@ -1280,6 +1369,7 @@ namespace SmartICAVI
                                     posCheck += posStroke;
                                     motionService.SetOverridePos(axisFeed, VisionPosMove);
                                 }
+                                Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                             }
                         }
                         break;
@@ -1289,12 +1379,16 @@ namespace SmartICAVI
                             start = DateTime.Now;
                             duration = new TimeSpan(0, 0, 0, 0, 100);
                             timeout = start.Add(duration);
-                            step += 1;
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
+                            step += 1;                            
                         }
                         break;
                     case 126:
                         if (timeout < DateTime.Now)
-                            step += 1;
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
+                            step += 1;                            
+                        }
                         break;
                     case 127:
                         if (0 == SetBackFeeding())
@@ -1323,8 +1417,9 @@ namespace SmartICAVI
                                 Log_Trace.WriteLine("BackPos Bot = {0:0.000}", currentPos - nextPosBot - top_bot);
                                 Log_Trace.WriteLine("BackPos Mon = {0:0.000}", currentPos - nextPosMon - top_mon);
                             }
-
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                             step = 130;
+                            
                         }
                         break;
                     case 130:
@@ -1357,7 +1452,9 @@ namespace SmartICAVI
                                 Log_Trace.WriteLine("BackPos Bot = {0:0.000}", currentPos - nextPosBot - top_bot);
                                 Log_Trace.WriteLine("BackPos Mon = {0:0.000}", currentPos - nextPosMon - top_mon);
                             }
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                             step = 100;
+                            
                         }
                         break;
 
@@ -1365,20 +1462,24 @@ namespace SmartICAVI
                     case 200:
                         dataService.IsVisionPaused = true;
                         motionService.Stop(axisFeed);
-                        step += 10;
+                        Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
+                        step += 10;                       
                         break;
                     case 210:
-                        if( true == motionService.IsMotionDone(axisFeed) )
+                        if (true == motionService.IsMotionDone(axisFeed))
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                             step += 10;
+                            
+                        }
                         break;
                     case 220:
                         if (SystemService.States.pause != sysService.State)
                         {
                             dataService.DataResult.SectionMinUnits = dataService.DataRecipe.SectionMinUnits;
-
-                            
-
+                            Log_SeqTrace.WriteLine("VisionProcess, Step: " + step.ToString());
                             step = 100;
+                            
                         }
                         break;
 
@@ -1578,8 +1679,9 @@ namespace SmartICAVI
                             PunchPosMove = 0.0;          // 첫번째 유닛의 위치 (SeqAuto 에서 초기위치를 -punchDistance 로 설정함)
                             PunchPosData = PunchPosMove - posStroke;      // 데이터 확인 위치는 펀치 위치보다 1 Stroke 이전에서 확인한다. 
                         }
-
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
+                        
                         break;
                     case 20:
                         if (false == dataService.IsVisionPaused)
@@ -1590,7 +1692,8 @@ namespace SmartICAVI
                                 motionService.AMove(axisFeed, PunchPosMove, vel, accel);
                                 //Log_Debug.WriteLine("punch steo 20 PunchPosData {0:0.000}", PunchPosData);
                             }
-                            step = stepCheckPos;
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                            step = stepCheckPos;                            
                         }
                         break;
                     #endregion
@@ -1612,7 +1715,8 @@ namespace SmartICAVI
                             // 데이터 존재유무 확인
                             if (true == CheckDataLength(PunchDataEndIdx))
                             {
-                                step = stepAddData;
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                                step = stepAddData;                                
                             }
                             else
                             {
@@ -1630,8 +1734,8 @@ namespace SmartICAVI
                                 {
                                     PunchDataEndIdx = dataService.IndexEndTop + 1;
                                     isJobEnd = true;
-
-                                    step += 10;
+                                    Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                                    step += 10;                                    
                                 }
                             }
                         }
@@ -1640,7 +1744,8 @@ namespace SmartICAVI
                         // 데이터 존재유무 확인
                         if (true == CheckDataLength(PunchDataEndIdx))
                         {
-                            step = stepAddData;
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                            step = stepAddData;                            
                         }
                         break;
                     #endregion 
@@ -1691,8 +1796,9 @@ namespace SmartICAVI
                             if (false == CheckSectionYield(i))
                                 isFindSectionYield = true;
                         }
-
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
+                        
 
                         // 구간 수율 Check // NG 데이터가 있을 경우 Punching 중에 처리한다.
                         // 펀칭 데이터가 없을 경우
@@ -1700,23 +1806,31 @@ namespace SmartICAVI
                         {
                             if (true == isFindSectionYield)
                             {
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepSectionYield;
                             }
                         }
                         break;
                     case stepAddData + 10:
                         motionService.SetOverridePos(axisFeed, PunchPosMove);
-                        step += 10;
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                        step += 10;                        
                         break;
                     case stepAddData + 20:
                         if (true == isFindPunchData)
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                            
                         }
                         else
                         {
                             if (true == isJobEnd)
+                            {
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepJobEnd;
+                                
+                            }
                             else
                             {
 
@@ -1728,8 +1842,9 @@ namespace SmartICAVI
                                     dataService.DataResult.IndexCurPunch = 0;
 
                                 PunchPosData = PunchPosMove - posStroke;
-
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepCheckPos;
+                                
                             }
                         }
                         break;
@@ -1743,13 +1858,18 @@ namespace SmartICAVI
 
                                 // yjs 20161215 첫번째 유닛 펀칭시 위치오차 문제로 500mSec Delay 기능 추가
                                 SetTimeout(dataService.DataSystem.DelayFeeding);
-                                step += 5;
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                                step += 5;                                
                             }
                         }
                         break;
                     case stepAddData + 35:
                         if (IsTimeout())
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 5;
+                            
+                        }
                         break;
                     case stepAddData + 40:                      // 이 스텝에서 마지막 구간인지 판단할 수 있다???
                         PunchDataStartUnit = punchUnit;
@@ -1763,7 +1883,9 @@ namespace SmartICAVI
                                 isJobEnd = true;
                             }
                         }
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
+                        
                         break;
                     case stepAddData + 50:
                         // 처음 펀치 위치는 위에서 입력되어 있음.
@@ -1775,18 +1897,24 @@ namespace SmartICAVI
                             {
                                 dataService.DataResult.AddTotal(i);
                             }
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                            
                         }
                         break;
                     case stepAddData + 60:
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step = stepPunch;
+                        
                         break;
                     #endregion
 
                     //500:
                     #region SectionYield
                     case stepSectionYield:
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
+                        
                         break;
 
                     case stepSectionYield + 10:
@@ -1797,8 +1925,9 @@ namespace SmartICAVI
                             isMotionMove = false;
 
                             sectionYieldStart = PunchDataStartUnit;
-
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                           
                         }
                         break;
 
@@ -1814,30 +1943,46 @@ namespace SmartICAVI
                                 break;
                             }
                         }
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
+                        
                         break;
 
                     case stepSectionYield + 30:
                         if (1 == SectionYieldProcess(indexSectionYield, PunchDataStartUnit))
-                            step = stepRestart;
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                            step = stepRestart;                           
+                        }
                         else
-                            step += 10;
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                            step += 10;                            
+                        }
                         break;
 
                     case stepSectionYield + 40:
                         if (false == isFindSectionYield)
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepSectionYield + 100;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepSectionYield + 20;
+                        }
                         break;
 
                     case stepSectionYield + 100:
                         if (false == isJobEnd)
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepJobEnd;
                         }
                         break;
@@ -1864,8 +2009,8 @@ namespace SmartICAVI
                             motionService.AMove(axisX, posX, velX, accelX);
                             motionService.AMove(axisY, posY, velY, accelY);
 
-
-                            step = stepCheckPos;
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
+                            step = stepCheckPos;                            
 
                             isAligned = false;
                         }
@@ -1876,6 +2021,7 @@ namespace SmartICAVI
                     // 1000
                     #region stepPUNCH
                     case stepPunch:
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -1896,8 +2042,9 @@ namespace SmartICAVI
                                 dataService.DataSystem.FirstIndexPause = true;
                                 break;
                             }
-
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                            
                         }
                         break;
 
@@ -2512,7 +2659,7 @@ namespace SmartICAVI
                             }
                         }                        
                         #endregion
-
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
 
                         break;
@@ -2522,15 +2669,24 @@ namespace SmartICAVI
                         if (false == punchEnable && isFindSectionYield)
                         {
                             if (1 == SectionYieldProcess(sectionYieldUnit, PunchDataStartUnit))
+                            {
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepRestart;
+
+                            }
                             else
                             {
                                 punchStartIdx = sectionYieldUnit + 1;
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepPunch + 20;
+
                             }
                         }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case stepPunch + 40:
@@ -2556,6 +2712,7 @@ namespace SmartICAVI
                                 countGrab = 0;
                             }
                         }
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 5;
                         break;
 
@@ -2569,6 +2726,7 @@ namespace SmartICAVI
                                     if (IsInPos(axisX, posX, dataService.DataSystem.MotionTolerance))
                                     {
                                         SetTimeout(10);
+                                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                         step += 5;
                                     }
                                 }
@@ -2576,6 +2734,7 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 5;
                         }
                         break;
@@ -2610,15 +2769,22 @@ namespace SmartICAVI
 
                                                     // 검사 오류
                                                     if (0 != inspectResult)
+                                                    {
+                                                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                                         step += 5;
+                                                    }
                                                     else
                                                     {
+                                                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                                         step += 10;
 
                                                         if (true == dataService.DataSystem.IsSelectedAlignTolerance)
                                                         {
                                                             if (dataService.DataSystem.AlignTolerance < Math.Abs(offsetX))
+                                                            {
+                                                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                                                 step = stepPunch + 59;
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -2642,12 +2808,14 @@ namespace SmartICAVI
                                         }
                                         else    // yjs 2017.11.25 bugfix
                                         {
+                                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                             step += 10;
                                         }
 
                                     }
                                     else
                                     {
+                                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                         step += 10;
                                     }
                                 }
@@ -2655,18 +2823,21 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
 
                     case stepPunch + 55:
                         winJobService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.alignError);
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 1;
                         break;
                         
                     case stepPunch + 56:
                         if (winJobService.IsMessageWindowClosed)
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepPunch + 60;
                         }
                         break;
@@ -2674,9 +2845,15 @@ namespace SmartICAVI
                     case stepPunch + 59:
                         ret = CheckAlignProcess();
                         if (1 == ret)
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepRestart;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepPunch + 60;
+                        }
                         break;
 
                     // 설정된 인덱스에 펀칭
@@ -2685,10 +2862,12 @@ namespace SmartICAVI
                         if (isSetIndex)
                         {
                             ret = SetIndexProcess(dataService.DataSystem.PunchUnitIndex);
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepPunch + 200;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -2707,9 +2886,15 @@ namespace SmartICAVI
                         }
 
                         if (1 == ret)
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepRestart;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     // CNG 확인 후 진행
@@ -2793,9 +2978,15 @@ namespace SmartICAVI
                         }
 
                         if (1 == ret)
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepRestart;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     // Joint 확인 후 진행
@@ -2806,6 +2997,7 @@ namespace SmartICAVI
                             if (dataService.DataSystem.IsSelectedJointStop)
                                 ret = JointProcess(punchUnit, isJointBottom);
                         }
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -2864,9 +3056,15 @@ namespace SmartICAVI
                             }
                         }
                         if (1 == ret)
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepRestart;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     // Dual Error (Top & Bottom) 확인
@@ -2878,9 +3076,15 @@ namespace SmartICAVI
                                 ret = DualErrorProcess(punchUnit);
                         }
                         if (1 == ret)
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepRestart;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     // Check Defect
@@ -2888,12 +3092,19 @@ namespace SmartICAVI
                         if (isCheckDefect)
                         {
                             if (1 == CheckDefectProcess(punchUnit, indexCheckDefect))
+                            {
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepRestart;
+                            }
                             else
+                            {
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepPunch + 200;
+                            }
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepPunch + 200;
                         }
                         break;
@@ -2909,6 +3120,7 @@ namespace SmartICAVI
                             if (false == isCNGPuchSkip)
                                 SetPunch(offsetX, offsetY, punchUnit, ipHole, isTHolePunch, isPunchAll);
                         }
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -2920,6 +3132,7 @@ namespace SmartICAVI
                         }
 
                         seqService.FireEventPunch(punchUnit, (int)EnumSmartIC.PunchStates.punchDone);
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -2932,18 +3145,26 @@ namespace SmartICAVI
                         }
 
                         if (1 == ret)
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepRestart;
+                        }
                         else
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case stepPunch + 230:
                         if (punchEnable || isHole)
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepPunch + 20;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
@@ -2951,10 +3172,12 @@ namespace SmartICAVI
                     case stepPunch + 240:
                         if (false == isJobEnd)
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepJobEnd;
                         }
                         break;
@@ -2981,7 +3204,7 @@ namespace SmartICAVI
                             motionService.AMove(axisX, posX, velX, accelX);
                             motionService.AMove(axisY, posY, velY, accelY);
 
-
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepCheckPos;                                        // 체크 포지션으로 재 이동.....
 
                             isAligned = false;
@@ -2995,12 +3218,16 @@ namespace SmartICAVI
                     case stepCheckData:     // CheckData
                         motionService.Stop(axisFeed);
                         isMotionMove = false;
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepCheckData + 10:
                         // Wait Move Done
                         if (true == motionService.IsMotionDone(axisFeed))
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
                     case stepCheckData + 20:
                         if (false == dataService.IsVisionPaused)
@@ -3010,7 +3237,7 @@ namespace SmartICAVI
                             {
                                 motionService.AMove(axisFeed, PunchPosMove, vel, accel);
                                 isMotionMove = true;
-
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepAddData;
                             }
                         }
@@ -3021,6 +3248,7 @@ namespace SmartICAVI
                     #region stepJOBEND
                     case stepJobEnd:
                         // Job End
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepJobEnd + 10:
@@ -3034,12 +3262,16 @@ namespace SmartICAVI
                             else
                                 motionService.SetOverridePos(axisFeed, PunchPosMove);
 
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
                         }
                         break;
                     case stepJobEnd + 20:
                         if (true == motionService.IsMotionDone(axisFeed))
+                        {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
+                        }
                         break;
                     case stepJobEnd + 30:
                         // IP Hole 검사위치 세팅 
@@ -3056,6 +3288,7 @@ namespace SmartICAVI
 
                         motionService.AMove(axisX, posX, velX, accelX);
                         motionService.AMove(axisY, posY, velY, accelY);
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepJobEnd + 40:
@@ -3064,6 +3297,7 @@ namespace SmartICAVI
                         {
                             if (true == motionService.IsMotionDone(axisY))
                             {
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step += 10;
                             }
                         }
@@ -3074,6 +3308,7 @@ namespace SmartICAVI
                         if (null != hImage)
                             hImage.Dispose();
                         GC.Collect();
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepJobEnd + 60:
@@ -3084,6 +3319,7 @@ namespace SmartICAVI
                     #region stepRESTART    
                     case stepRestart:
                         dataService.IsBackFeeding = true;
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
 
@@ -3094,6 +3330,7 @@ namespace SmartICAVI
                             isCNGEnd = false;
                             isCNGSection = false;
                             isPunchAll = false;
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepCheckPos;
                         }
                         break;
@@ -3104,12 +3341,14 @@ namespace SmartICAVI
                     case stepPause: // Pause
                         // Pause
                         motionService.Stop(axisFeed);
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         step += 10;
                         break;
                     case stepPause + 10:
                         // Wait Move Done
                         if (true == motionService.IsMotionDone(axisFeed))
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step += 10;
 
                             //dataService.DataSystem.punchPause = true;
@@ -3132,15 +3371,18 @@ namespace SmartICAVI
                                 if (true == isMotionMove)
                                 {
                                     //motionService.AMove(axisFeed, PunchPosMove, vel, accel);
+                                    Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                     step += 10;
                                 }
                                 else
                                 {
+                                    Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                     step = stepResume;
                                 }
                             }
                             else
                             {
+                                Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                 step = stepResume;
                             }
                         }
@@ -3148,6 +3390,7 @@ namespace SmartICAVI
                     case stepPause + 30:
                         if (SystemService.States.pause == sysService.State)
                         {
+                            Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                             step = stepPause;
                         }
                         else
@@ -3159,6 +3402,7 @@ namespace SmartICAVI
                                 if (false == dataService.IsVisionPaused)
                                 {
                                     motionService.AMove(axisFeed, PunchPosMove, vel, accel);
+                                    Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                                     step = stepResume;
                                 }
                             }
@@ -3177,6 +3421,7 @@ namespace SmartICAVI
                 {
                     if (step < stepPause)
                     {
+                        Log_SeqTrace.WriteLine("PunchProcess, Step: " + step.ToString());
                         stepResume = step;
                         step = stepPause;
                         motionService.Stop(axisFeed);
@@ -3434,27 +3679,34 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("HoleProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 10:
                         // Show Hole Message
                         jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.thole);
+                        Log_SeqTrace.WriteLine("HoleProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 20:
                         // Check Message Close
                         if (true == jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("HoleProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
                         ret = jobWindowService.ResultMessageWindow;
 
                         if (-1 == ret)
                             sysService.State = SystemService.States.stop;
-                        
+
+                        Log_SeqTrace.WriteLine("HoleProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("HoleProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3489,6 +3741,7 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("CNGProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -3498,22 +3751,29 @@ namespace SmartICAVI
                             jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.cngStart);
                         else
                             jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.cngEnd);
+
+                        Log_SeqTrace.WriteLine("CNGProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 20:
                         // Check Message Close
-                        if( jobWindowService.IsMessageWindowClosed )
+                        if (jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("CNGProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
                         ret = jobWindowService.ResultMessageWindow;
 
                         if (-1 == ret)
                             sysService.State = SystemService.States.stop;
-                        
+
+                        Log_SeqTrace.WriteLine("CNGProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("CNGProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3553,23 +3813,32 @@ namespace SmartICAVI
 
                     case 10:
                         // Show CNG Message
-                        jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.alignTolerance);
-                        step += 10;
+                        {
+                            jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.alignTolerance);
+                            step += 10;
+                            Log_SeqTrace.WriteLine("CheckAlignProcess, Step" + step.ToString());
+                        }
+                       
                         break;
                     case 20:
                         // Check Message Close
-                        if(jobWindowService.IsMessageWindowClosed )
+                        if (jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("CheckAlignProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
                         ret = jobWindowService.ResultMessageWindow;
 
                         if (-1 == ret)
                             sysService.State = SystemService.States.stop;
-                        
+
+                        Log_SeqTrace.WriteLine("CheckAlignProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("CheckAlignProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3613,12 +3882,17 @@ namespace SmartICAVI
                             jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.missPrintStart);
                         else
                             jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.missPrintEnd);
-                        step += 10;
+
+                        Log_SeqTrace.WriteLine("MissPrintProcess, Step" + step.ToString());
+                            step += 10;
                         break;
                     case 20:
                         // Check Message Close
                         if (true == jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("MissPrintProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
                         ret = jobWindowService.ResultMessageWindow;
@@ -3626,9 +3900,11 @@ namespace SmartICAVI
                         if (-1 == ret)
                             sysService.State = SystemService.States.stop;
 
+                        Log_SeqTrace.WriteLine("MissPrintProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("MissPrintProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3664,6 +3940,7 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("JointProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -3673,12 +3950,17 @@ namespace SmartICAVI
                             jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.joint);
                         else
                             jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.jointBottom);
+
+                        Log_SeqTrace.WriteLine("JointProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 20:
                         // Check Message Close
                         if (true == jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("JointProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
                         ret = jobWindowService.ResultMessageWindow;
@@ -3686,9 +3968,11 @@ namespace SmartICAVI
                         if (-1 == ret)
                             sysService.State = SystemService.States.stop;
 
+                        Log_SeqTrace.WriteLine("JointProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("JointProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3730,12 +4014,16 @@ namespace SmartICAVI
                     case 10:
                         // Show Joint Message
                         jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.dualError);
+                        Log_SeqTrace.WriteLine("DualErrorProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 20:
                         // Check Message Close
                         if (true == jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("DualErrorProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
                         ret = jobWindowService.ResultMessageWindow;
@@ -3743,9 +4031,11 @@ namespace SmartICAVI
                         if (-1 == ret)
                             sysService.State = SystemService.States.stop;
 
+                        Log_SeqTrace.WriteLine("DualErrorProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("DualErrorProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3786,13 +4076,17 @@ namespace SmartICAVI
 
                     case 10:
                         // Show Joint Message
+                        Log_SeqTrace.WriteLine("CheckDefectProcess, Step" + step.ToString());
                         jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.checkDefect, dataService.DataDefectInfo.Names[defectIndex]);
                         step += 10;
                         break;
                     case 20:
                         // Check Message Close
                         if (true == jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("CheckDefectProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
                         ret = jobWindowService.ResultMessageWindow;
@@ -3800,9 +4094,11 @@ namespace SmartICAVI
                         if (-1 == ret)
                             sysService.State = SystemService.States.stop;
 
+                        Log_SeqTrace.WriteLine("CheckDefectProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("CheckDefectProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3878,6 +4174,7 @@ namespace SmartICAVI
 
                         seqService.FireEventPunch(indexSectionYield, (int)EnumSmartIC.PunchStates.sectionYield);
 
+                        Log_SeqTrace.WriteLine("SectionYieldProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 20:
@@ -3885,6 +4182,7 @@ namespace SmartICAVI
                         {
                             if (true == motionService.IsMotionDone(axisY))
                             {
+                                Log_SeqTrace.WriteLine("SectionYieldProcess, Step" + step.ToString());
                                 step += 10;
                             }
                         }
@@ -3892,12 +4190,16 @@ namespace SmartICAVI
 
                     case 30:
                         jobWindowService.ShowMessageWindow((int)EnumSmartIC.LightAlarms.ngSection);
+                        Log_SeqTrace.WriteLine("SectionYieldProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 40:
                         // Check Message Close
                         if (true == jobWindowService.IsMessageWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("SectionYieldProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 50:
                         ret = jobWindowService.ResultMessageWindow;
@@ -3908,10 +4210,11 @@ namespace SmartICAVI
                         }
 
                         seqService.FireEventPunch(indexSectionYield, (int)EnumSmartIC.PunchStates.sectionYieldDone);
-
+                        Log_SeqTrace.WriteLine("SectionYieldProcess, Step" + step.ToString());
                         step += 10;
                         break;
                     case 60:
+                        Log_SeqTrace.WriteLine("SectionYieldProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -4013,7 +4316,7 @@ namespace SmartICAVI
                 {
                     case 0:
                         step += 10;
-
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         dataService.CurrentStatus = "재검사 (Back Feeding)";
                         break;
 
@@ -4039,7 +4342,7 @@ namespace SmartICAVI
                         cntService.ResetTriggerEnable(1);
                         cntService.ResetTriggerEnable(2);
                         cntService.ResetTriggerEnable(3);
-
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -4049,6 +4352,7 @@ namespace SmartICAVI
                             if (true == motionService.IsMotionDone(axisPunch))
                             {
                                 //step += 10;
+                                Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                                 step = 21;
                             }
                         }
@@ -4062,10 +4366,12 @@ namespace SmartICAVI
                         if (dataService.DataResult.IndexCurPunch > 0 && dataService.DataSystem.IsSelectedPunch == true)//IndexCurPunch 의 값은 검사 중 발견된 에러의 위치이다.
                         {
                             jobWindowService.ShowRecheckWindow((int)EnumSmartIC.LightAlarms.laserPosMove);
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 22;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 30;
                         }
                         break;
@@ -4073,6 +4379,7 @@ namespace SmartICAVI
                     case 22:
                         if (true == jobWindowService.IsRecheckWindowClosed)
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 23;
                         }
                         break;
@@ -4080,27 +4387,32 @@ namespace SmartICAVI
                     case 23:
                         if (0 == jobWindowService.ResultRecheckWindow)
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 24;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 30;
                         }
                         break;
 
                     case 24: //  레이저 포지션 이동.....
                         seqService.SetSequence((int)EnumSmartIC.Sequences.laserMove, 0, 0.0);
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step = 25;
                         break;
                     case 25:
 
                         jobWindowService.ShowRecheckWindow((int)EnumSmartIC.LightAlarms.laserMoveComp);
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step = 26;
                         break;
 
                     case 26:
                         if (true == jobWindowService.IsRecheckWindowClosed)
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 27;
                         }
                         break;
@@ -4111,6 +4423,7 @@ namespace SmartICAVI
                             dioService.ResetOutport((int)EnumSmartIC.Outports.laserOn);
                             // 백 피딩은 마지막 펀칭 인덱스로
                             index = dataService.DataSystem.LaserIndex;
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 30;
                         }
                         else
@@ -4129,6 +4442,7 @@ namespace SmartICAVI
                     case 30:
                         // 버퍼 위치 이동
                         SetSequence((int)EnumSmartIC.Sequences.bufferReference, 1, 10.0);
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -4145,6 +4459,7 @@ namespace SmartICAVI
                         motionService.AMove(axisX, posX, velX, accelX);
                         motionService.AMove(axisY, posY, velY, accelY);
 
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -4164,6 +4479,7 @@ namespace SmartICAVI
 
                         dataService.DeleteReviewData(index, maxCount);
 
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -4173,6 +4489,7 @@ namespace SmartICAVI
                             //Log_Debug.WriteLine("RESTART STEP 60 AXIS VISION DONE");
                             if (true == motionService.IsMotionDone(axisPunch))
                             {
+                                Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                                 //Log_Debug.WriteLine("RESTART STEP 60 AXIS PUNCH DONE MOVE STEP 70");
                                 step += 10;
                             }
@@ -4181,17 +4498,24 @@ namespace SmartICAVI
 
                     case 70:
                         jobWindowService.ShowRecheckWindow((int)EnumSmartIC.LightAlarms.reStart);
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
                     case 80:
                         if (jobWindowService.IsRecheckWindowClosed)
+                        {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
 
                     case 90:
                         if (0 == jobWindowService.ResultRecheckWindow)
+                        {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step += 10;
+                        }
                         else
                             sysService.State = SystemService.States.stop;
                         break;
@@ -4204,7 +4528,9 @@ namespace SmartICAVI
                             cntService.SetTriggerParams(2, dataService.DataSystem.BottomDistance + posVision - scanDummyBottom, 1000000.0, dataService.DataSystem.TriggerColor_Period, dataService.DataSystem.TriggerColor_Width, dataService.DataSystem.TriggerColor_Level);
                         if (true == dataService.DataSystem.IsSelectedMono)
                             cntService.SetTriggerParams(1, dataService.DataSystem.MonoDistance + posVision - scanDummyMono, 1000000.0, dataService.DataSystem.TriggerMono_Period, dataService.DataSystem.TriggerMono_Width, dataService.DataSystem.TriggerMono_Level);
-                        step += 10;
+
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
+                            step += 10;
                         break;
 
                     case 110:
@@ -4216,6 +4542,7 @@ namespace SmartICAVI
                         if (true == dataService.DataSystem.IsSelectedMono)
                             cntService.SetTriggerEnable(1);
 
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -4226,14 +4553,17 @@ namespace SmartICAVI
                         PunchDataStartUnit = index;
                         PunchDataEndIdx = index + units;
 
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step = 400;
                         break;
 
                     case 400:
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
                     case 410:
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -4256,6 +4586,7 @@ namespace SmartICAVI
                         }
 
                         SetTimeout(10000);
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -4266,6 +4597,7 @@ namespace SmartICAVI
                             {
                                 if (top2Service.IsReply((int)EnumSmartIC.VisionReplys.scan))
                                 {
+                                    Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                                     step += 10;
                                 }
                                 else
@@ -4288,6 +4620,7 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step += 10;
                         }
                         break;
@@ -4299,6 +4632,7 @@ namespace SmartICAVI
                             {
                                 if ( bottom2Service.IsReply((int)EnumSmartIC.VisionReplys.scan))
                                 {
+                                    Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                                     step += 10;
                                 }   
                                 else
@@ -4321,6 +4655,7 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step += 10;
                         }
                         break;
@@ -4332,6 +4667,7 @@ namespace SmartICAVI
                             {
                                 if (mono2Service.IsReply((int)EnumSmartIC.VisionReplys.scan))
                                 {
+                                    Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                                     step += 10;
                                 }
                                 else
@@ -4354,25 +4690,32 @@ namespace SmartICAVI
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step += 10;
                         }
                         break;
 
                     case 460:
                         SetTimeout(100);
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step += 10;
                         break;
 
                     case 470:
                         if (IsTimeout())
+                        {
+                            Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                             step = 500;
+                        }
                         break;
 
                     case 500:
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         step = 20000;
                         break;
 
                     case 20000:
+                        Log_SeqTrace.WriteLine("RestartProcess, Step" + step.ToString());
                         dataService.IsBackFeeding = false;
                         motionService.AMove(axisPunch, PunchPosMove, vel, accel);       // Vision 은 스스로 구동
                         return 0;

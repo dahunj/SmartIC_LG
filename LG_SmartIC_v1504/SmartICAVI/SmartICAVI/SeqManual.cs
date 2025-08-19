@@ -291,7 +291,7 @@ namespace SmartICAVI
         public int SetSequence(int seq, int type, double value = 0)
         {
             EnumSmartIC.Sequences enumType = (EnumSmartIC.Sequences)seq;
-
+            Log_SeqTrace.WriteLine("seq");
             switch (enumType)
             {
                 case EnumSmartIC.Sequences.uncoilerBuffer:
@@ -534,6 +534,8 @@ namespace SmartICAVI
         {
             //threadUncoiler = new Thread(new ThreadStart(this.ThreadUncoiler));
             //threadUncoiler.Start();
+
+            
 
             dataService.IsUncoilerRun = true;
             dataService.IsUncoilerReady = false;
@@ -1197,6 +1199,7 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -1205,10 +1208,12 @@ namespace SmartICAVI
 
                         if (tolerance > Math.Abs(reference - pos))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                             step = 20000;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                             movePos = (reference - pos) * 4.0;
                             motionService.RMove(axisFeed, movePos, 120.0, 120.0);
                             step += 10;
@@ -1216,13 +1221,18 @@ namespace SmartICAVI
                         break;
                     case 20:
                         if (true == motionService.IsMotionDone(axisFeed))
+                        {
+                            Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 30:
+                        Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                         SetTimeout(300);
                         step += 10;
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                         step = 100;
                         break;
 
@@ -1234,11 +1244,15 @@ namespace SmartICAVI
 
                             if (tolerance > Math.Abs(reference - pos))
                             {
+                                Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                                 //System.Diagnostics.Debug.WriteLine(string.Format("{0:0.000}, {1:0.000}", pos, movePos));
                                 step = 20000;
                             }
                             else
+                            {
+                                Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                                 step += 10;
+                            }
                         }
                         break;
                     case 110:       // 이동
@@ -1246,12 +1260,13 @@ namespace SmartICAVI
                         movePos = (reference - pos) * 4.0 * percent;
 
                         motionService.RMove(axisFeed, movePos, 50.0, 100.0);
-
+                        Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                         step += 10;
                         break;
                     case 120:
                         if (true == motionService.IsMotionDone(axisFeed))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                             SetTimeout(300);
                             step += 10;
                         }
@@ -1262,10 +1277,12 @@ namespace SmartICAVI
                         if (0.7 > percent)
                             percent = 0.7;
 
+                        Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                         step = 100;
                         break;
 
                     case 20000:
+                        Log_SeqTrace.WriteLine("SetBufferReference, Step" + step.ToString());
                         ResetFlag(flagRun);
                         SetFlag(flagReady);
                         return 0;
@@ -1320,6 +1337,7 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                         step += 10;
                         SetTimeout(1000);
                         break;
@@ -1328,41 +1346,51 @@ namespace SmartICAVI
                         {
                             if (1 == motionService.GetStateLimitN(axisBuffer))
                             {
+                                Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                                 step = 100;     // Search Init
                             }
                             else
                             {
+                                Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                                 step += 10;     // - Move
                             }
                         }
                         break;
                     case 20:            // Feed Back
                         motionService.JogN(axisPunchFeed, 50.0, 200.0);
+                        Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                         step += 10;
                         break;
                     case 30:            // Limit Check
                         if (1 == motionService.GetStateLimitN(axisBuffer))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             motionService.Stop(axisPunchFeed);
                             step += 10;
                         }
                         break;
                     case 40:            // Wait Move Done
                         if (true == motionService.IsMotionDone(axisPunchFeed))
+                        {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
-                    case 50:            
+                    case 50:
+                        Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                         step = 100;
                         break;
 
 
                     case 100:       // + Move
                         motionService.JogP(axisPunchFeed, 50.0, 200.0);
+                        Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                         step += 10;
                         break;
                     case 110:       // Check Limit N off
                         if (0 == motionService.GetStateLimitN(axisBuffer))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             motionService.Stop(axisPunchFeed);
                             step += 10;
                         }
@@ -1370,6 +1398,7 @@ namespace SmartICAVI
                     case 120:       // Wait Motion Done 
                         if (true == motionService.IsMotionDone(axisPunchFeed))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             SetTimeout(1000);
                             step += 10;
                         }
@@ -1377,6 +1406,7 @@ namespace SmartICAVI
                     case 130:       // Recheck - Lime
                         if (true == IsTimeout())
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             motionService.JogN(axisPunchFeed, 5.0, 5.0);
                             step += 10;
                         }
@@ -1384,6 +1414,7 @@ namespace SmartICAVI
                     case 140:
                         if (1 == motionService.GetStateLimitN(axisBuffer))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             motionService.Stop(axisPunchFeed);
                             step += 10;
                         }
@@ -1391,6 +1422,7 @@ namespace SmartICAVI
                     case 150:
                         if (true == motionService.IsMotionDone(axisPunchFeed))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             SetTimeout(1000);
                             step += 10;
                         }
@@ -1398,6 +1430,7 @@ namespace SmartICAVI
                     case 160:
                         if (true == IsTimeout())
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             motionService.JogP(axisPunchFeed, 5.0, 5.0);
                             step += 10;
                         }
@@ -1405,6 +1438,7 @@ namespace SmartICAVI
                     case 170:
                         if (0 == motionService.GetStateLimitN(axisBuffer))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             motionService.Stop(axisPunchFeed);
                             step += 10;
                         }
@@ -1412,19 +1446,25 @@ namespace SmartICAVI
                     case 180:
                         if (true == motionService.IsMotionDone(axisPunchFeed))
                         {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             SetTimeout(1000);
                             step += 10;
                         }
                         break;
                     case 190:
-                        if( true == IsTimeout() )
+                        if (true == IsTimeout())
+                        {
+                            Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 200:
+                        Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                         motionService.SetPosition(axisBuffer, 0.0);
                         step += 10;
                         break;
                     case 210:
+                        Log_SeqTrace.WriteLine("SetBufferInit, Step" + step.ToString());
                         step = 20000;
                         break;
 
@@ -3532,6 +3572,7 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                         step += 10;
                         break;
                     case 10:
@@ -3546,16 +3587,21 @@ namespace SmartICAVI
 
                     case 100:
                         if (false == dataService.IsBackFeeding)        // BackFeeding 이 아닐 경우에만 진행
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                             step += 10;
+                        }
                         break;
                     case 110:
                         // Vision Feeding
+                        Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                         motionService.JogP(axisFeed, vel, accel);
                         step += 10;
                         break;
                     case 120:
                         if (SystemService.States.pause == sysService.State)
                         {
+                            Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                             step = 200;
                         }
                         else    // Check Limit N
@@ -3567,10 +3613,12 @@ namespace SmartICAVI
                                 Log_Trace.WriteLine("posBuffer ={0} < LimitN = {1}", posBuffer, limitN);
 
                                 motionService.Stop(axisFeed);
+                                Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                                 step += 5;
                             }
                             else if (true == dataService.IsBackFeeding)
                             {
+                                Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                                 step = 100;
                             }
                         }
@@ -3581,23 +3629,33 @@ namespace SmartICAVI
                             start = DateTime.Now;
                             duration = new TimeSpan(0, 0, 0, 0, 100);
                             timeout = start.Add(duration);
+                            Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                             step += 1;
                         }
                         break;
                     case 126:
                         if (timeout < DateTime.Now)
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                             step += 1;
+                        }
                         break;
                     case 127:
                         if (0 == SetBackFeeding())
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                             step = 130;
+                        }
                         break;
                     case 130:
                         // Wait middle Position
                         posBuffer = motionService.GetCurrentPosition(axisBuffer);
 
                         if (posBuffer > limitP)
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                             step = 100;
+                        }
                         break;
 
                         // Pause
@@ -3605,12 +3663,16 @@ namespace SmartICAVI
                         step += 10;
                         break;
                     case 210:
+                        Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                         motionService.Stop(axisFeed);
                         step += 10;
                         break;
                     case 220:
                         if (SystemService.States.pause != sysService.State)
+                        {
+                            Log_SeqTrace.WriteLine("VisionProcess(Manual), Step" + step.ToString());
                             step = 100;
+                        }
                         break;
 
                     default:
@@ -3705,6 +3767,7 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case 10:
@@ -3716,6 +3779,7 @@ namespace SmartICAVI
                                 motionService.SetPosition(axisVision, 0);
                                 motionService.SetPosition(axisPunch, 0);
                                 cntService.SetPosition(0, 0);
+                                Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                                 step += 10;
                             }
                         }
@@ -3729,15 +3793,17 @@ namespace SmartICAVI
                         triggerEnd = scanLength * 1.5 + scanDummy * 2.0;
                         triggerPeriod = dataService.DataSystem.TriggerColor_Period;
                         width = dataService.DataSystem.TriggerColor_Width;
-
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case 30:
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step = 1000;
                         break;
 
 
                     case stepInitScan:
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case stepInitScan + 10:
@@ -3747,6 +3813,7 @@ namespace SmartICAVI
                         motionService.RMove(axisVision, -pos, vel, accel);
                         motionService.RMove(axisPunch, -pos, vel, accel);
 
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case stepInitScan + 20:
@@ -3755,6 +3822,7 @@ namespace SmartICAVI
                             if (true == motionService.IsMotionDone(axisPunch))
                             {
                                 SetTimeout(1000);
+                                Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                                 step += 10;
                             }
                         }
@@ -3766,7 +3834,7 @@ namespace SmartICAVI
 
                             //if (true == dataService.DataSystem.IsSelectedMono)
                             //    cntService.SetTriggerParams(1, triggerStart, triggerEnd, 0.00475, 10.0);
-
+                            Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                             step += 10;
                         }
                         break;
@@ -3775,6 +3843,7 @@ namespace SmartICAVI
 
                         //if (true == dataService.DataSystem.IsSelectedMono)
                         //    cntService.SetTriggerEnable(1);
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case stepInitScan + 50:
@@ -3782,11 +3851,13 @@ namespace SmartICAVI
                         topService.SetScanInit();
                         //if (true == dataService.DataSystem.IsSelectedMono)
                         //    monoService.SetScanInit();
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case stepInitScan + 60:
                         if (true == topService.IsReply((int)EnumSmartIC.VisionReplys.scan))
                         {
+                            Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                             step += 10;
                         }
                         break;
@@ -3800,7 +3871,7 @@ namespace SmartICAVI
                         motionService.RMove(axisPunch, pos, vel, accel);
 
                         //System.Diagnostics.Debug.WriteLine(string.Format("Scan Move = {0:0.000}", pos));
-
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case stepInitScan + 80:
@@ -3814,6 +3885,7 @@ namespace SmartICAVI
                                 cntService.ResetTriggerEnable(3);
 
                                 SetTimeout(100);
+                                Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                                 step += 10;
                             }
                         }
@@ -3824,6 +3896,7 @@ namespace SmartICAVI
                         {
                             motionService.AMove(axisVision, 0.0, vel, accel);
                             motionService.AMove(axisPunch, 0.0, vel, accel);
+                            Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                             step += 10;
                         }
                         break;
@@ -3833,6 +3906,7 @@ namespace SmartICAVI
                             if (true == motionService.IsMotionDone(axisPunch))
                             {
                                 SetTimeout(100);
+                                Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                                 step += 10;
                             }
                         }
@@ -3844,6 +3918,8 @@ namespace SmartICAVI
                                 SetTimeout(1000);
                             else
                                 SetTimeout(500);
+
+                            Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                             step += 10;
                         }
                         break;
@@ -3859,6 +3935,7 @@ namespace SmartICAVI
                                     msgService.ShowMessage((int)EnumSmartIC.LightAlarms.jobInitPos);
                                     ret = -1;
                                 }
+                                Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                                 step = 20000;
                             }
                         }
@@ -3866,6 +3943,7 @@ namespace SmartICAVI
 
 
                     case stepRePos:
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case stepRePos + 10:
@@ -3874,6 +3952,7 @@ namespace SmartICAVI
                         motionService.RMove(axisVision, pos, vel, accel);
                         motionService.RMove(axisPunch, pos, vel, accel);
 
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         step += 10;
                         break;
                     case stepRePos + 20:
@@ -3882,6 +3961,7 @@ namespace SmartICAVI
                             if (true == motionService.IsMotionDone(axisPunch))
                             {
                                 SetTimeout(500);
+                                Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                                 step += 10;
                             }
                         }
@@ -3893,6 +3973,7 @@ namespace SmartICAVI
                             motionService.SetPosition(axisVision, 0);
                             motionService.SetPosition(axisPunch, 0);
                             cntService.SetPosition(0, 0);
+                            Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                             step += 10;
                         }
                         break;
@@ -3903,15 +3984,19 @@ namespace SmartICAVI
                         {
                             msgService.ShowMessage((int)EnumSmartIC.LightAlarms.jobInitPos);
                             ret = -1;
+
+                            Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                             step = 20000;
                         }
                         else
                         {
+                            Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                             step = 0;
                         }
                         break;
                         
                     case 20000:
+                        Log_SeqTrace.WriteLine("SetInitSearch, Step" + step.ToString());
                         motionService.Stop(axisVision);
                         motionService.Stop(axisPunch);
 
@@ -3952,15 +4037,18 @@ namespace SmartICAVI
                 switch (step)
                 {
                     case 0:
+                        Log_SeqTrace.WriteLine("SetInitRMove, Step" + step.ToString());
                         step += 10;
                         break;
                     case 10:
                         // R Move P
                         motionService.RMove(axisVision, value, vel, accel);
                         motionService.RMove(axisPunch, value, vel, accel);
+                        Log_SeqTrace.WriteLine("SetInitRMove, Step" + step.ToString());
                         step += 10;
                         break;
                     case 20:
+                        Log_SeqTrace.WriteLine("SetInitRMove, Step" + step.ToString());
                         step += 10;
                         break;
 
@@ -3968,10 +4056,14 @@ namespace SmartICAVI
                         if (true == motionService.IsMotionDone(axisVision))
                         {
                             if (true == motionService.IsMotionDone(axisPunch))
+                            {
+                                Log_SeqTrace.WriteLine("SetInitRMove, Step" + step.ToString());
                                 step += 10;
+                            }
                         }
                         break;
                     case 40:
+                        Log_SeqTrace.WriteLine("SetInitRMove, Step" + step.ToString());
                         step = 20000;
                         break;
 

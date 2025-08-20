@@ -2385,6 +2385,11 @@ namespace SmartICAVI
             winDefectInfo.Show();
         }
 
+        private void btnLog_Click(object sender, RoutedEventArgs e)
+        {
+            Log_SeqTrace.WriteLine("Log btn clicked! when double buffer dance");
+        }
+
 
     }
 }

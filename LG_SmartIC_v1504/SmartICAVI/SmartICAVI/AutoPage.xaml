@@ -237,7 +237,7 @@
             </Grid>
 
             <!--Button-->
-            <UniformGrid Grid.Column="2" Rows="3">
+            <UniformGrid Grid.Column="2" Rows="4">
                 <CheckBox Name="btnStart" Tag="Start" Click="btnStart_Click" Margin="10, 5, 10, 5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_MenuStyle}">
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
                         <Image Source="Images/Auto48.png" Margin="5" Stretch="None"/>
@@ -257,6 +257,12 @@
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
                         <Image Source="Images/Stop48.png" Margin="5" Stretch="None"/>
                         <TextBlock Name="tblStop" Text="작업취소" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </CheckBox>
+                <CheckBox Name="btnLog" Tag="Log" Click="btnLog_Click"  Margin="10, 5, 10, 5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Template="{StaticResource TemplateCheckBox_MenuStyle}">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <!--<Image Source="Images/Stop48.png" Margin="5" Stretch="None"/>-->
+                        <TextBlock Name="tblLog" Text="로그 기록" Foreground="White" FontFamily="Segoe UI" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </StackPanel>
                 </CheckBox>
             </UniformGrid>
